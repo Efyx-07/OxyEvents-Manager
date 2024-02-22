@@ -35,7 +35,7 @@ const connectGuestAndLaunchDemo = async () => {
             adminStore.isConnected = true; // passe le statut de l'administrateur sur 'connecté'
 
             // connexion réussie, redirection vers page d'accueil du back-office
-            router.push('/admin_homepage');
+            router.push('/home');
         
         } else {
             // affiche une erreur et empêche la redirection
