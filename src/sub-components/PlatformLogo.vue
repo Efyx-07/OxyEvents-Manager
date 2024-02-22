@@ -14,8 +14,8 @@ const logoClasses = loginPage ? 'loginPageStyle' : [];
 <template>
     <div class="platformLogo">
         <Icon icon="solar:planet-3-broken" class="icon" :class="logoClasses"/>
-        <div class="platformName">
-            <p class="mainName" :class="logoClasses">O X Y E V E N T S</p>
+        <div class="platformName" :class="logoClasses">
+            <p class="mainName">O X Y E V E N T S</p>
             <p class="subName">M A N A G E R</p>
         </div>
     </div>
@@ -54,27 +54,9 @@ const logoClasses = loginPage ? 'loginPageStyle' : [];
         }
         .subName {
             font-size: .8rem;
-            //color: $accentColorBackof3;
             font-weight: 400;
         }
     }
 }
 
-
-@media screen and (min-width: $breakpointLargeDesktop) {
-    .platformLogo {
-        .icon {
-            font-size: 2rem;
-        }
-        .platformName {
-            .mainName {
-                font-size: 2rem;
-            }
-            .subName {
-                font-size: .9rem;
-            }
-        }
-    }
-}
- 
 </style>
