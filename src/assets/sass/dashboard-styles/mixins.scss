@@ -1,0 +1,9 @@
+@mixin backOfficeButtonStyle {
+    font-size: 1rem;
+    font-weigh: 600;
+    padding: .6rem 1.1rem;
+    border: none;
+    color: $ultraWhiteColor;
+    border-radius: 5px;
+    cursor: pointer;
+}

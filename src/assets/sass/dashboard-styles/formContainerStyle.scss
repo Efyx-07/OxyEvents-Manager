@@ -4,8 +4,8 @@
 .formContainer {
     width: 90vw;
     padding: 1.5rem;
-    background: $darkColor;
-    color: $ultraWhiteColor;
+    background: $ultraWhiteColor;
+    color: $blackColor;
     //box-shadow: $shadow;
     border: solid 1px rgba($ultraWhiteColor, .5);
     //border-radius: $containerRadiusM;
@@ -28,7 +28,7 @@
 
             &:hover {
                 opacity: 1;
-                //color: $accentColorBackof2;
+                color: $lightColor;
             }
         }
     }

@@ -21,7 +21,7 @@ import { Icon } from '@iconify/vue';
 .platformLogo {
     width: 100%;
     font-family: 'Blinker', sans-serif;
-    color: $whiteColor;
+    color: rgba($darkColor, .5);
     display: flex;
     align-items: center;
     justify-content: center;

@@ -2,6 +2,7 @@
 
 import PlatformLogo from '@/sub-components/PlatformLogo.vue';
 import AdminFormLogin from '@/dashboard-forms/AdminFormLogin.vue';
+import ReusableSeparator from '@/sub-components/ReusableSeparator.vue';
 
 </script>
 
@@ -10,6 +11,11 @@ import AdminFormLogin from '@/dashboard-forms/AdminFormLogin.vue';
         <PlatformLogo class="platformLogo"/>
         <ReusableSeparator/>
         <AdminFormLogin />
+        <ReusableSeparator/>
+        <div class="options">
+            <p>Mot de passe oublié ?</p>
+            <p>Mode demo</p>
+        </div>
     </div>
 </template>
 
