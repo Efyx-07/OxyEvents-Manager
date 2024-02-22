@@ -1,14 +1,21 @@
 <script setup lang="ts">
 
 import { Icon } from '@iconify/vue';
+import { useRoute } from 'vue-router';
+
+const route = useRoute();
+
+// gestion d'une classe conditionnelle selon la route
+const loginPage: boolean = route.name === 'LoginPage';// || route.name === 'BackOfficeResetPassword' || route.name === 'BackOfficeAdminRegister';
+const logoClasses = loginPage ? 'loginPageStyle' : [];
 
 </script>
 
 <template>
     <div class="platformLogo">
-        <Icon icon="solar:planet-3-broken" class="icon" />
+        <Icon icon="solar:planet-3-broken" class="icon" :class="logoClasses"/>
         <div class="platformName">
-            <p class="mainName" >O X Y E V E N T S</p>
+            <p class="mainName" :class="logoClasses">O X Y E V E N T S</p>
             <p class="subName">M A N A G E R</p>
         </div>
     </div>
@@ -18,10 +25,13 @@ import { Icon } from '@iconify/vue';
 
 @import '@/assets/sass/dashboard-styles/colors.scss';
 @import '@/assets/sass/breakPoints.scss';
+.loginPageStyle {
+    color: rgba($darkColor, .5);
+}
 .platformLogo {
     width: 100%;
     font-family: 'Blinker', sans-serif;
-    color: rgba($darkColor, .5);
+    color: $ultraWhiteColor;
     display: flex;
     align-items: center;
     justify-content: center;
