@@ -1,5 +1,11 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+
+import NavAside from '@/dashboard-components/NavAside.vue';
+
+</script>
 
 <template>
-    <div>HOME</div>
+    <div class="backOfficeHomePage">
+        <NavAside />
+    </div>
 </template>
