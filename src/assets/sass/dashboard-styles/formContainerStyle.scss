@@ -1,0 +1,44 @@
+@import './colors.scss';
+@import '@/assets/sass/breakPoints.scss';
+
+.formContainer {
+    width: 90vw;
+    padding: 1.5rem;
+    background: $ultraWhiteColor;
+    color: $darkColor;
+    //box-shadow: $shadow;
+    //border: solid 1px rgba($darkColor, .5);
+    //border-radius: $containerRadiusM;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+
+    .options {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 1rem;
+
+        p {
+            margin: 0;
+            font-size: .8rem;
+            font-weight: 700;
+            opacity: .5;
+            cursor: pointer;
+
+            &:hover {
+                opacity: 1;
+                //color: $accentColorBackof2;
+            }
+        }
+    }
+
+}
+
+@media screen and (min-width: $breakpointDesktop) {
+    
+    .formContainer {
+        width: 25rem;
+        padding: 2rem;
+    }
+}
