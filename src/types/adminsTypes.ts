@@ -4,5 +4,5 @@ export interface Admin {
     prenom: string;
     email: string;
     hashed_password: string;
-    statut: 'SUPERADMIN' | 'ADMIN' | 'GENERIC' | 'GUEST'; 
+    statut: 'SUPERADMIN' | 'ADMIN' | 'GENERIC' | 'GUEST';
 }

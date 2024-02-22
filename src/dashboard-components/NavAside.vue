@@ -4,6 +4,7 @@ import PlatformLogo from '@/sub-components/PlatformLogo.vue';
 //import LogoutConfirmationModal from '@/sub-components/LogoutConfirmationModal.vue';
 import { Icon } from '@iconify/vue';
 import { useAdminStore } from '@/stores/AdminStore';
+import type { Admin } from '@/types/adminsTypes';
 import { ref, onMounted, watch } from 'vue';
 
 // ouvre la fenetre 'LogoutModal' au clic de l'icone
@@ -16,19 +17,18 @@ const openLogoutConfirmationModal = () => {
 const adminStore = useAdminStore();
 
 // ref par défaut des données de l'administrateur connecté
-const adminData = ref(null);
+const adminData = ref<Admin | null>(null);
 
 // charge adminData depuis le localStorage avant le rendu du composant et utilise méthode de AdminStore
 onMounted(async () => {
     await adminStore.loadAdminDataFromLocalStorage();
 });
 
-/*
 // surveille les changements de adminData dans le store et met à jour adminData
-watch(() => adminStore.adminData, (newAdminData) => {
+watch (() => adminStore.adminData, (newAdminData) => {
     adminData.value = newAdminData;
 });
-*/ 
+
 </script>
 
 <template>
@@ -55,10 +55,10 @@ watch(() => adminStore.adminData, (newAdminData) => {
                 <div class="active-bar"></div>
         </router-link>
         <div class="footer-section">
-            <!-- <p v-if="adminData">{{ adminData.firstName }} {{ adminData.lastName }}</p> -->
+            <p v-if="adminData">{{ adminData.firstName }} {{ adminData.lastName }}</p>
             <Icon icon="mdi:power" class="icon" @click="openLogoutConfirmationModal()"/>
         </div>
-        <LogoutConfirmationModal />
+        <!-- <LogoutConfirmationModal /> -->
     </div>   
 </template>
 
