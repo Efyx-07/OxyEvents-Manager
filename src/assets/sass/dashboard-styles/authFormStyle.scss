@@ -1,0 +1,74 @@
+@import './colors.scss';
+@import '@/assets/sass/breakPoints.scss';
+
+.adminLoginPage-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+
+    .inputs_wrapper {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        width: 100%;
+    }
+    .input_container {
+        display: flex;
+        flex-direction: column;
+        gap: .25rem;
+        width: 100%;
+        position: relative;
+
+        label {
+            font-size: .95rem;
+        }
+
+        input {
+            height: 3rem;
+            outline: none;
+            background: transparent;
+            border: solid 1px rgba($ultraWhiteColor, .25);
+            color: $ultraWhiteColor;
+            font-size: 1rem;
+            padding-left: 1rem;
+
+            &:focus {
+                border: solid 1px $lightColor;
+            }
+        }
+
+        .validateIcon {
+            position: absolute;
+            right: 1rem;
+            top: 70%;
+            transform: translateY(-70%);
+            color: $validColor;
+            font-size: .8rem;
+        }
+    }
+    .adminLoginPage-button {
+        align-self: self-end;
+        cursor: pointer;
+    }
+    .registration-result_message {
+        margin-top: 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        color: $errorColor;
+        .text_container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+
+            p {
+            margin: 0;
+            }
+            .alertIcon {
+                font-size: 1.3rem;
+            }
+        }
+    }
+}

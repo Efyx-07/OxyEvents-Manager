@@ -1,86 +1,86 @@
 <script setup lang="ts">
 
-    import ReusablePrimaryButton from '@/sub-components/ReusablePrimaryButton.vue';
-    import { ref } from 'vue';
-    import { useGlobalDataStore } from '@/stores/GlobalDataStore';
-    import { useRouter } from 'vue-router';
-    import { useAdminStore } from '@/stores/AdminStore';
-    import { Icon } from '@iconify/vue';
+import ReusablePrimaryButton from '@/sub-components/ReusablePrimaryButton.vue';
+import { ref } from 'vue';
+import { useGlobalDataStore } from '@/stores/GlobalDataStore';
+import { useRouter } from 'vue-router';
+import { useAdminStore } from '@/stores/AdminStore';
+import { Icon } from '@iconify/vue';
 
-    const router = useRouter();
-    const adminStore = useAdminStore();
+const router = useRouter();
+const adminStore = useAdminStore();
 
-    // visibilité par défaut du message d'erreur
-    const wrongIds = ref<boolean>(false)
+// visibilité par défaut du message d'erreur
+const wrongIds = ref<boolean>(false)
 
-    // propriétés du formulaire
-    const email = ref<string>('');
-    const password = ref<string>('');
+// propriétés du formulaire
+const email = ref<string>('');
+const password = ref<string>('');
 
-    // valide le formulaire
-    const handleAdminLogin = async () => {
+// valide le formulaire
+const handleAdminLogin = async () => {
 
-        // extrait les valeurs des objets ref
-        const emailValue = email.value;
-        const passwordValue = password.value;
+    // extrait les valeurs des objets ref
+    const emailValue = email.value;
+    const passwordValue = password.value;
 
-        try {
+    try {
 
-            const { hostName } = useGlobalDataStore();
+        const { hostName } = useGlobalDataStore();
 
-            const response = await fetch(`${hostName}/admins/login`, {
-                method: 'POST',
-                headers: {
-                    'Content-type': 'application/json',
-                },
-                body: JSON.stringify({
-                    email: emailValue,
-                    password: passwordValue,
-                }),
-            });
+        const response = await fetch(`${hostName}/admins/login`, {
+            method: 'POST',
+            headers: {
+                'Content-type': 'application/json',
+            },
+            body: JSON.stringify({
+                email: emailValue,
+                password: passwordValue,
+            }),
+        });
 
-            if (response.ok) {
+        if (response.ok) {
 
-                // récupère les données de l'administrateur depuis la réponse du serveur et affiche le message de connexion réussie
-                const data = await response.json();
-                console.log(data.message);
-                adminStore.setAdminData(data.admin);
+            // récupère les données de l'administrateur depuis la réponse du serveur et affiche le message de connexion réussie
+            const data = await response.json();
+            console.log(data.message);
+            adminStore.setAdminData(data.admin);
 
-                // si connexion réussie, obtient le token du serveur et le stocke dans le localStorage 
-                const token = data.token;
-                localStorage.setItem('token', token);
+            // si connexion réussie, obtient le token du serveur et le stocke dans le localStorage 
+            const token = data.token;
+            localStorage.setItem('token', token);
 
-                // stocke également le token dans AdminStore
-                adminStore.setToken(token);
-                adminStore.isConnected = true; // passe le statut de l'administrateur sur 'connecté'
+            // stocke également le token dans AdminStore
+            adminStore.setToken(token);
+            adminStore.isConnected = true; // passe le statut de l'administrateur sur 'connecté'
 
-                // connexion réussie, redirection vers page d'accueil du back-office
-                router.push('/admin_homepage');
+            // connexion réussie, redirection vers page d'accueil du back-office
+            router.push('/admin_homepage');
                 
-            } else {
+        } else {
 
-                // affiche une erreur et empêche la redirection
-                console.error('Erreur lors de la connexion: ', response.statusText);
-                wrongIds.value = true;
-                // Réinitialise wrongIds après 3 secondes
-                setTimeout(() => {
-                    wrongIds.value = false;
-                    resetForm();
-                }, 3000);
+            // affiche une erreur et empêche la redirection
+            console.error('Erreur lors de la connexion: ', response.statusText);
+            wrongIds.value = true;
+            // Réinitialise wrongIds après 3 secondes
+            setTimeout(() => {
+                wrongIds.value = false;
+                resetForm();
+            }, 3000);
 
-            }
-
-        } catch (error) {
-            // affiche une erreur en cas d'echec de la requete
-            console.error('Erreur lors de la connexion: ', error);
         }
-    };
 
-    // réinitialise le formulaire
-    const resetForm = () => {
-        email.value = '';
-        password.value = '';
+    } catch (error) {
+        // affiche une erreur en cas d'echec de la requete
+        console.error('Erreur lors de la connexion: ', error);
     }
+};
+
+// réinitialise le formulaire
+const resetForm = () => {
+    email.value = '';
+    password.value = '';
+}
 
 </script>
 
@@ -106,3 +106,9 @@
         <ReusablePrimaryButton class="adminLoginPage-button" type="submit" v-else>Se connecter</ReusablePrimaryButton>
     </form>  
 </template>
+
+<style lang="scss" scoped>
+
+@import '@/assets/sass/dashboard-styles/authFormStyle.scss';
+
+</style>
