@@ -1,5 +1,11 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+
+import LoginContainer from '@/dashboard-components/LoginContainer.vue';
+
+</script>
 
 <template>
-    <div></div>
+    <div class="backOffice">
+        <LoginContainer  class="formContainer"/>
+    </div>
 </template>
