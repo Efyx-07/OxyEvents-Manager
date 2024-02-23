@@ -1,0 +1,13 @@
+@import '@/assets/sass/breakPoints.scss';
+
+@media screen and (min-width: $breakpointDesktop) {
+
+    .dashboardPage {
+        display: grid;
+        grid-template-columns: min(25vw, 20rem) 1fr;
+        .page-content {
+            grid-column: 2 /-1;
+            width: 100%;
+        }
+    } 
+}
