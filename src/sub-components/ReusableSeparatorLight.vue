@@ -8,7 +8,7 @@
 .separator {
     width: 100%;
     height: 1px;
-    background: rgba($blackColor, .25);
+    background: rgba($whiteColor, .25);
 }
     
 </style>

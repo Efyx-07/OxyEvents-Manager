@@ -5,9 +5,8 @@
 .formContainer {
     width: 90vw;
     padding: 1.5rem;
-    background: $ultraWhiteColor;
-    color: $blackColor;
-    border: solid 1px rgba($ultraWhiteColor, .5);
+    background: $darkColor;
+    color: $whiteColor;
     border-radius: $containerRadiusM;
     display: flex;
     flex-direction: column;
@@ -28,7 +27,7 @@
 
             &:hover {
                 opacity: 1;
-                color: $lightColor;
+                color: $accentColorPrimary;
             }
         }
     }

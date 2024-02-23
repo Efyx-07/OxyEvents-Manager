@@ -66,7 +66,7 @@ watch (() => adminStore.adminData, (newAdminData: AdminData) => {
 
 @import '@/assets/sass/dashboard-styles/colors.scss';
 @import '@/assets/sass/breakPoints.scss';
-
+/*
 .backOfficeNavAside {
     display: none;
 }
@@ -151,5 +151,5 @@ watch (() => adminStore.adminData, (newAdminData: AdminData) => {
     }
 
 }
-
+*/
 </style>
