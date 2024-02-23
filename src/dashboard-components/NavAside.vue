@@ -7,12 +7,37 @@ import { useAdminStore } from '@/stores/AdminStore';
 import type { AdminData } from '@/types/adminsTypes';
 import { ref, onMounted, watch } from 'vue';
 
-// ouvre la fenetre 'LogoutModal' au clic de l'icone
-const openLogoutConfirmationModal = () => {
-    // crée un nouvel evenement personnalisé 
-    const showLogoutConfirmationModalEvent = new CustomEvent('show-logoutConfirmationModal');
-    window.dispatchEvent(showLogoutConfirmationModalEvent);
+interface NavItem {
+    name: string;
+    icon: string;
+    navTo: string;
+    activePaths: string[];
 };
+
+const navItems: NavItem[] = [
+
+  {
+    name: 'Vos évènements',
+    icon: 'material-symbols:home-outline',
+    navTo: '/home',
+    activePaths: ['/home']
+  },
+
+  {
+    name: 'Nouvel évènement',
+    icon: 'ic:outline-create',
+    navTo: '/home',
+    activePaths: []
+  },
+
+  {
+    name: 'Administration',
+    icon: 'material-symbols:manage-accounts-outline',
+    navTo: '/home',
+    activePaths: []
+  },
+
+];
 
 const adminStore = useAdminStore();
 
@@ -29,6 +54,14 @@ watch (() => adminStore.adminData, (newAdminData: AdminData) => {
     adminData.value = newAdminData;
 });
 
+// ouvre la fenetre 'LogoutModal' au clic de l'icone
+const openLogoutConfirmationModal = (): void => {
+    // crée un nouvel evenement personnalisé 
+    const showLogoutConfirmationModalEvent = new CustomEvent('show-logoutConfirmationModal');
+    window.dispatchEvent(showLogoutConfirmationModalEvent);
+};
+
+
 </script>
 
 <template>
@@ -36,24 +69,13 @@ watch (() => adminStore.adminData, (newAdminData: AdminData) => {
         <div class="head-section">
             <PlatformLogo />
         </div>
-        <router-link to="/admin_homepage" class="item-section" :class="{ 'active-link': $route.path === '/home' }">
-                <Icon icon="material-symbols:home-outline" class="icon"/>
-                <p>Vos évènements</p>
+        <div class="navItems-container">
+            <router-link v-for="navItem in navItems" :key="navItem.name" :to="navItem.navTo" class="item-section" :class="{'active-link': navItem.activePaths.includes($route.path)}">
+                <Icon :icon="navItem.icon" class="icon"/>
+                <p>{{ navItem.name }}</p>
                 <div class="active-bar"></div>
-        </router-link>
-        <router-link to="/admin_new-event" class="item-section" :class="{ 'active-link': $route.path === '/admin_new-event' }">
-                <Icon icon="ic:outline-create" class="icon"/>
-                <p>Nouvel évènement</p>
-                <div class="active-bar"></div>
-        </router-link>
-        <router-link 
-            to="/admin_your-account" 
-            class="item-section" 
-            :class="{ 'active-link': $route.path === '/admin_your-account' || $route.path === '/admin_add-admin' || $route.path === '/admin_delete-admin' }">
-                <Icon icon="material-symbols:manage-accounts-outline" class="icon"/>
-                <p>Administration</p>
-                <div class="active-bar"></div>
-        </router-link>
+            </router-link>
+        </div>
         <div class="footer-section">
             <p v-if="adminData">{{ adminData.firstName }} {{ adminData.lastName }}</p>
             <Icon icon="mdi:power" class="icon" @click="openLogoutConfirmationModal()"/>
@@ -66,7 +88,8 @@ watch (() => adminStore.adminData, (newAdminData: AdminData) => {
 
 @import '@/assets/sass/dashboard-styles/colors.scss';
 @import '@/assets/sass/breakPoints.scss';
-/*
+@import '@/assets/sass/variables.scss';
+
 .backOfficeNavAside {
     display: none;
 }
@@ -83,43 +106,52 @@ watch (() => adminStore.adminData, (newAdminData: AdminData) => {
         background: $darkColor;
         z-index: 199;
         .head-section {
-            height: 6rem;
+            height: 12rem;
             display: flex;
             justify-content: center;
-        }
-        .head-section, .item-section {
+            margin: 0 1rem;
             border-bottom: solid 1px rgba($whiteColor, .25);
         }
-        .item-section {
-            text-decoration: none;
-            height: 4rem;
-            display: flex;
-            align-items: center;
-            gap: .5rem;
-            color: $ultraWhiteColor;
-            padding-left: 1rem;
-            cursor: pointer;
-            position: relative;
-            .icon {
-                font-size: 1.5rem;
-            }
+        .navItems-container {
+            padding-top: 3rem;
+            .item-section {
+                text-decoration: none;
+                height: 3.5rem;
+                display: flex;
+                align-items: center;
+                gap: 1rem;
+                color: $whiteColor;
+                padding-left: 2rem;
+                cursor: pointer;
+                position: relative;
+                &:hover > .active-bar {
+                    background-color: rgba($accentColorPrimary, .25);
+                    width: 100%;
+                }
+                .icon {
+                    font-size: 1.5rem;
+                }
 
-            p {
-                margin: 0;
-                font-size: 1.1rem;
-            }
-            .active-bar {
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: .25rem;
-                height: 100%;
-                background-color: transparent;
-            }
-            &.active-link>.active-bar {
-                background-color: $lightColor;
-            }
-            
+                p {
+                    margin: 0;
+                    font-size: 1rem;
+                }
+                .active-bar {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    z-index: -1;
+                    width: 0;
+                    height: 100%;
+                    background-color: transparent;
+                    border-radius: 0 $containerRadius * 2 $containerRadius * 2 0;
+                    transition: all .3s ease-in-out;
+                }
+                &.active-link>.active-bar {
+                    background-color: $accentColorPrimary;
+                    width: 100%;
+                }
+            }        
         }
         .footer-section {
             position: absolute;
@@ -127,7 +159,8 @@ watch (() => adminStore.adminData, (newAdminData: AdminData) => {
             bottom: 0;
             width: 100%;
             height: 6rem;
-            color: $ultraWhiteColor;
+            color: $whiteColor;
+            background: $darkColor;
             border-top: solid 1px rgba($whiteColor, .25);
             display: flex;
             align-items: center;
@@ -136,20 +169,18 @@ watch (() => adminStore.adminData, (newAdminData: AdminData) => {
 
             p {
                 margin: 0;
-                font-size: 1.1;
+                font-size: 1rem;
             }
             .icon {
                 font-size: 1.5rem;
                 cursor: pointer;
 
                 &:hover {
-                    color: $lightColor;
+                    color: $accentColorPrimary;
                 }
             }
-
         }
     }
-
 }
-*/
+
 </style>
