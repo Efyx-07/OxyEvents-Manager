@@ -33,8 +33,8 @@ const navItems: NavItem[] = [
   {
     name: 'Administration',
     icon: 'material-symbols:manage-accounts-outline',
-    navTo: '/home',
-    activePaths: []
+    navTo: '/admin-update',
+    activePaths: ['/admin-update', '/admin-add', '/admin-delete']
   },
 
 ];
