@@ -68,20 +68,7 @@ const adminNavItems: AdminNavItem[] = [
 
 @media screen and (min-width: $breakpointDesktop) {
     .adminPageNav {
-        border: solid 1px rgba($darkColor, .25);
-        border-radius: $containerRadius * 2;
-        display: flex;
-        justify-content: center;
         gap: 5rem;
-        padding: .5rem 2rem;
-        align-items: center;
-        .navIcon {
-            color: $blackColor;
-            font-size: 1.5rem;
-            &:hover, &.active-link {
-                color: $accentColorPrimary;
-            }
-        }
     }
 }
 
