@@ -18,6 +18,6 @@ import DashboardHeader from '@/dashboard-components/DashboardHeader.vue';
 
 <style lang="scss" scoped>
 
-@import '@/assets/sass/dashboard-styles/dashboardPageStyle.scss'
+@import '@/assets/sass/dashboard-styles/dashboardPageStyle.scss';
 
 </style>

@@ -19,15 +19,45 @@ const props = defineProps<DashboardHeaderProps>();
 
 <style lang="scss" scoped>
 
-.dashboardHeader {
-    width: 100%;
-    height: 6rem;
-    background: red;
-    display: flex;
-    justify-content: space-between;
+@import '@/assets/sass/dashboard-styles/colors.scss';
+@import '@/assets/sass/breakPoints.scss';
 
-    h1 {
-        margin: 0;
-    }
+.dashboardHeader {
+  background: $whiteColor;
+  box-shadow: $shadow;
+  padding: 1rem;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  position: sticky;
+  top: 0;
+  z-index: 99;
+
+  h1 {
+    margin: 0;
+    font-size: 1.5rem;
+  }
+  .content {
+    width: 100%;
+  }
 }
+
+@media screen and (min-width: $breakpointDesktop) {
+  .dashboardHeader {
+    padding: 1rem 3rem;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    align-items: center;
+    
+    h1 {
+      font-size: 1.8rem;
+    }
+    .content {
+      width: unset;
+    }
+  }
+}
+
+
 </style>
