@@ -8,45 +8,42 @@ import { useRouter } from 'vue-router';
 import ReusablePrimaryButton from '@/sub-components/ReusablePrimaryButton.vue';
 
 // visibilité par défaut des messages de succés ou d'erreur
-const successMessage = ref(false);
-const updateErrorMessage = ref(false)
+const successMessage = ref<boolean>(false);
+const updateErrorMessage = ref<boolean>(false);
 
 // propriétés du formulaire
-const adminCurrentPassword = ref('');
-const adminNewPassword = ref('');
-const confirmAdminNewPassword = ref('');
+const adminCurrentPassword = ref<string>('');
+const adminNewPassword = ref<string>('');
+const confirmAdminNewPassword = ref<string>('');
 
 // états de validation
-const adminNewPasswordValid = ref(true);
-const confirmAdminNewPasswordValid = ref(true);
+const adminNewPasswordValid = ref<boolean>(true);
+const confirmAdminNewPasswordValid = ref<boolean>(true);
 
 // Regex
-const passwordRegex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@#$%^&+=!*]).{8,}$/;
+const passwordRegex: RegExp = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@#$%^&+=!*]).{8,}$/;
 
 // fonctions de validation des champs
-const validateAdminNewPassword = () => {
+const validateAdminNewPassword = (): void => {
     adminNewPasswordValid.value = passwordRegex.test(adminNewPassword.value);
-    console.log('Validation du nouveau mot de passe :', adminNewPasswordValid.value);
 };
 const validateConfirmAdminNewPassword = () => {
     confirmAdminNewPasswordValid.value = adminNewPassword.value === confirmAdminNewPassword.value;
-    console.log('Validation de la confirmation du nouveau mot de passe :', confirmAdminNewPasswordValid.value);
 };
 
 // valide le formulaire
-const validateAdminPasswordUpdating = async () => {
-    console.log('Soumission du formulaire');
+const validateAdminPasswordUpdating = async (): Promise<void> => {
 
     // valide les champs individuels
     validateAdminNewPassword();
     validateConfirmAdminNewPassword();
 
     // extrait les valeurs des objets ref
-    const adminCurrentPasswordValue = adminCurrentPassword.value;
-    const adminNewPasswordValue = adminNewPassword.value;
+    const adminCurrentPasswordValue: string = adminCurrentPassword.value;
+    const adminNewPasswordValue: string = adminNewPassword.value;
 
-    // détermine les chapms requis pour soumettre le formulaire
-    const requiredFieldsValid = 
+    // détermine les champs requis pour soumettre le formulaire
+    const requiredFieldsValid: boolean = 
         adminNewPasswordValid.value &&
         confirmAdminNewPasswordValid.value;
 
@@ -56,7 +53,7 @@ const validateAdminPasswordUpdating = async () => {
         try {
 
             // obtient le token du localStorage
-            const token = localStorage.getItem('token'); 
+            const token: string | null = localStorage.getItem('token'); 
 
             if(!token) {
                 console.error('Token introuvable dans le localStorage');
@@ -64,11 +61,11 @@ const validateAdminPasswordUpdating = async () => {
             }
 
             // décode le token pour obtenir adminId
-            const tokenParts = token.split('.');
+            const tokenParts: string[] = token.split('.');
             // décode la partie payload
-            const tokenPayload = JSON.parse(atob(tokenParts[1]));
+            const tokenPayload: any = JSON.parse(atob(tokenParts[1]));
             // extrait adminId du payload
-            const adminIdValue = tokenPayload.adminId;
+            const adminIdValue: any = tokenPayload.adminId;
 
             const { hostName } = useGlobalDataStore();
 
@@ -184,4 +181,5 @@ const resetForm = () => {
 <style lang="scss" scoped>
 
 @import '@/assets/sass/dashboard-styles/adminMgmtFormStyle.scss';
+
 </style>
