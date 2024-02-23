@@ -4,7 +4,7 @@ import PlatformLogo from '@/sub-components/PlatformLogo.vue';
 //import LogoutConfirmationModal from '@/sub-components/LogoutConfirmationModal.vue';
 import { Icon } from '@iconify/vue';
 import { useAdminStore } from '@/stores/AdminStore';
-import type { Admin } from '@/types/adminsTypes';
+import type { AdminData } from '@/types/adminsTypes';
 import { ref, onMounted, watch } from 'vue';
 
 // ouvre la fenetre 'LogoutModal' au clic de l'icone
@@ -17,7 +17,7 @@ const openLogoutConfirmationModal = () => {
 const adminStore = useAdminStore();
 
 // ref par défaut des données de l'administrateur connecté
-const adminData = ref<Admin | null>(null);
+const adminData = ref<AdminData | null>(null);
 
 // charge adminData depuis le localStorage avant le rendu du composant et utilise méthode de AdminStore
 onMounted(async () => {
@@ -25,7 +25,7 @@ onMounted(async () => {
 });
 
 // surveille les changements de adminData dans le store et met à jour adminData
-watch (() => adminStore.adminData, (newAdminData) => {
+watch (() => adminStore.adminData, (newAdminData: AdminData) => {
     adminData.value = newAdminData;
 });
 

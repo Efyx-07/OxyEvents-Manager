@@ -1,14 +1,14 @@
 import { defineStore } from 'pinia';
 import { reactive } from 'vue';
 import * as api from '@/services/api'; // importe les fonctions de l'api du fichier api.js
-import type { Admin } from '@/types/adminsTypes';
+import type { Admin, AdminData } from '@/types/adminsTypes';
 
 export const useAdminStore = defineStore('admins', {
 
     state: () => ({
         token: null as string | null, // initialise le token à null par défaut
         isConnected: <boolean>false, // statut initial de l'administrateur à 'non-connecté'
-        adminData: reactive<Record<string, unknown>>({}), // déclare adminData comme réactif
+        adminData: reactive({}) as AdminData, // déclare adminData comme réactif
         admins: [] as Admin[], // initialise admins comme un tableau vide
     }),
 
@@ -30,7 +30,7 @@ export const useAdminStore = defineStore('admins', {
         },
 
         // charge les données de l'administrateur à partir de la réponse JSON
-        setAdminData(adminData: Admin): void {
+        setAdminData(adminData: AdminData): void {
             this.adminData = reactive(adminData);
             this.saveAdminDataInLocalStorage();
         },
