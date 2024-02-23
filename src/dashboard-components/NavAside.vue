@@ -1,7 +1,7 @@
 <script setup lang="ts">
 
 import PlatformLogo from '@/sub-components/PlatformLogo.vue';
-//import LogoutConfirmationModal from '@/sub-components/LogoutConfirmationModal.vue';
+import LogoutConfirmationModal from '@/dashboard-modals/LogoutConfirmationModal.vue';
 import { Icon } from '@iconify/vue';
 import { useAdminStore } from '@/stores/AdminStore';
 import type { AdminData } from '@/types/adminsTypes';
@@ -54,7 +54,7 @@ watch (() => adminStore.adminData, (newAdminData: AdminData) => {
     adminData.value = newAdminData;
 });
 
-// ouvre la fenetre 'LogoutModal' au clic de l'icone
+// ouvre la fenetre 'LogoutConfirmationModal' au clic de l'icone
 const openLogoutConfirmationModal = (): void => {
     // crée un nouvel evenement personnalisé 
     const showLogoutConfirmationModalEvent = new CustomEvent('show-logoutConfirmationModal');
@@ -80,7 +80,7 @@ const openLogoutConfirmationModal = (): void => {
             <p v-if="adminData">{{ adminData.firstName }} {{ adminData.lastName }}</p>
             <Icon icon="mdi:power" class="icon" @click="openLogoutConfirmationModal()"/>
         </div>
-        <!-- <LogoutConfirmationModal /> -->
+        <LogoutConfirmationModal />
     </div>   
 </template>
 

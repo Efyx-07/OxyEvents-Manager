@@ -10,10 +10,10 @@
 @import '@/assets/sass/dashboard-styles/mixins.scss';
 .btn {
     @include backOfficeButtonStyle;
-    background: $accentColorPrimary;
+    background: $accentColorSecondary;
 
     &:hover {
-        background: $accentColorPrimaryLighted;
+        background: $accentColorSecondaryLighted;
     }
 }
 
