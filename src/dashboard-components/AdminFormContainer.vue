@@ -17,7 +17,9 @@ const props = defineProps<AdminFormContainerProps>()
                 <p>{{ props.title }}</p>
                 <ReusableSeparatorDark />
             </div>
-            <div class="content"></div>
+            <div class="content">
+                <slot></slot>
+            </div>
         </div>
     </div>
 </template>
@@ -49,6 +51,10 @@ const props = defineProps<AdminFormContainerProps>()
                 font-size: 1.25rem;
                 font-weight: 700;
             }
+        }
+        .content {
+            display: flex;
+            justify-content: center;
         }
     }
 }

@@ -3,6 +3,7 @@
 import NavAside from '@/dashboard-components/NavAside.vue';
 import DashboardHeader from '@/dashboard-components/DashboardHeader.vue';
 import AdminPageNav from '@/dashboard-components/AdminPageNav.vue';
+import AdminFormContainer from '@/dashboard-components/AdminFormContainer.vue';
 
 </script>
 
@@ -13,6 +14,9 @@ import AdminPageNav from '@/dashboard-components/AdminPageNav.vue';
             <DashboardHeader title="Gestion compte administrateur">
                 <AdminPageNav />
             </DashboardHeader>
+            <AdminFormContainer title="Supprimer un administrateur">
+                <!-- <BO_AdminForm_updatePassword class="adminUpdatePasswordForm"/> -->
+            </AdminFormContainer>
         </div>
     </div>
 </template>
