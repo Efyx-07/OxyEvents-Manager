@@ -125,7 +125,7 @@ const openLogoutConfirmationModal = (): void => {
                 cursor: pointer;
                 position: relative;
                 &:hover > .active-bar {
-                    background-color: rgba($accentColorPrimary, .25);
+                    background: rgba($accentColorPrimary, .25);
                     width: 100%;
                 }
                 .icon {
@@ -143,12 +143,12 @@ const openLogoutConfirmationModal = (): void => {
                     z-index: -1;
                     width: 0;
                     height: 100%;
-                    background-color: transparent;
+                    background: transparent;
                     border-radius: 0 $containerRadius * 2 $containerRadius * 2 0;
                     transition: all .3s ease-in-out;
                 }
                 &.active-link>.active-bar {
-                    background-color: $accentColorPrimary;
+                    background: $accentColorPrimary;
                     width: 100%;
                 }
             }        
