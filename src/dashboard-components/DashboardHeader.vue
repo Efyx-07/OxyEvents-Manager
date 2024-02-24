@@ -59,5 +59,4 @@ const props = defineProps<DashboardHeaderProps>();
   }
 }
 
-
 </style>

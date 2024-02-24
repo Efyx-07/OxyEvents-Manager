@@ -51,7 +51,7 @@ const adminNavItems: AdminNavItem[] = [
 @import '@/assets/sass/breakPoints.scss';
 
 .adminPageNav {
-    border: solid 1px rgba($darkColor, .1);
+    border: solid 1px $blackTransparency;
     border-radius: $containerRadius * 2;
     display: flex;
     justify-content: space-around;

@@ -110,7 +110,7 @@ const openLogoutConfirmationModal = (): void => {
             display: flex;
             justify-content: center;
             margin: 0 1rem;
-            border-bottom: solid 1px rgba($whiteColor, .1);
+            border-bottom: solid 1px $whiteTransparency;
         }
         .navItems-container {
             padding-top: 3rem;
@@ -161,7 +161,7 @@ const openLogoutConfirmationModal = (): void => {
             height: 6rem;
             color: $whiteColor;
             background: $darkColor;
-            border-top: solid 1px rgba($whiteColor, .25);
+            border-top: solid 1px $whiteTransparency;
             display: flex;
             align-items: center;
             justify-content: space-between;
