@@ -54,7 +54,9 @@ const props = defineProps<AdminFormContainerProps>()
         }
         .content {
             display: flex;
-            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+            gap: 3rem;
         }
     }
 }
