@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-import ReusableSeparatorDark from '@/sub-components/ReusableSeparatorDark.vue'; 
+import ReusableSeparator from '@/sub-components/ReusableSeparator.vue'; 
 
 interface AdminFormContainerProps {
     title: string;
@@ -15,7 +15,7 @@ const props = defineProps<AdminFormContainerProps>()
         <div class="adminFormContainer">
             <div class="title-container">
                 <p>{{ props.title }}</p>
-                <ReusableSeparatorDark />
+                <ReusableSeparator />
             </div>
             <div class="content">
                 <slot></slot>

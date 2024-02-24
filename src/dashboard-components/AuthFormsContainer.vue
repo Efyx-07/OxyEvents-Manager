@@ -2,7 +2,7 @@
 
 import PlatformLogo from '@/sub-components/PlatformLogo.vue';
 import AdminFormLogin from '@/dashboard-forms/AdminFormLogin.vue';
-import ReusableSeparatorLight from '@/sub-components/ReusableSeparatorLight.vue';
+import ReusableSeparator from '@/sub-components/ReusableSeparator.vue';
 import AdminFormForgotPassword from '@/dashboard-forms/AdminFormForgotPassword.vue';
 import DemoModeLogin from './DemoModeLogin.vue';
 import { ref } from 'vue';
@@ -38,11 +38,11 @@ const backToLoginForm = (): void  => {
 <template>
     <div class="formContainer">
         <PlatformLogo class="platformLogo"/>
-        <ReusableSeparatorLight/>
+        <ReusableSeparator color="light"/>
         <AdminFormLogin v-if="loginFormVisible"/>
         <AdminFormForgotPassword v-else-if="askResetPasswordFormVisible"/>
         <DemoModeLogin v-else-if="demoModeLoginVisible"/>
-        <ReusableSeparatorLight/>
+        <ReusableSeparator color="light"/>
         <div class="options">
             <p @click="askResetPassword" v-if="loginFormVisible">Mot de passe oublié ?</p>
             <p @click="backToLoginForm" v-else>Retour</p>

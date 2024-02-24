@@ -1,7 +1,7 @@
 <script setup lang="ts">
 
 import { Icon } from '@iconify/vue';
-import ReusableSeparatorDark from '@/sub-components/ReusableSeparatorDark.vue';
+import ReusableSeparator from '@/sub-components/ReusableSeparator.vue';
 import ReusablePrimaryButton from '@/sub-components/ReusablePrimaryButton.vue';
 import ReusableSecondaryButton from '@/sub-components/ReusableSecondaryButton.vue';
 import { ref, onMounted } from 'vue';
@@ -53,9 +53,9 @@ const handleSignOut = (): void => {
                 </div>
                 <p>Déconnexion</p>
             </div>
-            <ReusableSeparatorDark/>
+            <ReusableSeparator />
             <p class="alertMessage">Souhaitez-vous vous déconnecter ? </p>
-            <ReusableSeparatorDark/>
+            <ReusableSeparator />
             <div class="buttons_container">
                 <ReusableSecondaryButton  @click="closeLogoutConfirmationModal">Annuler</ReusableSecondaryButton> 
                 <ReusablePrimaryButton @click="handleSignOut">Confirmer</ReusablePrimaryButton>

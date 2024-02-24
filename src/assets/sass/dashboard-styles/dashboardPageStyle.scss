@@ -1,5 +1,9 @@
 @import '@/assets/sass/breakPoints.scss';
 
+.dashboardPage {
+    min-height: 100vh;
+}
+
 @media screen and (min-width: $breakpointDesktop) {
 
     .dashboardPage {
