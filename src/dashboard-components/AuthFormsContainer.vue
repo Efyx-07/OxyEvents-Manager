@@ -84,7 +84,6 @@ const backToLoginForm = (): void  => {
             }
         }
     }
-
 }
 
 @media screen and (min-width: $breakpointDesktop) {
