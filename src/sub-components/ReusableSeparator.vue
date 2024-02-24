@@ -29,7 +29,6 @@ const colorClass = computed(() => {
 .color-dark {
     background: $blackTransparency;
 }
-
 .color-light {
     background: $whiteTransparency;
 }
