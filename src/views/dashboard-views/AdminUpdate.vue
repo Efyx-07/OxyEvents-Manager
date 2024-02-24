@@ -4,7 +4,7 @@ import NavAside from '@/dashboard-components/NavAside.vue';
 import DashboardHeader from '@/dashboard-components/DashboardHeader.vue';
 import AdminPageNav from '@/dashboard-components/AdminPageNav.vue';
 import AdminFormContainer from '@/dashboard-components/AdminFormContainer.vue';
-import AdminFormUpdatePasswordVue from '@/dashboard-forms/AdminFormUpdatePassword.vue';
+import AdminFormUpdatePassword from '@/dashboard-forms/AdminFormUpdatePassword.vue';
 
 </script>
 
@@ -16,7 +16,7 @@ import AdminFormUpdatePasswordVue from '@/dashboard-forms/AdminFormUpdatePasswor
                 <AdminPageNav />
             </DashboardHeader>
             <AdminFormContainer title="Modifier votre mot de passe">
-                <AdminFormUpdatePasswordVue />
+                <AdminFormUpdatePassword />
             </AdminFormContainer>
         </div>
     </div>
