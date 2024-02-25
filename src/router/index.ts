@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router';
 
 //dashboard views
 import LoginPage from '@/views/dashboard-views/LoginPage.vue';
+import ResetPassword from '@/views/dashboard-views/ResetPassword.vue';
 import HomePage from '@/views/dashboard-views/HomePage.vue';
 import AdminUpdate from '@/views/dashboard-views/AdminUpdate.vue';
 import AdminAdd from '@/views/dashboard-views/AdminAdd.vue';
@@ -16,6 +17,11 @@ const router = createRouter({
       path: '/',
       name: 'LoginPage',
       component: LoginPage
+    },
+    {
+      path: '/reset-password/:token',
+      name: 'ResetPassword',
+      component: ResetPassword
     },
     {
       path: '/home',

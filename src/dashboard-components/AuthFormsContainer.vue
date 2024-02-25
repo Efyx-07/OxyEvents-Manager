@@ -5,7 +5,9 @@ import AdminFormLogin from '@/dashboard-forms/AdminFormLogin.vue';
 import ReusableSeparator from '@/sub-components/ReusableSeparator.vue';
 import AdminFormForgotPassword from '@/dashboard-forms/AdminFormForgotPassword.vue';
 import DemoModeLogin from './DemoModeLogin.vue';
+import AdminFormResetPassword from '@/dashboard-forms/AdminFormResetPassword.vue';
 import { ref } from 'vue';
+import { useRoute } from 'vue-router';
 
 // visibilités par défaut
 const loginFormVisible = ref<boolean>(true);
@@ -33,21 +35,30 @@ const backToLoginForm = (): void  => {
     demoModeLoginVisible.value = false;
 };
 
+const route = useRoute();
+
+const loginPage = route.name === 'LoginPage';
+
 </script>
 
 <template>
     <div class="formContainer">
         <PlatformLogo class="platformLogo"/>
         <ReusableSeparator color="light"/>
-        <AdminFormLogin v-if="loginFormVisible"/>
-        <AdminFormForgotPassword v-else-if="askResetPasswordFormVisible"/>
-        <DemoModeLogin v-else-if="demoModeLoginVisible"/>
-        <ReusableSeparator color="light"/>
-        <div class="options">
-            <p @click="askResetPassword" v-if="loginFormVisible">Mot de passe oublié ?</p>
-            <p @click="backToLoginForm" v-else>Retour</p>
-            <p @click="toDemoModeNotification" v-if="!demoModeLoginVisible">Mode demo</p>
+        <div v-if="loginPage" class="content">
+            <AdminFormLogin v-if="loginFormVisible"/>
+            <AdminFormForgotPassword v-else-if="askResetPasswordFormVisible"/>
+            <DemoModeLogin v-else-if="demoModeLoginVisible"/>
+            <ReusableSeparator color="light"/>
+            <div class="options">
+                <p @click="askResetPassword" v-if="loginFormVisible">Mot de passe oublié ?</p>
+                <p @click="backToLoginForm" v-else>Retour</p>
+                <p @click="toDemoModeNotification" v-if="!demoModeLoginVisible">Mode demo</p>
+            </div>
         </div>
+        <div v-else>
+            <AdminFormResetPassword />
+        </div>      
     </div>
 </template>
 
@@ -65,22 +76,28 @@ const backToLoginForm = (): void  => {
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
-    .options {
+
+    .content {
         display: flex;
-        flex-wrap: wrap;
-        justify-content: space-between;
-        gap: 1rem;
+        flex-direction: column;
+        gap: 1.5rem;
+        .options {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 1rem;
 
-        p {
-            margin: 0;
-            font-size: .8rem;
-            font-weight: 600;
-            opacity: .5;
-            cursor: pointer;
+            p {
+                margin: 0;
+                font-size: .8rem;
+                font-weight: 600;
+                opacity: .5;
+                cursor: pointer;
 
-            &:hover {
-                opacity: 1;
-                color: $accentColorPrimary;
+                &:hover {
+                    opacity: 1;
+                    color: $accentColorPrimary;
+                }
             }
         }
     }
