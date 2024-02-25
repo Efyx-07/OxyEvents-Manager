@@ -1,7 +1,7 @@
 // import des interfaces
 import type { Event } from '@/types/eventsTypes';
 import type { Participant } from '@/types/participantsTypes';
-import type { Admin } from '@/types/adminsTypes';
+import type { Admin, AdminApiResponse } from '@/types/adminsTypes';
 
 const hostName = 'https://oxyeventsmanagerdemo-backend.vercel.app'; // adresse du serveur backend
 
@@ -50,8 +50,8 @@ export async function fetchAdminsData(): Promise<Admin[]> {
         if (!response.ok) {
             throw new Error ('Erreur lors de la récupération des données des administrateurs');
         }
-        const adminsData: Admin[] = await response.json();
-        return adminsData;
+        const adminsData: AdminApiResponse = await response.json();
+        return adminsData.admins;
 
     } catch (error) {
         console.error('Erreur lors de la récupération des données des administrateurs: ', error);

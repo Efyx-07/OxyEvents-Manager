@@ -7,6 +7,10 @@ export interface Admin {
     statut: 'SUPERADMIN' | 'ADMIN' | 'GENERIC' | 'GUEST';
 }
 
+export interface AdminApiResponse {
+    admins: Admin[];
+}
+
 export interface AdminData {
     id: number;
     lastName: string;

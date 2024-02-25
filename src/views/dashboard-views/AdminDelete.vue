@@ -4,6 +4,7 @@ import NavAside from '@/dashboard-components/NavAside.vue';
 import DashboardHeader from '@/dashboard-components/DashboardHeader.vue';
 import AdminPageNav from '@/dashboard-components/AdminPageNav.vue';
 import AdminFormContainer from '@/dashboard-components/AdminFormContainer.vue';
+import AdminFormDeleteAdmin from '@/dashboard-forms/AdminFormDeleteAdmin.vue';
 
 </script>
 
@@ -15,7 +16,7 @@ import AdminFormContainer from '@/dashboard-components/AdminFormContainer.vue';
                 <AdminPageNav />
             </DashboardHeader>
             <AdminFormContainer title="Supprimer un administrateur">
-                <!-- <BO_AdminForm_updatePassword class="adminUpdatePasswordForm"/> -->
+                <AdminFormDeleteAdmin />
             </AdminFormContainer>
         </div>
     </div>
