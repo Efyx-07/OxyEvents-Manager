@@ -34,7 +34,7 @@ const props = defineProps<AdminFormContainerProps>()
     .adminFormContainer {
         background: $whiteColor;
         box-shadow: $containerShadow;
-        border-radiuS: $containerRadius;
+        border-radiuS: $containerRadiusM;
         padding: 2rem;
         display: flex;
         flex-direction: column;
