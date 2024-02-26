@@ -6,9 +6,13 @@ import { useGlobalDataStore } from '@/stores/GlobalDataStore';
 import { Icon } from '@iconify/vue';
 import ReusablePrimaryButton from '@/sub-components/ReusablePrimaryButton.vue';
 import ReusableSeparator from '@/sub-components/ReusableSeparator.vue';
+import ButtonLoader from '@/sub-components/ButtonLoader.vue';
 import type { Admin } from '@/types/adminsTypes';
 
 const adminStore = useAdminStore();
+
+// visibilité par défaut du loader
+const isLoading = ref<boolean>(false);
 
 // initialise un tableau vide de successMessage
 const successMessage = ref<Record<string | number, boolean>>({});
@@ -20,6 +24,8 @@ const filteredAdmins = ref<Admin[]>([]);
 const deleteAdmin = async (adminId: number) => {
 
     try {
+
+        isLoading.value = true;
 
         const { hostName } = useGlobalDataStore();
 
@@ -73,7 +79,10 @@ onMounted(() => {
             </div>
             <div class="adminNameAndButton_container" v-else>
                 <p> {{ admin.prenom }} {{ admin.nom }} </p>
-                <ReusablePrimaryButton v-if="admin.id > 3" @click="deleteAdmin(admin.id)">Supprimer</ReusablePrimaryButton>
+                <div v-if="admin.id > 3">
+                    <ButtonLoader v-if="isLoading"/>
+                    <ReusablePrimaryButton @click="deleteAdmin(admin.id)" v-else>Supprimer</ReusablePrimaryButton>
+                </div>
             </div>
             <ReusableSeparator/>
         </div>           
