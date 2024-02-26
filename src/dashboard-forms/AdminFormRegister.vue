@@ -8,46 +8,46 @@ import { useAdminStore } from '@/stores/AdminStore';
 import { useRoute, useRouter } from 'vue-router';
 
 // statut de visibilité par défaut des messages d'erreur et de succès
-const errorMessage = ref(false);
-const successMessage = ref(false);
+const errorMessage = ref<boolean>(false);
+const successMessage = ref<boolean>(false);
 
 // propriétés du formulaire
-const lastName = ref('');
-const firstName = ref('');
-const password = ref('');
-const confirmPassword = ref('');
+const lastName = ref<string>('');
+const firstName = ref<string>('');
+const password = ref<string>('');
+const confirmPassword = ref<string>('');
 
 // états de validation
-const lastNameValid = ref(true);
-const firstNameValid = ref(true);
-const passwordValid = ref (true);
-const confirmPasswordValid = ref (true);
+const lastNameValid = ref<boolean>(true);
+const firstNameValid = ref<boolean>(true);
+const passwordValid = ref<boolean>(true);
+const confirmPasswordValid = ref<boolean>(true);
 
 // Regex
-const nameTypeRegex = /^[A-Za-zÀ-ÖØ-öø-ÿ '-]+$/;
-const passwordRegex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@#$%^&+=!*]).{8,}$/;
+const nameTypeRegex: RegExp = /^[A-Za-zÀ-ÖØ-öø-ÿ '-]+$/;
+const passwordRegex: RegExp = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@#$%^&+=!*]).{8,}$/;
 
 // fonctions de validation pour chaque champ
-const validateLastName = () => {
+const validateLastName = (): void => {
     lastNameValid.value = nameTypeRegex.test(lastName.value);
 };
-const validateFirstName = () => {
+const validateFirstName = (): void => {
     firstNameValid.value = nameTypeRegex.test(firstName.value);
 };
-const validatePassword = () => {
+const validatePassword = (): void => {
     passwordValid.value = passwordRegex.test(password.value);
 };
-const validateConfirmPassword = () => {
+const validateConfirmPassword = (): void => {
     confirmPasswordValid.value = password.value === confirmPassword.value;
 };
 
 // utilise la route pour récupérer le token et l'adresse email
 const route = useRoute();
-const token = route.params.token;
+const token: string | string[] = route.params.token;
 const emailFromURL = route.query.email;
 
 // valide le formulaire
-const validateAdminRegistration = async () => {
+const validateAdminRegistration = async (): Promise<void> => {
 
     // valide chaque champ individuellement
     validateLastName(); 
@@ -56,10 +56,10 @@ const validateAdminRegistration = async () => {
     validateConfirmPassword();
 
     // extrait les valeurs des objets ref
-    const lastNameValue = lastName.value;
-    const firstNameValue = firstName.value;
+    const lastNameValue: string = lastName.value;
+    const firstNameValue: string = firstName.value;
     const emailValue = emailFromURL;
-    const passwordValue = password.value;
+    const passwordValue: string = password.value;
 
     // détermine les champs requis pour soumettre le formulaire
     const requiredFieldsValid = 
@@ -118,12 +118,12 @@ const validateAdminRegistration = async () => {
 const router = useRouter();
 
 // redirige vers la page de navigation
-const navigateToLoginPage = () => {
+const navigateToLoginPage = (): void => {
     router.push('/');
 };
 
 // réinitialise le formulaire
-const resetForm = () => {
+const resetForm = (): void => {
     lastName.value = '';
     firstName.value = '';
     password.value = '';
@@ -131,7 +131,7 @@ const resetForm = () => {
 };
 
 // revient au formulaire réinitialisé
-const backToResetForm = () => {
+const backToResetForm = (): void => {
     resetForm()
     errorMessage.value = false;
 };
