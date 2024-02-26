@@ -3,7 +3,7 @@ import type { Event } from '@/types/eventsTypes';
 import type { Participant } from '@/types/participantsTypes';
 import type { Admin, AdminApiResponse } from '@/types/adminsTypes';
 
-const hostName = 'https://oxyeventsmanagerdemo-backend.vercel.app'; // adresse du serveur backend
+const hostName = 'https://oxyeventsmanagerdemo-backend.vercel.app'; // adresse du serveur backend 
 
 // récupère du backend, l'API des datas des évènements
 export async function fetchEventsData(): Promise<Event[]> {

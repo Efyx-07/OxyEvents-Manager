@@ -5,7 +5,7 @@ export const useGlobalDataStore = defineStore('globalData', {
     state: () => ({
 
         // Serveur backend
-        hostName: 'https://oxyeventsmanagerdemo-backend.vercel.app', // entrer ici l'adresse du serveur backend, ne doit se déclarer qu'à cet endroit
+        hostName: 'https://oxyeventsmanagerdemo-backend.vercel.app', // adresse du serveur backend 
 
         // Icones de Iconify
         validateIconName: "ooui:success", // Icone 'validé'
