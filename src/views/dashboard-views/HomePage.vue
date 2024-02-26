@@ -26,4 +26,11 @@ import DashboardEventCard from '@/dashboard-components/DashboardEventCard.vue';
 
 @import '@/assets/sass/dashboard-styles/dashboardPageStyle.scss';
 
+.eventCards_container {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
 </style>

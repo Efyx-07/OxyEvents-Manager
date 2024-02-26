@@ -191,7 +191,7 @@ onMounted(() => {
       }
     } */
     .backOfficeEventCard {
-        width: 24rem;
+        width: 100%;
         height: 22rem;
         background: $whiteColor;
         box-shadow: $containerShadow;
@@ -199,7 +199,7 @@ onMounted(() => {
         position: relative;
         .eventImage_container {
             width: 100%;
-            height: 12rem;
+            height: 50%;
             display: inline-block;
             position: relative;
             overflow: hidden;
