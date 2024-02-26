@@ -8,7 +8,7 @@
 
 @import '@/assets/sass/dashboard-styles/colors.scss';
 .loader-container {
-    width: 8rem;
+    width: 6rem;
     height: 2.3rem;
     display: flex;
     align-items: center;

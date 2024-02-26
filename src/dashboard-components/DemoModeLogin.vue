@@ -1,17 +1,24 @@
 <script setup lang="ts">
 
 import ReusablePrimaryButton from '@/sub-components/ReusablePrimaryButton.vue';
+import ButtonLoader from '@/sub-components/ButtonLoader.vue';
 import { useGlobalDataStore } from '@/stores/GlobalDataStore';
 import { useRouter } from 'vue-router';
 import { useAdminStore } from '@/stores/AdminStore';
+import { ref } from 'vue';
 
 const router = useRouter();
 const adminStore = useAdminStore();
 
+// visibilité par défaut du loader
+const isLoading = ref<boolean>(false);
+
 // envoie la requête
-const connectGuestAndLaunchDemo = async () => {
+const connectGuestAndLaunchDemo = async (): Promise<void> => {
 
     try {
+
+        isLoading.value = true;
 
         const { hostName } = useGlobalDataStore();
 
@@ -54,7 +61,10 @@ const connectGuestAndLaunchDemo = async () => {
     <p>🚀 Bienvenue en mode démo !</p>
     <p> Veuillez noter que certaines fonctionnalités ont été désactivées dans ce mode pour des raisons de démonstration.</p>
     <p>Bonne exploration !</p>
-    <ReusablePrimaryButton class="adminLoginPage-button" type="submit" @click="connectGuestAndLaunchDemo">Explorer</ReusablePrimaryButton>
+    <div class="adminLoginPage-button">
+        <ButtonLoader v-if="isLoading"/>
+        <ReusablePrimaryButton type="submit" @click="connectGuestAndLaunchDemo" v-else>Explorer</ReusablePrimaryButton>
+    </div> 
 </template>
 
 <style lang="scss" scoped>
