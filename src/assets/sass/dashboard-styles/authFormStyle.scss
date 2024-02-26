@@ -62,6 +62,7 @@
         align-items: center;
         justify-content: space-between;
         color: $errorColor;
+
         .text_container {
             display: flex;
             align-items: center;
@@ -70,6 +71,7 @@
             p {
             margin: 0;
             }
+            
             .alertIcon {
                 font-size: 1.3rem;
             }

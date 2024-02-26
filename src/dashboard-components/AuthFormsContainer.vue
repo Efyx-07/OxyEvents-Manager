@@ -48,7 +48,6 @@ const route = useRoute();
             <AdminFormResetPassword />
         </div>
         <div class="content" v-else-if="route.name === 'AdminRegister'">
-            <h1 class="adminFormRegister-title">Créez votre compte</h1>
             <AdminFormRegister />
         </div> 
         <div class="content" v-else>
@@ -102,10 +101,6 @@ const route = useRoute();
                     color: $accentColorPrimary;
                 }
             }
-        }
-        .adminFormRegister-title {
-            margin: 0;
-            font-size: 1.5rem;
         }
     }
 }

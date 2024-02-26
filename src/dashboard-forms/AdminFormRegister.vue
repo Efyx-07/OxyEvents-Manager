@@ -148,6 +148,7 @@ const backToResetForm = () => {
         <ReusablePrimaryButton class="button" type="submit" @click="navigateToLoginPage">Me connecter</ReusablePrimaryButton>
     </div>
     <form class="adminLoginPage-form" @submit.prevent="validateAdminRegistration" v-else>
+        <h1 class="adminFormRegister-title">Créez votre compte</h1>
         <div class="inputs_wrapper">
             <div class="input_container">
                 <label for="newAdmin_email">Votre adresse mail : </label>     
@@ -191,11 +192,17 @@ const backToResetForm = () => {
 
 @import '@/assets/sass/dashboard-styles/authFormStyle.scss';
 @import '@/assets/sass/dashboard-styles/colors.scss';
+
+.adminFormRegister-title {
+    margin: 0;
+    font-size: 1.5rem;
+}
 .input_container {
     .mailAddress {
         margin: 0;
-        font-size: .8rem; 
-        font-weight: 700;
+        font-size: .9rem; 
+        font-weight: 600;
+        color: $accentColorPrimary;
     }
     .label_container {
         display: flex;
@@ -213,5 +220,20 @@ const backToResetForm = () => {
         color: $errorColor;
     }
 } 
+.registration-result_message {   
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    .notification {
+        margin: 0;
+    }
+    .error {
+        color: $errorColor;
+    }
+    .button {
+        align-self: self-end;
+        cursor: pointer;
+    }
+}
 
 </style>
