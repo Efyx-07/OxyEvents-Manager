@@ -1,7 +1,13 @@
 @import '@/assets/sass/breakPoints.scss';
+@import './colors.scss';
 
 .dashboardPage {
+    background: $darkColor;
     min-height: 100vh;
+
+    .page-content .content-field {
+        padding: 1rem 1rem 3rem 1rem;
+    }
 }
 
 @media screen and (min-width: $breakpointDesktop) {
@@ -12,6 +18,10 @@
         .page-content {
             grid-column: 2 /-1;
             width: 100%;
+
+            .content-field {
+                padding: 3rem 3rem;
+            }
         }
     } 
 }

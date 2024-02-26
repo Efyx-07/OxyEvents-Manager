@@ -15,14 +15,16 @@ import AdminFormInvitNewAdmin from '@/dashboard-forms/AdminFormInvitNewAdmin.vue
             <DashboardHeader title="Gestion compte administrateur">
                 <AdminPageNav />
             </DashboardHeader>
-            <AdminFormContainer title="Ajouter un nouvel administrateur">
-                <div class="aboutNotification">
-                    <p>
-                        Notification: Pour créer un nouvel administrateur, renseignez son email. Celui-ci recevra une invitation lui permettant de créer son compte. Le nouvel administrateur sera ajouté dès son compte créé. Il aura accès à toutes les fonctionnalités sauf l'ajout ou la suppression d'autres administrateurs, droits dont vous seul bénéficiez.
-                    </p>
-                </div>
-                <AdminFormInvitNewAdmin />
-            </AdminFormContainer>
+            <div class="content-field">
+                <AdminFormContainer title="Ajouter un nouvel administrateur">
+                    <div class="aboutNotification">
+                        <p>
+                            Notification: Pour créer un nouvel administrateur, renseignez son email. Celui-ci recevra une invitation lui permettant de créer son compte. Le nouvel administrateur sera ajouté dès son compte créé. Il aura accès à toutes les fonctionnalités sauf l'ajout ou la suppression d'autres administrateurs, droits dont vous seul bénéficiez.
+                        </p>
+                    </div>
+                    <AdminFormInvitNewAdmin />
+                </AdminFormContainer>
+            </div>
         </div>
     </div>
 </template>

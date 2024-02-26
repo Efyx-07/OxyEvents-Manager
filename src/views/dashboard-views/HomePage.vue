@@ -13,8 +13,10 @@ import DashboardEventCard from '@/dashboard-components/DashboardEventCard.vue';
             <DashboardHeader title="Vos évènements">
                 <button>Je suis un bouton</button>
             </DashboardHeader>
-            <div class="eventCards_container">
-                <DashboardEventCard />
+            <div class="content-field">
+                <div class="eventCards_container">
+                    <DashboardEventCard />
+                </div>
             </div>
         </div>
     </div>

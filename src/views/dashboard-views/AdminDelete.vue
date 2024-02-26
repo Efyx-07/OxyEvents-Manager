@@ -15,9 +15,11 @@ import AdminFormDeleteAdmin from '@/dashboard-forms/AdminFormDeleteAdmin.vue';
             <DashboardHeader title="Gestion compte administrateur">
                 <AdminPageNav />
             </DashboardHeader>
-            <AdminFormContainer title="Supprimer un administrateur">
-                <AdminFormDeleteAdmin />
-            </AdminFormContainer>
+            <div class="content-field">
+                <AdminFormContainer title="Supprimer un administrateur">
+                    <AdminFormDeleteAdmin />
+                </AdminFormContainer>
+            </div>
         </div>
     </div>
 </template>

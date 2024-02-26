@@ -15,9 +15,11 @@ import AdminFormUpdatePassword from '@/dashboard-forms/AdminFormUpdatePassword.v
             <DashboardHeader title="Gestion compte administrateur">
                 <AdminPageNav />
             </DashboardHeader>
-            <AdminFormContainer title="Modifier votre mot de passe">
-                <AdminFormUpdatePassword />
-            </AdminFormContainer>
+            <div class="content-field">
+                <AdminFormContainer title="Modifier votre mot de passe">
+                    <AdminFormUpdatePassword />
+                </AdminFormContainer>
+            </div>
         </div>
     </div>
 </template>

@@ -152,3 +152,141 @@ onMounted(() => {
         </div>
     </div>
 </template>
+
+<style lang="scss" scoped>
+
+    @import '@/assets/sass/dashboard-styles/colors.scss';
+    /*
+    .noMatchFound_container {
+      height: 75vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+      .noMatchFound {
+        margin: 0;
+        font-size: 1.2rem;
+      }
+      .back_btn {
+        background: transparent;
+        //color: $darkColorBackOf;
+        //border: 1px solid $darkColorBackOf;
+        display: flex;
+        justify-content: center;
+        text-align: center;
+        cursor: pointer;
+
+        &:hover {
+          //color: $accentColorBackof2;
+          //border-color: $accentColorBackof2;
+        }
+
+        p {
+          margin: 0;
+          font-size: 1rem;
+          font-weight: 700;
+          padding: .5rem;
+        }
+      }
+    } */
+    .backOfficeEventCard {
+        width: 24rem;
+        height: 22rem;
+        background: $whiteColor;
+        box-shadow: $containerShadow;
+        //border-radius: $containerRadius 0 $containerRadius 0;
+        position: relative;
+        .eventImage_container {
+            width: 100%;
+            height: 12rem;
+            display: inline-block;
+            position: relative;
+            overflow: hidden;
+            //border-radius: $containerRadius 0 0 0;
+            .eventImage {
+                width: 100%;
+                height: 100%;
+                display: block;
+                position: relative;
+                object-fit: cover;
+                cursor: pointer;
+                transition: transform .6s ease-in-out;
+
+                &:hover {
+                  transform: scale(1.05);
+                }
+            }
+        }
+        .eventCard-titleAndActions_container {
+            display: flex;
+            flex-direction: column;
+            gap: .5rem;
+            padding: 0 1rem;
+            .eventLocation_container {
+              display: flex;
+              align-items: center;
+              gap: .2rem;
+              p, .loc-icon  {
+                margin: 0;
+                font-size: .9rem;
+                font-weight: 500;
+                color: $accentColorSecondary;
+              }
+            }
+            .eventTitle {
+              margin: 0;
+              font-size: 1.25rem;
+            }
+            .actionIcons_container {
+                display: flex;
+                gap: 1.5rem;
+                position: absolute;
+                right: 1rem;
+                bottom: 1rem;
+                .icon_container {
+                    .icon {
+                        font-size: 1.5rem;
+                        cursor: pointer;
+
+                        &:hover {
+                            color: $accentColorPrimary;
+                        }
+                    }
+
+                }
+            }
+        }
+        .dateCard {
+          background: rgba($whiteColor, .8);
+          border-radius: 10px 0;
+          display: flex;
+          align-items: center;
+          gap:.2rem;
+          position: absolute;
+          top: .5rem;
+          right: .5rem;
+          padding: .3rem;
+
+          p {
+            margin: 0;
+          }
+          .dateCard-day {
+            font-size: 2rem;
+          }
+          .monthYear_container {
+            display: flex;
+            flex-direction: column;
+            line-height: 1;
+            .dateCard-month {
+              font-size: .8rem;
+            }
+            .dateCard-year {
+              font-size: .9rem;
+            }
+
+          }
+        }
+    }
+    
+</style>

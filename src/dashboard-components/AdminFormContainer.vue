@@ -31,7 +31,6 @@ const props = defineProps<AdminFormContainerProps>()
 @import '@/assets/sass/variables.scss';
 .adminFormContainer-wrapper {
     width: 100%;
-    padding: 1rem 1rem 3rem 1rem;
     .adminFormContainer {
         background: $whiteColor;
         box-shadow: $containerShadow;
@@ -62,19 +61,16 @@ const props = defineProps<AdminFormContainerProps>()
 }
 
 @media screen and (min-width: $breakpointDesktop) {
-    .adminFormContainer-wrapper {
-        padding: 2rem 3rem;
-        .adminFormContainer {
-            .title-container {
-                flex-wrap: unset;
-                gap: 1rem;
+    .adminFormContainer-wrapper .adminFormContainer {
+        .title-container {
+            flex-wrap: unset;
+            gap: 1rem;
 
-                p {
-                    white-space: nowrap;
-                }
+            p {
+                white-space: nowrap;
             }
         }
-    }
+    }   
 }
 
 </style>
