@@ -1,6 +1,7 @@
 <script setup lang="ts">
 
 import ReusablePrimaryButton from '@/sub-components/ReusablePrimaryButton.vue';
+import ButtonLoader from '@/sub-components/ButtonLoader.vue';
 import { ref } from 'vue';
 import { useGlobalDataStore } from '@/stores/GlobalDataStore';
 import { useRouter } from 'vue-router';
@@ -11,7 +12,10 @@ const router = useRouter();
 const adminStore = useAdminStore();
 
 // visibilité par défaut du message d'erreur
-const wrongIds = ref<boolean>(false)
+const wrongIds = ref<boolean>(false);
+
+// visibilité par défaut du loader
+const isLoading = ref<boolean>(false);
 
 // propriétés du formulaire
 const email = ref<string>('');
@@ -25,6 +29,8 @@ const handleAdminLogin = async () => {
     const passwordValue = password.value;
 
     try {
+
+        isLoading.value = true;
 
         const { hostName } = useGlobalDataStore();
 
@@ -103,7 +109,10 @@ const resetForm = () => {
                 <p>Identifiants invalides !</p>
             </div>
         </div>
-        <ReusablePrimaryButton class="adminLoginPage-button" type="submit" v-else>Se connecter</ReusablePrimaryButton>
+        <div v-else class="adminLoginPage-button">
+            <ButtonLoader v-if="isLoading"/>
+            <ReusablePrimaryButton type="submit" v-else>Se connecter</ReusablePrimaryButton>
+        </div>
     </form>  
 </template>
 
