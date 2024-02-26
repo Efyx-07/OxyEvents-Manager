@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
 import { reactive } from 'vue';
-import * as api from '@/services/api'; // importe les fonctions de l'api du fichier api.js
+import * as api from '@/services/adminsApi'; // importe les fonctions de l'api du fichier api.js
 import type { Admin, AdminData } from '@/types/adminsTypes';
 
 type State = {
