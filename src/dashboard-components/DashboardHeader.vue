@@ -27,6 +27,7 @@ const props = defineProps<DashboardHeaderProps>();
   box-shadow: $shadow;
   padding: 1rem;
   width: 100%;
+  min-height: 5rem;
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
@@ -51,11 +52,17 @@ const props = defineProps<DashboardHeaderProps>();
     align-items: center;
     
     h1 {
-      font-size: 1.8rem;
+      font-size: 1.5rem;
     }
     .content {
       width: unset;
     }
+  }
+}
+
+@media screen and (min-width: $breakpointLargeDesktop) {
+  .dashboardHeader h1 {
+    font-size: 1.8rem;
   }
 }
 

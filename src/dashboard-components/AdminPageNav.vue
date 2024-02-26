@@ -59,7 +59,7 @@ const adminNavItems: AdminNavItem[] = [
     align-items: center;
     .navIcon {
         color: $blackColor;
-        font-size: 1.5rem;
+        font-size: 1.3rem;
         &:hover, &.active-link {
             color: $accentColorPrimary;
         }
@@ -69,6 +69,12 @@ const adminNavItems: AdminNavItem[] = [
 @media screen and (min-width: $breakpointDesktop) {
     .adminPageNav {
         gap: 5rem;
+    }
+}
+
+@media screen and (min-width: $breakpointLargeDesktop) {
+    .adminPageNav .navIcon {
+        font-size: 1.5rem;
     }
 }
 
