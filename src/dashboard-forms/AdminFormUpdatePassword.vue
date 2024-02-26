@@ -6,10 +6,14 @@ import { Icon } from '@iconify/vue';
 import { useAdminStore } from '@/stores/AdminStore';
 import { useRouter } from 'vue-router';
 import ReusablePrimaryButton from '@/sub-components/ReusablePrimaryButton.vue';
+import ButtonLoader from '@/sub-components/ButtonLoader.vue';
 
 // visibilité par défaut des messages de succés ou d'erreur
 const successMessage = ref<boolean>(false);
 const updateErrorMessage = ref<boolean>(false);
+
+// visibilité par défaut du loader
+const isLoading = ref<boolean>(false);
 
 // propriétés du formulaire
 const adminCurrentPassword = ref<string>('');
@@ -51,6 +55,8 @@ const validateAdminPasswordUpdating = async (): Promise<void> => {
     if(requiredFieldsValid) {
 
         try {
+
+            isLoading.value = true;
 
             // obtient le token du localStorage
             const token: string | null = localStorage.getItem('token'); 
@@ -127,6 +133,7 @@ const resetForm = () => {
     adminCurrentPassword.value = '';
     adminNewPassword.value = '';
     confirmAdminNewPassword.value = '';
+    isLoading.value = false;
 };
 
 </script>
@@ -174,7 +181,10 @@ const resetForm = () => {
                 <p v-if="!confirmAdminNewPasswordValid && confirmAdminNewPassword !== ''" class="error-message">N'est pas identique à votre nouveau mot de passe</p>
             </div>
         </div>
-        <ReusablePrimaryButton class="adminMgmtForm-button" type="submit">Modifier mot de passe</ReusablePrimaryButton>
+        <div class="adminMgmtForm-button">
+            <ButtonLoader v-if="isLoading"/>
+            <ReusablePrimaryButton type="submit" v-else>Modifier mot de passe</ReusablePrimaryButton>
+        </div>
     </form>
 </template>
 

@@ -86,6 +86,7 @@ const handleAdminLogin = async () => {
 const resetForm = () => {
     email.value = '';
     password.value = '';
+    isLoading.value = false;
 }
 
 </script>
