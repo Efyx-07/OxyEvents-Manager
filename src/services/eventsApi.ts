@@ -1,5 +1,5 @@
 // import interface
-import type { Event } from '@/types/eventsTypes';
+import type { Event, EventApiResponse } from '@/types/eventsTypes';
 
 const hostName = 'https://oxyeventsmanagerdemo-backend.vercel.app'; // adresse du serveur backend 
 
@@ -12,8 +12,8 @@ export async function fetchEventsData(): Promise<Event[]> {
         if (!response.ok) {
             throw new Error ('Erreur lors de la récupération des données de l\'évènement');
         }
-        const eventsData: Event[] = await response.json();
-        return eventsData;
+        const eventsData: EventApiResponse = await response.json();
+        return eventsData.events;
 
     } catch (error) {
         console.error('Erreur lors de la récupération des données de l\'évènement: ', error);

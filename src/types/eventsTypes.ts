@@ -26,3 +26,7 @@ export interface Event {
         prenom: string;
     }
 }
+
+export interface EventApiResponse {
+    events: Event[];
+}
