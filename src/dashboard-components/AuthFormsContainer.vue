@@ -6,6 +6,7 @@ import ReusableSeparator from '@/sub-components/ReusableSeparator.vue';
 import AdminFormForgotPassword from '@/dashboard-forms/AdminFormForgotPassword.vue';
 import DemoModeLogin from './DemoModeLogin.vue';
 import AdminFormResetPassword from '@/dashboard-forms/AdminFormResetPassword.vue';
+import AdminFormRegister from '@/dashboard-forms/AdminFormRegister.vue';
 import { ref } from 'vue';
 import { useRoute } from 'vue-router';
 
@@ -37,15 +38,20 @@ const backToLoginForm = (): void  => {
 
 const route = useRoute();
 
-const loginPage = route.name === 'LoginPage';
-
 </script>
 
 <template>
     <div class="formContainer">
         <PlatformLogo class="platformLogo"/>
         <ReusableSeparator color="light"/>
-        <div v-if="loginPage" class="content">
+        <div v-if="route.name === 'ResetPassword'">
+            <AdminFormResetPassword />
+        </div>
+        <div class="content" v-else-if="route.name === 'AdminRegister'">
+            <h1 class="adminFormRegister-title">Créez votre compte</h1>
+            <AdminFormRegister />
+        </div> 
+        <div class="content" v-else>
             <AdminFormLogin v-if="loginFormVisible"/>
             <AdminFormForgotPassword v-else-if="askResetPasswordFormVisible"/>
             <DemoModeLogin v-else-if="demoModeLoginVisible"/>
@@ -55,10 +61,7 @@ const loginPage = route.name === 'LoginPage';
                 <p @click="backToLoginForm" v-else>Retour</p>
                 <p @click="toDemoModeNotification" v-if="!demoModeLoginVisible">Mode demo</p>
             </div>
-        </div>
-        <div v-else>
-            <AdminFormResetPassword />
-        </div>      
+        </div>     
     </div>
 </template>
 
@@ -99,6 +102,10 @@ const loginPage = route.name === 'LoginPage';
                     color: $accentColorPrimary;
                 }
             }
+        }
+        .adminFormRegister-title {
+            margin: 0;
+            font-size: 1.5rem;
         }
     }
 }

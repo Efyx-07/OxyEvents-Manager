@@ -46,6 +46,11 @@
             color: $validColor;
             font-size: .8rem;
         }
+
+        .specInput-validateIcon {
+            @extend .validateIcon;
+            top: 80%;
+        }
     }
     .adminLoginPage-button {
         align-self: self-end;
