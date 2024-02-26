@@ -23,37 +23,38 @@ export const useEventStore = defineStore('events', {
     actions: {
 
         // récupère les données de tous les évènements à partir de eventsApi.js
-        async loadEventsData() {
+        async loadEventsData(): Promise<void> {
+
             try {
                 const eventsData: Event[] = await api.fetchEventsData();
-                console.log('les events: ', typeof eventsData)
-                this.events = eventsData.events;
-                //this.sortEventByCreationDateNewToOld();
-                //this.updateFilteredEvents();
+                this.events = eventsData;
+                this.sortEventByCreationDateNewToOld();
+                this.updateFilteredEvents();
             } catch (error) {
                 console.error('Erreur lors du chargement des données des évènements: ', error);
             }
         },
-/*
+
         // trie les évènements par date de création (du plus récent au plus ancien)
-        sortEventByCreationDateNewToOld() {
-            this.events.sort((a, b) => {
-                return new Date(b.creationDate) - new Date(a.creationDate);
-              });
+        sortEventByCreationDateNewToOld(): void {
+            this.events.sort((a: Event, b: Event) => {
+                const dateA = new Date(a.creationDate);
+                const dateB = new Date(b.creationDate);
+                return dateB.getTime() - dateA.getTime();
+            });
         },
 
         // met à jour keyword
-        updateSearchedKeyword(newKeyword) {
+        updateSearchedKeyword(newKeyword: string): void {
             this.keyword = newKeyword;
         },
 
         // méthode permettant de filtrer les évènements selon date "à venir / passés"
-        updateFilteredEvents() {
-            const currentDate = new Date();
+        updateFilteredEvents(): void {
+            const currentDate: Date = new Date();
             this.upcomingEvents = this.events.filter(event => new Date(event.date) > currentDate);
             this.pastEvents = this.events.filter(event => new Date(event.date) <= currentDate);
             this.filteredByKeywordEvents = this.events.filter(event => event.title.toLowerCase().includes(this.keyword.toLowerCase()));
         },
-*/
-    },
-});
+    }
+})

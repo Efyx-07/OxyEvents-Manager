@@ -1,19 +1,18 @@
-<script setup lang="ts">
+<script setup>
 
-import { Icon } from '@iconify/vue';
-import { useEventStore } from '@/stores/EventStore';
-import { useGlobalDataStore } from '@/stores/GlobalDataStore';
-  //import { useRouter } from 'vue-router';
-  //import { ref, computed, onMounted } from 'vue';
+  import { Icon } from '@iconify/vue';
+  import { useEventStore } from '@/stores/EventStore';
+  import { useGlobalDataStore } from '@/stores/GlobalDataStore';
+  import { useRouter } from 'vue-router';
+  import { ref, computed, onMounted } from 'vue';
 
-const eventStore = useEventStore();
-const events = eventStore.events;
+  const eventStore = useEventStore();
+  const events = eventStore.events;
 
-const { hostName } = useGlobalDataStore();
+  const { hostName } = useGlobalDataStore();
 
- // const router = useRouter();
+  const router = useRouter();
 
-/*
   // reformate la date et sépare jour / mois / année
   const formatDateDay = (date) => {
       const options = { day: 'numeric' };
@@ -100,18 +99,18 @@ const { hostName } = useGlobalDataStore();
     // emet un évènement personnalisé pour restaurer la class active 'all'
     window.dispatchEvent(new CustomEvent('filterChanged', { detail: 'all' }));
   };
-*/
+
 </script>
 
 <template>
-    <!-- <div class="noMatchFound_container" v-if="filteredByKeywordEventsCount === 0 && currentFilter.value === 'keyword'">
+    <div class="noMatchFound_container" v-if="filteredByKeywordEventsCount === 0 && currentFilter.value === 'keyword'">
         <p class="noMatchFound">Aucun résultat pour votre recherche...</p> 
         <button class="back_btn" @click="displayAllEvents">
             <p>Retour à vos évènements</p>
         </button>
-    </div> -->
-    <div class="backOfficeEventCard" v-for="event in events" :key="event.title">
-        <div class="eventImage_container">
+    </div>
+    <div class="backOfficeEventCard" v-for="event in filteredEvents" :key="event.title" v-else>
+        <div class="eventImage_container" @click="navigateToEvent(event.slug)">
             <img :src="hostName + event.image.source" :alt="event.image.alt" class="eventImage">
         </div>
         <div class="eventCard-titleAndActions_container">
@@ -120,7 +119,7 @@ const { hostName } = useGlobalDataStore();
                 <p>{{ event.location }}</p>
             </div>
             <h1 class="eventTitle">{{ event.title }}</h1>
-            <!-- <div class="actionIcons_container">
+            <div class="actionIcons_container">
                 <div class="icon_container">
                     <Icon icon="mdi:eye" class="icon" @click="navigateToEvent(event.slug)"/>
                 </div>
@@ -133,14 +132,14 @@ const { hostName } = useGlobalDataStore();
                 <div class="icon_container">
                     <Icon icon="mdi:trash" class="icon" @click="openRemoveEventConfirmationModal(event)"/>
                 </div>
-            </div> -->
+            </div>
         </div>
-        <!-- <div class="dateCard">
+        <div class="dateCard">
             <p class="dateCard-day"> {{ formatDateDay(event.date) }} </p>
             <div class="monthYear_container">
                 <p class="dateCard-month"> {{ formatDateMonth(event.date) }} </p>
                 <p class="dateCard-year"> {{ formatDateYear(event.date) }} </p>
             </div> 
-        </div> -->
-    </div> 
+        </div>
+    </div>
 </template>
