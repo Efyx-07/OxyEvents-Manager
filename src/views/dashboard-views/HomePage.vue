@@ -2,7 +2,7 @@
 
 import NavAside from '@/dashboard-components/NavAside.vue';
 import DashboardHeader from '@/dashboard-components/DashboardHeader.vue';
-import DB_EventCard from '@/dashboard-components/DB_EventCard.vue';
+import DashboardEventCard from '@/dashboard-components/DashboardEventCard.vue';
 
 </script>
 
@@ -14,7 +14,7 @@ import DB_EventCard from '@/dashboard-components/DB_EventCard.vue';
                 <button>Je suis un bouton</button>
             </DashboardHeader>
             <div class="eventCards_container">
-                <DB_EventCard />
+                <DashboardEventCard />
             </div>
         </div>
     </div>
