@@ -1,7 +1,8 @@
 <script setup lang="ts">
 
 import { Icon } from '@iconify/vue';
-import ReusablePrimaryButton from '@/sub-components/ReusablePrimaryButton.vue'
+import ReusablePrimaryButton from '@/sub-components/ReusablePrimaryButton.vue';
+import ButtonLoader from '@/sub-components/ButtonLoader.vue';
 import { ref } from 'vue';
 import { useGlobalDataStore } from '@/stores/GlobalDataStore';
 import { useAdminStore } from '@/stores/AdminStore';
@@ -10,6 +11,9 @@ import { useRoute, useRouter } from 'vue-router';
 // statut de visibilité par défaut des messages d'erreur et de succès
 const errorMessage = ref<boolean>(false);
 const successMessage = ref<boolean>(false);
+
+// visibilité par défaut du loader
+const isLoading = ref<boolean>(false);
 
 // propriétés du formulaire
 const lastName = ref<string>('');
@@ -73,6 +77,8 @@ const validateAdminRegistration = async (): Promise<void> => {
 
         try {
 
+            isLoading.value = true;
+
             const { hostName } = useGlobalDataStore();
 
             const response = await fetch (`${hostName}/admins/register/${token}`, {
@@ -128,6 +134,7 @@ const resetForm = (): void => {
     firstName.value = '';
     password.value = '';
     confirmPassword.value = '';
+    isLoading.value = false;
 };
 
 // revient au formulaire réinitialisé
@@ -184,7 +191,10 @@ const backToResetForm = (): void => {
                 <p v-if="!confirmPasswordValid && confirmPassword !== ''" class="error-message">N'est pas identique à votre mot de passe</p>
             </div>
         </div>
-        <ReusablePrimaryButton class="adminLoginPage-button" type="submit">Créer mon compte</ReusablePrimaryButton>
+        <div class="adminLoginPage-button">
+            <ButtonLoader v-if="isLoading"/>
+            <ReusablePrimaryButton type="submit" v-else>Créer mon compte</ReusablePrimaryButton>
+        </div>
     </form>
 </template>
 
@@ -210,7 +220,8 @@ const backToResetForm = (): void => {
         .notification {
             margin: 0;
             font-size: .7rem;
-            font-weight: 700;
+            font-weight: 600;
+            opacity: .5;
         }
     }
     .error-message {

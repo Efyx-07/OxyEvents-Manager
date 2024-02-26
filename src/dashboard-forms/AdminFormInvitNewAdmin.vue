@@ -1,6 +1,7 @@
 <script setup lang="ts">
 
 import ReusablePrimaryButton from '@/sub-components/ReusablePrimaryButton.vue';
+import ButtonLoader from '@/sub-components/ButtonLoader.vue';
 import { Icon } from '@iconify/vue';
 import { ref } from 'vue';
 import { useGlobalDataStore } from '@/stores/GlobalDataStore';
@@ -11,9 +12,13 @@ import { useAdminStore } from '@/stores/AdminStore';
 // MODE DEMO: extrait le statut de l'administrateur connecté
 const adminStore = useAdminStore();
 const adminStatus: "SUPERADMIN" | "ADMIN" | "GENERIC" | "GUEST" = adminStore.adminData.status
+
+console.log('statut: ', adminStatus)
 // MODE DEMO visibilité par défaut de la notification
 const demoNotification = ref<boolean>(false);
 
+// visibilité par défaut du loader
+const isLoading = ref<boolean>(false);
 
 // visibilité par défaut des messages de succés ou d'erreur
 const successMessage = ref<boolean>(false);
@@ -48,6 +53,8 @@ const sendInvitationToAdmin = async (): Promise<void> => {
         if (adminStatus !== 'GUEST') {
 
             try {
+
+                isLoading.value = true;
 
                 const { hostName } = useGlobalDataStore();
 
@@ -110,6 +117,7 @@ const resetForm = (): void => {
     successMessage.value = false;
     emailAlreadyExistsMessage.value = false;
     newAdminMail.value = '';
+    isLoading.value = false;
 }
 
 </script>
@@ -144,7 +152,10 @@ const resetForm = (): void => {
         </div>
         <!-- MODE DEMO -->
         <DemoNotification v-if="demoNotification"/>
-        <ReusablePrimaryButton class="adminMgmtForm-button" type="submit" v-else>Envoyer l'invitation</ReusablePrimaryButton>
+        <div class="adminMgmtForm-button" v-else>
+            <ButtonLoader v-if="isLoading"/>
+            <ReusablePrimaryButton class="adminMgmtForm-button" type="submit" v-else>Envoyer l'invitation</ReusablePrimaryButton>
+        </div>
     </form>
 </template>
 
