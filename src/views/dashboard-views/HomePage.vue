@@ -2,11 +2,7 @@
 
 import NavAside from '@/dashboard-components/NavAside.vue';
 import DashboardHeader from '@/dashboard-components/DashboardHeader.vue';
-
-import { useAdminStore } from '@/stores/AdminStore';
-
-const adminStore = useAdminStore();
-const adminStatus: "SUPERADMIN" | "ADMIN" | "GENERIC" | "GUEST" = adminStore.adminData.status
+import DB_EventCard from '@/dashboard-components/DB_EventCard.vue';
 
 </script>
 
@@ -14,10 +10,12 @@ const adminStatus: "SUPERADMIN" | "ADMIN" | "GENERIC" | "GUEST" = adminStore.adm
     <div class="dashboardPage">
         <NavAside />
         <div class="page-content">
-            <DashboardHeader title="JE SUIS LE TITRE DE LA HOMEPAGE">
+            <DashboardHeader title="Vos évènements">
                 <button>Je suis un bouton</button>
             </DashboardHeader>
-            <h1>{{ adminStatus }}</h1>
+            <div class="eventCards_container">
+                <DB_EventCard />
+            </div>
         </div>
     </div>
 </template>

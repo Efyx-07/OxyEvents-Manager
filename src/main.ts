@@ -1,7 +1,7 @@
 import './assets/sass/main.scss'
 import { createApp } from 'vue';
 import { createPinia } from 'pinia';
-//import { useEventStore } from './stores/EventStore';
+import { useEventStore } from './stores/EventStore';
 import { useAdminStore } from './stores/AdminStore';
 import CKEditor from '@ckeditor/ckeditor5-vue';
 import App from './App.vue';
@@ -16,7 +16,7 @@ const initApp = async () => {
     app.use(createPinia());
     
     // crée une instance de store
-    //const eventStore = useEventStore();
+    const eventStore = useEventStore();
     const adminStore = useAdminStore();
 
     // verifie si un token est dans le localStorage
@@ -28,7 +28,7 @@ const initApp = async () => {
     }
 
     try {
-        //await eventStore.loadEventsData();
+        await eventStore.loadEventsData();
         await adminStore.loadAdminsData();
         
     } catch (error) {
