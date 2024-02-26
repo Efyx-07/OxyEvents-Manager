@@ -1,6 +1,7 @@
 <script setup lang="ts">
 
 import ReusablePrimaryButton from '@/sub-components/ReusablePrimaryButton.vue';
+import ButtonLoader from '@/sub-components/ButtonLoader.vue';
 import { ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { useGlobalDataStore } from '@/stores/GlobalDataStore';
@@ -9,6 +10,9 @@ import { Icon } from '@iconify/vue';
 // statut de visibilité par défaut des messages d'erreur et de succès
 const errorMessage = ref<boolean>(false);
 const successMessage = ref<boolean>(false);
+
+// visibilité par défaut du loader
+const isLoading = ref<boolean>(false);
 
 // propriétés du formulaire
 const newPassword = ref<string>('');
@@ -47,6 +51,8 @@ const updatePassword = async (): Promise<void> => {
     if (newPasswordValid.value && confirmNewPasswordValid.value) {
 
         try {
+
+            isLoading.value = true;
 
             const { hostName } = useGlobalDataStore();
 
@@ -88,6 +94,7 @@ const backToLoginPage = (): void => {
 const resetForm = () => {
     newPassword.value = ('');
     confirmNewPassword.value = ('');
+    isLoading.value = false;
 };
 
 // permet de revenir au formulaire réinitialisé 
@@ -123,7 +130,10 @@ const backToResetPasswordForm = () => {
                 <p v-if="!confirmNewPasswordValid && confirmNewPassword !== ''" class="error-message">N'est pas identique à votre nouveau mot de passe</p>
             </div>
         </div>
-        <ReusablePrimaryButton class="adminLoginPage-button" type="submit">Envoyer</ReusablePrimaryButton>
+        <div class="adminLoginPage-button">
+            <ButtonLoader v-if="isLoading" />
+            <ReusablePrimaryButton type="submit" v-else>Envoyer</ReusablePrimaryButton>
+        </div>
     </form> 
 </template>
 
