@@ -26,7 +26,7 @@ const router = createRouter({
       component: ResetPassword
     },
     {
-      path: '/admin_register',
+      path: '/admin_register/:token',
       name: 'AdminRegister',
       component: AdminRegister
     },
