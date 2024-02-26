@@ -1,12 +1,16 @@
 <script setup lang="ts">
 
 import ReusablePrimaryButton from '@/sub-components/ReusablePrimaryButton.vue';
+import ButtonLoader from '@/sub-components/ButtonLoader.vue';
 import { ref } from 'vue';
 import { useGlobalDataStore } from '@/stores/GlobalDataStore';
 
 // statut visibilité par défaut des messages d'erreur et de succès
 const emailNotFound = ref<boolean>(false);
 const successMessage = ref<boolean>(false);
+
+// visibilité par défaut du loader
+const isLoading = ref<boolean>(false);
 
 // propriété du formulaire
 const email = ref<string>('');
@@ -32,6 +36,8 @@ const sendResetLink = async (): Promise<void> => {
     const emailValue: string = email.value;
 
     try {
+
+        isLoading.value = true;
 
         const { hostName } = useGlobalDataStore();
 
@@ -66,6 +72,7 @@ const sendResetLink = async (): Promise<void> => {
 const resetForm = (): void => {
     email.value = ('');
     emailValid.value = false;
+    isLoading.value = false;
 };
 
 // reviens au formulaire précédent réinitialisé
@@ -92,7 +99,10 @@ const backToForgotPasswordForm = (): void => {
                 <input type="email" name="email" required id="admin_email" v-model="email" @input="validateEmail">
             </div>
         </div>
-        <ReusablePrimaryButton class="adminLoginPage-button" type="submit">Envoyer</ReusablePrimaryButton>
+        <div class="adminLoginPage-button">
+            <ButtonLoader v-if="isLoading" />
+            <ReusablePrimaryButton type="submit" v-else>Envoyer</ReusablePrimaryButton>
+        </div>
     </form> 
 </template>
 
