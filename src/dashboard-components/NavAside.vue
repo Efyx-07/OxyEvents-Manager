@@ -65,7 +65,7 @@ const openLogoutConfirmationModal = (): void => {
 </script>
 
 <template>
-    <div class="backOfficeNavAside">
+    <div class="navAside">
         <div class="head-section">
             <PlatformLogo />
         </div>
@@ -90,21 +90,22 @@ const openLogoutConfirmationModal = (): void => {
 @import '@/assets/sass/breakPoints.scss';
 @import '@/assets/sass/variables.scss';
 
-.backOfficeNavAside {
+.navAside {
     display: none;
 }
 
 @media screen and (min-width: $breakpointDesktop) {
-    .backOfficeNavAside {
+    .navAside {
         display: block;
         position: fixed;
         top: 0;
         left: 0;
+        z-index: 199;
         height: 100vh;
         width: 25vw;
         max-width: 20rem;
         background: $darkColor;
-        z-index: 199;
+        border-right: solid 1px $whiteTransparency;
         .head-section {
             height: 12rem;
             display: flex;
