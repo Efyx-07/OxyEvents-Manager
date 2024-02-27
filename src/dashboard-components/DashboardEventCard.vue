@@ -156,6 +156,7 @@ onMounted(() => {
 <style lang="scss" scoped>
 
     @import '@/assets/sass/dashboard-styles/colors.scss';
+    @import '@/assets/sass/variables.scss';
     /*
     .noMatchFound_container {
       height: 75vh;
@@ -194,8 +195,7 @@ onMounted(() => {
         width: 100%;
         height: 22rem;
         background: $whiteColor;
-        box-shadow: $containerShadow;
-        //border-radius: $containerRadius 0 $containerRadius 0;
+        border-radius: $containerRadiusM;
         position: relative;
         .eventImage_container {
             width: 100%;
@@ -203,7 +203,7 @@ onMounted(() => {
             display: inline-block;
             position: relative;
             overflow: hidden;
-            //border-radius: $containerRadius 0 0 0;
+            border-radius: $containerRadiusM $containerRadiusM 0 0;
             .eventImage {
                 width: 100%;
                 height: 100%;
