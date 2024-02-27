@@ -59,6 +59,11 @@ const router = createRouter({
 
     // public routes
   ]
-})
+});
+
+//permet à chaque changement de route d'afficher la nouvelle page à partir du haut
+router.afterEach(() => {
+  window.scrollTo(0, 0);
+});
 
 export default router
