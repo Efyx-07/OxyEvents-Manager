@@ -5,8 +5,16 @@
     background: $darkColor;
     min-height: 100vh;
 
-    .page-content .content-field {
-        padding: 2rem 1rem 3rem 1rem;
+    .page-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .content-field {
+            padding: 2rem 1rem 3rem 1rem;
+            width: 100%;
+            max-width: 72rem;
+        }
     }
 }
 
