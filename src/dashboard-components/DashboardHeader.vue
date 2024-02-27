@@ -23,7 +23,9 @@ const props = defineProps<DashboardHeaderProps>();
 @import '@/assets/sass/breakPoints.scss';
 
 .dashboardHeader {
-  background: $whiteColor;
+  background: $darkColor;
+  color: $whiteColor;
+  border-bottom: solid 1px $whiteTransparency;
   box-shadow: $shadow;
   padding: 1rem;
   width: 100%;

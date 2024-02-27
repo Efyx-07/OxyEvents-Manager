@@ -51,14 +51,14 @@ const adminNavItems: AdminNavItem[] = [
 @import '@/assets/sass/breakPoints.scss';
 
 .adminPageNav {
-    border: solid 1px $blackTransparency;
+    border: solid 1px $whiteTransparency;
     border-radius: $containerRadius * 2;
     display: flex;
     justify-content: space-around;
     padding: .5rem 2rem;
     align-items: center;
     .navIcon {
-        color: $blackColor;
+        color: $whiteColor;
         font-size: 1.3rem;
         &:hover, &.active-link {
             color: $accentColorPrimary;
