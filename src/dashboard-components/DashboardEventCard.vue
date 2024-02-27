@@ -131,7 +131,8 @@ onMounted(() => {
     width: 100%;
     height: 22rem;
     background: $whiteColor;
-    border-radius: $containerRadiusM;
+    //color: $whiteColor;
+    border-radius: 0 $containerRadiusM 0 $containerRadiusXL;
     position: relative;
     .image_container {
         width: 100%;
@@ -139,7 +140,7 @@ onMounted(() => {
         display: inline-block;
         position: relative;
         overflow: hidden;
-        border-radius: $containerRadiusM $containerRadiusM 0 0;
+        border-radius: 0 $containerRadiusM 0 0;
 
         img {
             width: 100%;
@@ -180,8 +181,13 @@ onMounted(() => {
 
     .actions {
         position: absolute;
-        bottom: 1rem;
-        right: 1rem;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        padding: 1rem;
+        display: flex;
+        justify-content: flex-end;
+        border-top: solid 1px $blackTransparency;
     }
     .dateCard {
         position: absolute;
