@@ -9,6 +9,7 @@ import { Icon } from '@iconify/vue';
 import ReusablePrimaryButton from '@/sub-components/ReusablePrimaryButton.vue';
 import ReusableSecondaryButton from '@/sub-components/ReusableSecondaryButton.vue';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+//import type { Event } from '@/types/eventsTypes';
 // MODE DEMO
 import DemoNotification from '@/sub-components/DemoNotification.vue'; 
 
@@ -16,26 +17,32 @@ import DemoNotification from '@/sub-components/DemoNotification.vue';
 const { removeImageIconName } = useGlobalDataStore();
 
 // MODE DEMO visibilité par défaut de la notification
-const demoNotification = ref(false);
+const demoNotification = ref<boolean>(false);
 
 // propriétés du formulaire
-const eventTitle = ref('');
-const eventCoverImage = ref('');
-const eventDate = ref('');
-const eventLocation = ref('');
-const eventPresentation = ref('');
-const eventProgramme = ref('');
-const eventPracticalInformations = ref('');
-const eventOrganizerName = ref('');
-const eventOrganizerLogo = ref('');
-const eventOrganizerWebsite  = ref('');
+const eventTitle = ref<string>('');
+const eventCoverImage = ref<File | null>(null);
+const eventDate = ref<string>('');
+const eventLocation = ref<string>('');
+const eventPresentation = ref<string>('');
+const eventProgramme = ref<string>('');
+const eventPracticalInformations = ref<string>('');
+const eventOrganizerName = ref<string>('');
+const eventOrganizerLogo = ref<File | null>(null);
+const eventOrganizerWebsite  = ref<string>('');
 
 // propriétés des previews de l'image de couverture et du logo organisateur
-const coverImagePreview = ref('');
-const organizerLogoPreview = ref('');
+const coverImagePreview = ref<string>('');
+const organizerLogoPreview = ref<string>('');
+
+type FileChangeEvent = {
+    target: {
+         files: FileList;
+    };
+};
 
 // gère le téléchargement du fichier image de couverture et stocke le fichier selectionné
-const handleCoverImageFileChange = (event) => {
+const handleCoverImageFileChange = (event: FileChangeEvent) => {
     eventCoverImage.value = event.target.files[0];
 
     // permet la preview de l'image de couverture
@@ -43,34 +50,38 @@ const handleCoverImageFileChange = (event) => {
     if (file) {
         const reader = new FileReader();
         reader.onload = (e) => {
-            coverImagePreview.value = e.target.result;
+            if (e.target && e.target.result && typeof e.target.result === 'string') {
+                coverImagePreview.value = e.target.result;
+            }
         };
         reader.readAsDataURL(file);
     }
 };
 
 // gère le téléchargement du fichier logo de l'organisateur et stocke le fichier selectionné
-const handleOrganizerLogoFileChange = (event) => {
+const handleOrganizerLogoFileChange = (event: FileChangeEvent) => {
     eventOrganizerLogo.value = event.target.files[0];
 
-    // permet la preview du logo de l'organisateur
+    // permet la preview de l'image de couverture
     const file = event.target.files[0];
     if (file) {
         const reader = new FileReader();
         reader.onload = (e) => {
-            organizerLogoPreview.value = e.target.result;
+            if (e.target && e.target.result && typeof e.target.result === 'string') {
+                organizerLogoPreview.value = e.target.result;
+            }
         };
         reader.readAsDataURL(file);
     }
 };
 
 // supprime l'image de couverture en preview
-const removeCoverImageFromPreview = () => {
+const removeCoverImageFromPreview = (): void => {
     coverImagePreview.value = '';
 };
 
 // supprime le logo de l'organisateur en preview
-const removeOrganizerLogoFromPreview = () => {
+const removeOrganizerLogoFromPreview = (): void => {
     organizerLogoPreview.value = '';
 };
 
@@ -94,9 +105,9 @@ const editorConfig = {
     language: 'fr',
     link: {
         decorators: {
-                addTargetToExternalLinks: {
+            addTargetToExternalLinks: {
                 mode: 'automatic',
-                callback: url => /^(https?:)?\/\//.test( url ),
+                callback: (url: string) => /^(https?:)?\/\//.test( url ),
                 attributes: {
                     target: '_blank',
                     rel: 'noopener noreferrer'
@@ -113,15 +124,21 @@ onMounted(() => {
     editorDataPracticalInformations = eventPracticalInformations.value;
 });
 
-// fonctions pour mettre à jour les propriétés du formulaires quand le contenu de l'éditeur change
-const updateEventPresentation = (event) => {
-    eventPresentation.value = event;
+interface ChangeEvent {
+    target: {
+        value: string;
+    };
 }
-const updateEventProgramme = (event) => {
-    eventProgramme.value = event;
+
+// fonctions pour mettre à jour les propriétés du formulaires quand le contenu de l'éditeur change
+const updateEventPresentation = (event: ChangeEvent) => {
+    eventPresentation.value = event.target.value;
+}
+const updateEventProgramme = (event: ChangeEvent) => {
+    eventProgramme.value = event.target.value;
 };
-const updateEventPracticalInformations = (event) => {
-    eventPracticalInformations.value = event;
+const updateEventPracticalInformations = (event: ChangeEvent) => {
+    eventPracticalInformations.value = event.target.value;
 };
 
 const eventStore = useEventStore();
@@ -129,31 +146,40 @@ const adminStore = useAdminStore();
 const router = useRouter();
 
 // soumet le formulaire
-const validateEventCreation = async () => {
+const validateEventCreation = async (): Promise<void> => {
         
-    const formData = new FormData();
+    const formData: FormData = new FormData();
+
     formData.append('eventTitle', eventTitle.value);
-    formData.append('eventCoverImage', eventCoverImage.value);
+
+    if (eventCoverImage.value) {
+        formData.append('eventCoverImage', eventCoverImage.value, eventCoverImage.value.name);
+    }
+
     formData.append('eventDate', eventDate.value);
     formData.append('eventLocation', eventLocation.value);
     formData.append('eventPresentation', eventPresentation.value);
     formData.append('eventProgramme', eventProgramme.value);
     formData.append('eventPracticalInformations', eventPracticalInformations.value);
     formData.append('eventOrganizerName', eventOrganizerName.value);
-    formData.append('eventOrganizerLogo', eventOrganizerLogo.value);
+
+    if (eventOrganizerLogo.value) {
+        formData.append('eventOrganizerLogo', eventOrganizerLogo.value, eventOrganizerLogo.value.name);
+    }
+
     formData.append('eventOrganizerWebsite', eventOrganizerWebsite.value);
 
     const adminId = adminStore.adminData.id;
 
-    formData.append('adminId', adminId);
+    formData.append('adminId', adminId.toString());
 
     // affiche les valeurs dans la console
     for (const pair of formData.entries()) {
         console.log(pair[0], pair[1]);
     }
 
-    // MODE DEMO: extrait le statut de l'administrateur connecté
-    const adminStatus = adminStore.adminData.status
+        // MODE DEMO: extrait le statut de l'administrateur connecté
+        const adminStatus: "SUPERADMIN" | "ADMIN" | "GENERIC" | "GUEST" = adminStore.adminData.status
     // CONDITION POUR LE MODE DEMO
     if (adminStatus !== 'GUEST') {
 
@@ -194,12 +220,11 @@ const validateEventCreation = async () => {
             demoNotification.value = false;
         }, 3000)
     };
-};
-
-// reconduis vers la page 'vos évènements'
-const navigateToHomepage = () => {
-    router.push('/admin_homepage');
-};
+} 
+    // reconduis vers la page 'vos évènements'
+    const navigateToHomepage = () => {
+        router.push('/admin_homepage');
+    };
 
 </script>
 
