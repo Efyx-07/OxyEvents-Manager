@@ -8,6 +8,7 @@ import HomePage from '@/views/dashboard-views/HomePage.vue';
 import AdminUpdate from '@/views/dashboard-views/AdminUpdate.vue';
 import AdminAdd from '@/views/dashboard-views/AdminAdd.vue';
 import AdminDelete from '@/views/dashboard-views/AdminDelete.vue';
+import NewEvent from '@/views/dashboard-views/NewEvent.vue';
 
 
 const router = createRouter({
@@ -49,6 +50,11 @@ const router = createRouter({
       path: '/admin-delete',
       name: 'AdminDelete',
       component: AdminDelete
+    },
+    {
+      path: '/new-event',
+      name: 'NewEvent',
+      component: NewEvent
     },
 
     // public routes

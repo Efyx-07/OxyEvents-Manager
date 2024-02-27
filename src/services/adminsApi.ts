@@ -1,7 +1,7 @@
 // import interface
 import type { Admin, AdminApiResponse } from '@/types/adminsTypes';
 
-const hostName = 'https://oxyeventsmanagerdemo-backend.vercel.app'; // adresse du serveur backend 
+const hostName = 'http://localhost:3000'; // adresse du serveur backend 
 
 // récupère du backend, l'API des datas des administrateurs
 export async function fetchAdminsData(): Promise<Admin[]> {
