@@ -3,6 +3,7 @@
 import NavAside from '@/dashboard-components/NavAside.vue';
 import DashboardHeader from '@/dashboard-components/DashboardHeader.vue';
 import AdminFormContainer from '@/dashboard-components/AdminFormContainer.vue';
+import EventFormCreate from '@/dashboard-forms/EventFormCreate.vue';
 
 </script>
 
@@ -15,6 +16,7 @@ import AdminFormContainer from '@/dashboard-components/AdminFormContainer.vue';
             </DashboardHeader>
             <div class="content-field">
                 <AdminFormContainer title="Créer un nouvel évènement">
+                    <EventFormCreate />
                 </AdminFormContainer>
             </div>
         </div>
