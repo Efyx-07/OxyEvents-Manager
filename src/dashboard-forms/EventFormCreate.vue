@@ -235,11 +235,12 @@ const validateEventCreation = async (): Promise<void> => {
             demoNotification.value = false;
         }, 3000)
     };
-} 
-    // reconduis vers la page 'vos évènements'
-    const navigateToHomepage = () => {
-        router.push('/admin_homepage');
-    };
+}; 
+
+// reconduis vers la page 'vos évènements'
+const navigateToHomepage = () => {
+    router.push('/home');
+};
 
 </script>
 
