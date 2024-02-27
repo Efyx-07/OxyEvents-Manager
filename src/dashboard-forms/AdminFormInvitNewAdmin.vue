@@ -12,8 +12,6 @@ import { useAdminStore } from '@/stores/AdminStore';
 // MODE DEMO: extrait le statut de l'administrateur connecté
 const adminStore = useAdminStore();
 const adminStatus: "SUPERADMIN" | "ADMIN" | "GENERIC" | "GUEST" = adminStore.adminData.status
-
-console.log('statut: ', adminStatus)
 // MODE DEMO visibilité par défaut de la notification
 const demoNotification = ref<boolean>(false);
 
