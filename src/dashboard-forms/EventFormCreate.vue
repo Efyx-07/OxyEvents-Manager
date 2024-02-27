@@ -9,7 +9,6 @@ import { Icon } from '@iconify/vue';
 import ReusablePrimaryButton from '@/sub-components/ReusablePrimaryButton.vue';
 import ReusableSecondaryButton from '@/sub-components/ReusableSecondaryButton.vue';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-//import type { Event } from '@/types/eventsTypes';
 // MODE DEMO
 import DemoNotification from '@/sub-components/DemoNotification.vue'; 
 
@@ -35,14 +34,8 @@ const eventOrganizerWebsite  = ref<string>('');
 const coverImagePreview = ref<string>('');
 const organizerLogoPreview = ref<string>('');
 
-type FileChangeEvent = {
-    target: {
-         files: FileList;
-    };
-};
-
 // gère le téléchargement du fichier image de couverture et stocke le fichier selectionné
-const handleCoverImageFileChange = (event: FileChangeEvent) => {
+const handleCoverImageFileChange = (event: any) => {
     eventCoverImage.value = event.target.files[0];
 
     // permet la preview de l'image de couverture
@@ -59,7 +52,7 @@ const handleCoverImageFileChange = (event: FileChangeEvent) => {
 };
 
 // gère le téléchargement du fichier logo de l'organisateur et stocke le fichier selectionné
-const handleOrganizerLogoFileChange = (event: FileChangeEvent) => {
+const handleOrganizerLogoFileChange = (event: any) => {
     eventOrganizerLogo.value = event.target.files[0];
 
     // permet la preview de l'image de couverture
@@ -86,11 +79,32 @@ const removeOrganizerLogoFromPreview = (): void => {
 };
 
 // crée une instance CKEditor
+interface EditorConfig {
+    toolbar: {
+        items: string[];
+    };
+    language: string;
+    link: {
+        decorators: {
+            addTargetToExternalLinks: {
+                mode: string;
+                callback: (url: string) => boolean;
+                attributes: {
+                    target: string;
+                    rel: string;
+                };
+            };
+        };
+    };
+}
+
 const editor = ClassicEditor;
+
 let editorDataPresentation = '';
 let editorDataProgramme = '';
 let editorDataPracticalInformations = '';
-const editorConfig = {
+
+const editorConfig: EditorConfig = {
     toolbar: {
         items: [
             'bold', 
@@ -124,21 +138,22 @@ onMounted(() => {
     editorDataPracticalInformations = eventPracticalInformations.value;
 });
 
-interface ChangeEvent {
-    target: {
+interface CKEditorInputEvent {
+    editor: any; // Type CKEditor si vous l'avez défini
+    data: {
         value: string;
     };
 }
 
 // fonctions pour mettre à jour les propriétés du formulaires quand le contenu de l'éditeur change
-const updateEventPresentation = (event: ChangeEvent) => {
-    eventPresentation.value = event.target.value;
+const updateEventPresentation = (event: CKEditorInputEvent) => {
+    eventPresentation.value = event.data?.value ?? '';
 }
-const updateEventProgramme = (event: ChangeEvent) => {
-    eventProgramme.value = event.target.value;
+const updateEventProgramme = (event: CKEditorInputEvent) => {
+    eventProgramme.value = event.data?.value ?? '';
 };
-const updateEventPracticalInformations = (event: ChangeEvent) => {
-    eventPracticalInformations.value = event.target.value;
+const updateEventPracticalInformations = (event: CKEditorInputEvent) => {
+    eventPracticalInformations.value = event.data?.value ?? '';
 };
 
 const eventStore = useEventStore();
