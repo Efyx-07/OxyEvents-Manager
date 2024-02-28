@@ -14,6 +14,7 @@ import EventParticipants from '@/views/dashboard-views/EventParticipants.vue';
 
 //confirmation pages
 import ConfirmPagePublication from '@/views/dashboard-views/ConfirmPagePublication.vue';
+import ConfirmPageRemovedEvent from '@/views/dashboard-views/ConfirmPageRemovedEvent.vue';
 
 //public views
 import EventPage from '@/views/public-views/EventPage.vue';
@@ -80,6 +81,11 @@ const router = createRouter({
       path: '/publication-confirmation',
       name: 'ConfirmPagePublication',
       component: ConfirmPagePublication
+    },
+    {
+      path: '/removed_event-confirmation',
+      name: 'ConfirmPageRemovedEvent',
+      component: ConfirmPageRemovedEvent
     },
 
     // public routes

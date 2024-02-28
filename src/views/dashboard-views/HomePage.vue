@@ -3,6 +3,7 @@
 import NavAside from '@/dashboard-components/NavAside.vue';
 import DashboardHeader from '@/dashboard-components/DashboardHeader.vue';
 import DashboardEventCard from '@/dashboard-components/DashboardEventCard.vue';
+import RemoveEventConfirmationModal from '@/dashboard-modals/RemoveEventConfirmationModal.vue'
 
 </script>
 
@@ -20,6 +21,7 @@ import DashboardEventCard from '@/dashboard-components/DashboardEventCard.vue';
             </div>
         </div>
     </div>
+    <RemoveEventConfirmationModal />
 </template>
 
 <style lang="scss" scoped>

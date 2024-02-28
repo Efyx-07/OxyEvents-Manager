@@ -6,7 +6,7 @@ import { useRouter } from 'vue-router';
 const props = defineProps<{
     slug: string;
     title: string;
-    id: number;
+    id: string;
 }>()
 
 interface ActionItem {
@@ -69,7 +69,7 @@ const navigateToEventParticipants = (eventSlug: string): void => {
 };
 
 // ouvre la fenetre 'RemoveEventConfirmationModal' au clic de l'icone
-const openRemoveEventConfirmationModal = (title: string, id: number): void => {
+const openRemoveEventConfirmationModal = (title: string, id: string): void => {
     const eventDetail = { eventTitle: title, eventId: id };
     // crée un nouvel evenement personnalisé 
     const showRemoveEventConfirmationModalEvent = new CustomEvent('show-removeEventConfirmationModal', {
