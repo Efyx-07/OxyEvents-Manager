@@ -54,7 +54,6 @@ const selectedEvent: Event | undefined = allEvents.find((event) => {
 @import '@/assets/sass/variables.scss';
 
 .eventImageAndTitle_container {
-    margin: 3rem 0 0 0;
     align-self: center;
     width: 100%;
     height: 12rem;
@@ -110,16 +109,7 @@ const selectedEvent: Event | undefined = allEvents.find((event) => {
 @media screen and (min-width: $breakpointLargeDesktop) {
 
     .eventImageAndTitle_container {
-        width: 75%;
         height: 18rem;
-
-        .eventTitle_container {
-
-            .eventTitle {
-                font-size: 2rem;
-                padding: 1rem;
-            }
-        }
     }
 }
 
