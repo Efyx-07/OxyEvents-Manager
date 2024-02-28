@@ -8,6 +8,7 @@ import { useRouter } from 'vue-router';
 import { Icon } from '@iconify/vue';
 import ReusablePrimaryButton from '@/sub-components/ReusablePrimaryButton.vue';
 import ReusableSecondaryButton from '@/sub-components/ReusableSecondaryButton.vue';
+import ButtonLoader from '@/sub-components/ButtonLoader.vue';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 // MODE DEMO
 import DemoNotification from '@/sub-components/DemoNotification.vue'; 
@@ -17,6 +18,9 @@ const { removeImageIconName } = useGlobalDataStore();
 
 // MODE DEMO visibilité par défaut de la notification
 const demoNotification = ref<boolean>(false);
+
+// visibilité par défaut du loader
+const isLoading = ref<boolean>(false);
 
 // propriétés du formulaire
 const eventTitle = ref<string>('');
@@ -200,6 +204,8 @@ const validateEventCreation = async (): Promise<void> => {
 
         try {
 
+            isLoading.value = true;
+
             const { hostName } = useGlobalDataStore();
             
             const response = await fetch (`${hostName}/events/create`, {
@@ -239,6 +245,7 @@ const validateEventCreation = async (): Promise<void> => {
 
 // reconduis vers la page 'vos évènements'
 const navigateToHomepage = () => {
+    isLoading.value = false;
     router.push('/home');
 };
 
@@ -364,6 +371,7 @@ const navigateToHomepage = () => {
             <ReusableSecondaryButton  @click="navigateToHomepage">Annuler</ReusableSecondaryButton>
             <!-- MODE DEMO -->
             <DemoNotification v-if="demoNotification"/>
+            <ButtonLoader v-else-if="isLoading"/>
             <ReusablePrimaryButton type="submit" v-else>Publier l'évènement</ReusablePrimaryButton>
         </div>
     </form>
