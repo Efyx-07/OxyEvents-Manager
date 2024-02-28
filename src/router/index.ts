@@ -8,7 +8,9 @@ import HomePage from '@/views/dashboard-views/HomePage.vue';
 import AdminUpdate from '@/views/dashboard-views/AdminUpdate.vue';
 import AdminAdd from '@/views/dashboard-views/AdminAdd.vue';
 import AdminDelete from '@/views/dashboard-views/AdminDelete.vue';
-import NewEvent from '@/views/dashboard-views/NewEvent.vue';
+import EventCreate from '@/views/dashboard-views/EventCreate.vue';
+import EventUpdate from '@/views/dashboard-views/EventUpdate.vue';
+import EventParticipants from '@/views/dashboard-views/EventParticipants.vue';
 
 //confirmation pages
 import ConfirmPagePublication from '@/views/dashboard-views/ConfirmPagePublication.vue';
@@ -57,10 +59,21 @@ const router = createRouter({
       component: AdminDelete
     },
     {
-      path: '/new-event',
-      name: 'NewEvent',
-      component: NewEvent
+      path: '/event-create',
+      name: 'EventCreate',
+      component: EventCreate
     },
+    {
+      path: '/event-update/:eventSlug',
+      name: 'EventToUpdate',
+      component: EventUpdate
+    },
+    {
+      path: '/event-participants/:eventSlug',
+      name: 'EventParticipants',
+      component: EventParticipants
+    },
+
 
     // confirmation pages
     {

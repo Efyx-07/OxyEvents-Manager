@@ -41,24 +41,6 @@ const filteredEvents = computed(() => {
     }
 });
 
-
-
-// permet de naviguer vers la page de modification de l'évènement selectionné
-const navigateToEventUpdatePage = (eventSlug: string): void => {
-    router.push({
-        name: 'EventToUpdate',
-        params: { eventSlug }
-    });
-};
-
-// permet de naviguer vers la page affichant la liste des participants à l'évènement sélectionné
-const navigateToParticipantsList = (eventSlug: string): void => {
-    router.push({
-        name: 'ParticipantsList',
-        params: { eventSlug }
-    });
-};
-
 // ouvre la fenetre 'RemoveEventConfirmationModal' au clic de l'icone
 const openRemoveEventConfirmationModal = (event: Event): void => {
     const eventDetail = { eventTitle: event.title, eventId: event.id };

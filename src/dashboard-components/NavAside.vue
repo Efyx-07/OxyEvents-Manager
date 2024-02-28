@@ -26,8 +26,8 @@ const navItems: NavItem[] = [
   {
     name: 'Nouvel évènement',
     icon: 'ic:outline-create',
-    navTo: '/new-event',
-    activePaths: ['/new-event']
+    navTo: '/event-create',
+    activePaths: ['/event-create']
   },
 
   {
