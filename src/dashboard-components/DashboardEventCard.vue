@@ -94,7 +94,7 @@ onMounted(() => {
             </div>
             <h1 class="eventTitle">{{ event.title }}</h1>
         </div>
-        <DashboardEventCardActions class="actions" :slug="event.slug"/>
+        <DashboardEventCardActions class="actions" :slug="event.slug" :title="event.title" :id="event.id"/>
         <DashboardEventCardDateCard :date="new Date(event.date)" class="dateCard" />
     </div>
     <!-- <div class="noMatchFound_container" v-if="filteredByKeywordEventsCount === 0 && currentFilter.value === 'keyword'">
