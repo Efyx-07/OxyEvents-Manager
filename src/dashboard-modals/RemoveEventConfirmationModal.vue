@@ -7,6 +7,7 @@ import { useRouter } from 'vue-router';
 import ReusablePrimaryButton from '@/sub-components/ReusablePrimaryButton.vue';
 import ReusableSecondaryButton from '@/sub-components/ReusableSecondaryButton.vue';
 import ReusableSeparator from '@/sub-components/ReusableSeparator.vue';
+import ButtonLoader from '@/sub-components/ButtonLoader.vue';
 
 // MODE DEMO
 import DemoNotification from '@/sub-components/DemoNotification.vue'; 
@@ -16,6 +17,9 @@ const adminStore = useAdminStore();
 const adminStatus: "SUPERADMIN" | "ADMIN" | "GENERIC" | "GUEST" = adminStore.adminData.status
 // MODE DEMO visibilité par défaut de la notification
 const demoNotification = ref<boolean>(false);
+
+// visibilité par défaut du loader
+const isLoading = ref<boolean>(false);
 
 // statut par défaut de la visibilité de la fenetre
 const isRemoveEventConfirmationModalVisible  = ref<boolean>(false);
@@ -64,6 +68,8 @@ const confirmRemoveEvent = async (): Promise<void> => {
 
         try {
 
+            isLoading.value = true;
+
             const { hostName } = useGlobalDataStore();
 
             // recupère l'id de l'évènement à supprimer
@@ -89,6 +95,7 @@ const confirmRemoveEvent = async (): Promise<void> => {
 
             // ferme la fenêtre modale de suppression
             isRemoveEventConfirmationModalVisible.value = false;
+            
         } catch (error) {
             console.error('Erreur lors de la suppression de l\'événement :', error);
         }
@@ -120,6 +127,7 @@ const confirmRemoveEvent = async (): Promise<void> => {
                 <ReusableSecondaryButton  @click="closeRemoveEventConfirmationModal">Annuler</ReusableSecondaryButton> 
                 <!-- MODE DEMO -->
                 <DemoNotification v-if="demoNotification"/>
+                <ButtonLoader v-else-if="isLoading"/>
                 <ReusablePrimaryButton @click="confirmRemoveEvent" v-else>Confirmer</ReusablePrimaryButton>
             </div>            
             <Icon icon="ci:close-sm" class="closeIcon" @click="closeRemoveEventConfirmationModal"/>
