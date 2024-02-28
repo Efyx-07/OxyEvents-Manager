@@ -2,6 +2,10 @@
 
 import { Icon } from '@iconify/vue';
 
+const props = defineProps<{
+    slug: string;
+}>()
+
 interface ActionItem {
     name: string;
     icon: string;
@@ -13,7 +17,7 @@ const actionItems: ActionItem[] = [
     {
         name: 'navigateToEvent',
         icon: 'mdi:eye',
-        clickAction: 'navigateToEvent(event.slug)'
+        clickAction: `navigateToEvent('${props.slug}')`
     },
 
     {

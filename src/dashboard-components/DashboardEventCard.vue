@@ -6,7 +6,7 @@ import { useGlobalDataStore } from '@/stores/GlobalDataStore';
 import DashboardEventCardActions from './DashboardEventCardActions.vue';
 import DashboardEventCardDateCard from './DashboardEventCardDateCard.vue';
 import { useRouter } from 'vue-router';
-import { ref, computed } from 'vue';
+//import { ref, computed } from 'vue';
 import type { Event } from '@/types/eventsTypes';
 
 const eventStore = useEventStore();
@@ -24,6 +24,7 @@ const navigateToEvent = (eventSlug: string): void => {
     });
 };
 
+/*
 // déclare currentFilter comme réactif avec valeur 'all' par défaut
 const currentFilter = ref({ value: 'all' });
 
@@ -40,7 +41,7 @@ const filteredEvents = computed(() => {
     }
 });
 
-/*
+
 
 // permet de naviguer vers la page de modification de l'évènement selectionné
 const navigateToEventUpdatePage = (eventSlug: string): void => {
@@ -100,7 +101,7 @@ onMounted(() => {
 </script>
 
 <template>
-    <div class="dashboardEventCard" v-for="event in filteredEvents" :key="event.title">
+    <div class="dashboardEventCard" v-for="event in events" :key="event.title">
         <div class="image_container" @click="navigateToEvent(event.slug)">
             <img :src="hostName + event.image.source" :alt="event.image.alt">
         </div>
@@ -111,7 +112,7 @@ onMounted(() => {
             </div>
             <h1 class="eventTitle">{{ event.title }}</h1>
         </div>
-        <DashboardEventCardActions class="actions"/>
+        <DashboardEventCardActions class="actions" :slug="event.slug"/>
         <DashboardEventCardDateCard :date="new Date(event.date)" class="dateCard" />
     </div>
     <!-- <div class="noMatchFound_container" v-if="filteredByKeywordEventsCount === 0 && currentFilter.value === 'keyword'">

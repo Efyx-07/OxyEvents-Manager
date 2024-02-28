@@ -13,6 +13,8 @@ import NewEvent from '@/views/dashboard-views/NewEvent.vue';
 //confirmation pages
 import ConfirmPagePublication from '@/views/dashboard-views/ConfirmPagePublication.vue';
 
+//public views
+import EventPage from '@/views/public-views/EventPage.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -68,6 +70,17 @@ const router = createRouter({
     },
 
     // public routes
+    {
+      path: '/event-page',
+      name: 'EventPage',
+      component: EventPage
+    },
+      // création d'une route dynamique pour afficher la page de l'evenement
+      {
+        path: '/event-page/:eventSlug', 
+        name: 'EventDetail',
+        component: EventPage
+      },
   ]
 });
 
