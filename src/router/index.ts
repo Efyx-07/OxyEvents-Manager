@@ -10,6 +10,9 @@ import AdminAdd from '@/views/dashboard-views/AdminAdd.vue';
 import AdminDelete from '@/views/dashboard-views/AdminDelete.vue';
 import NewEvent from '@/views/dashboard-views/NewEvent.vue';
 
+//confirmation pages
+import ConfirmPagePublication from '@/views/dashboard-views/ConfirmPagePublication.vue';
+
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -55,6 +58,13 @@ const router = createRouter({
       path: '/new-event',
       name: 'NewEvent',
       component: NewEvent
+    },
+
+    // confirmation pages
+    {
+      path: '/publication-confirmation',
+      name: 'ConfirmPagePublication',
+      component: ConfirmPagePublication
     },
 
     // public routes

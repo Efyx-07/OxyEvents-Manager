@@ -224,7 +224,7 @@ const validateEventCreation = async (): Promise<void> => {
                 await eventStore.loadEventsData();
 
                 // renvoie vers une page de redirection
-                router.push('/admin_publication-confirmation');
+                router.push('/publication-confirmation');
                         
             } else {
                 console.error('Erreur lors de la création d\'evenement :', response.statusText);
