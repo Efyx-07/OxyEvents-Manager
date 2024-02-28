@@ -40,17 +40,6 @@ const filteredEvents = computed(() => {
         return events
     }
 });
-
-// ouvre la fenetre 'RemoveEventConfirmationModal' au clic de l'icone
-const openRemoveEventConfirmationModal = (event: Event): void => {
-    const eventDetail = { eventTitle: event.title, eventId: event.id };
-    // crée un nouvel evenement personnalisé 
-    const showRemoveEventConfirmationModalEvent = new CustomEvent('show-removeEventConfirmationModal', {
-      detail: eventDetail,
-    });
-    // déclenche l'événement 'show-removeEventConfirmationModal' sur l'objet window
-    window.dispatchEvent(showRemoveEventConfirmationModalEvent);
-}
 */
 
 /*

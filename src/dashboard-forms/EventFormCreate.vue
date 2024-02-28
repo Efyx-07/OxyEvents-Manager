@@ -170,23 +170,21 @@ const validateEventCreation = async (): Promise<void> => {
     const formData: FormData = new FormData();
 
     formData.append('eventTitle', eventTitle.value);
-
-    if (eventCoverImage.value) {
-        formData.append('eventCoverImage', eventCoverImage.value, eventCoverImage.value.name);
-    }
-
     formData.append('eventDate', eventDate.value);
     formData.append('eventLocation', eventLocation.value);
     formData.append('eventPresentation', eventPresentation.value);
     formData.append('eventProgramme', eventProgramme.value);
     formData.append('eventPracticalInformations', eventPracticalInformations.value);
     formData.append('eventOrganizerName', eventOrganizerName.value);
+    formData.append('eventOrganizerWebsite', eventOrganizerWebsite.value);
+
+    if (eventCoverImage.value) {
+        formData.append('eventCoverImage', eventCoverImage.value, eventCoverImage.value.name);
+    }
 
     if (eventOrganizerLogo.value) {
         formData.append('eventOrganizerLogo', eventOrganizerLogo.value, eventOrganizerLogo.value.name);
     }
-
-    formData.append('eventOrganizerWebsite', eventOrganizerWebsite.value);
 
     const adminId = adminStore.adminData.id;
 
