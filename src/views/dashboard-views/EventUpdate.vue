@@ -2,11 +2,12 @@
 
 import NavAside from '@/dashboard-components/NavAside.vue';
 import DashboardHeader from '@/dashboard-components/DashboardHeader.vue';
+import ReusablePrimaryButton from '@/sub-components/ReusablePrimaryButton.vue';
 import AdminFormContainer from '@/dashboard-components/AdminFormContainer.vue';
 import EventFormUpdate from '@/dashboard-forms/EventFormUpdate.vue';
 import { useEventStore } from '@/stores/EventStore';
 import { useGlobalDataStore } from '@/stores/GlobalDataStore';
-import { useRoute } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 import type { Event } from '@/types/eventsTypes';
 
 const eventStore = useEventStore();
@@ -22,6 +23,13 @@ const selectedEvent: Event | undefined = allEvents.find((event) => {
     return event.slug === eventSlug;
 });
 
+const router = useRouter();
+
+// reconduis vers la page 'vos évènements'
+const navigateToHomepage = () => {
+    router.push('/home');
+};
+
 </script>
 
 <template>
@@ -29,7 +37,7 @@ const selectedEvent: Event | undefined = allEvents.find((event) => {
         <NavAside />
         <div class="page-content">
             <DashboardHeader title="Modifier votre évènement">
-                <button>Je suis un bouton</button>
+                <ReusablePrimaryButton @click="navigateToHomepage">Retour aux évènements</ReusablePrimaryButton>
             </DashboardHeader>
             <div class="content-field">
                 <AdminFormContainer title="Modifier les données de l'évènement" v-if="selectedEvent">
