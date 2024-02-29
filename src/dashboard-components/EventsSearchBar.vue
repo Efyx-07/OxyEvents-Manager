@@ -88,36 +88,30 @@ const handleEnterKey = (): void => {
 @import '@/assets/sass/variables.scss';
 
 .hiddenEventsSearchBar {
-    transform: translateY(-100%);
+    transform: translateX(-100%);
 }
 .searchBar_container {
     width: 100%;
-    height: 6.8rem;
-    background: $darkColor;
+    height: 100%;
+    background: rgba($darkColor, .95);
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: transform .2s ease-in-out;
-    position: relative;
+    transition: transform .3s ease-in-out;
     .searchBar_content {
         width: 25rem;
-        height: 2.5rem;
-        margin: 0 1rem;
+        height: 3.5rem;
         display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: .2rem;
+        position: relative;
         .searchBar {
             width: 100%;
             height: 100%;
             background: $whiteColor;
-            border-radius: $containerRadius 0 0 0;
+            border-radius: $containerRadius * 2;
             border: solid 2px $whiteColor;
             outline: none;
-            padding-left: 1rem;
+            padding-left: 2rem;
             font-size: 1rem;
-            display: flex;
-            align-items: center;
 
             &:focus {
                 border: solid 2px $accentColorPrimary;
@@ -125,12 +119,15 @@ const handleEnterKey = (): void => {
         }
         .icon_container {
             width: 3.5rem;
-            height: 100%;
-            border-radius: 0 0 $containerRadius 0;
+            height: 3.5rem;
+            border-radius: 100%;
             display: flex;
             justify-content: center;
             align-items: center;
             cursor: pointer;
+            position: absolute;
+            box-shadow: $shadow;
+            right: 0;
             .icon {
                 color: $whiteColor;
                 font-size: 1.5rem;
@@ -159,18 +156,5 @@ const handleEnterKey = (): void => {
         z-index: -1;
     }
 }
-
-@media screen and (min-width: $breakpointDesktop) {
-    .searchBar_container {
-        height: 4.5rem;
-        .searchBar_content {
-            width: 25rem;
-            height: 2.2rem;
-            .searchBar {
-                font-size: 1rem;
-            }
-        }
-    }
-}
-    
+ 
 </style>
