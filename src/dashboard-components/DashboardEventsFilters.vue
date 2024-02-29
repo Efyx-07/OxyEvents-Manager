@@ -97,7 +97,7 @@ const filterItems: FilterItem[] = [
             <SearchIcon />
         </div>
         <div class="filterItems-container">
-            <div class="filterItem" v-for="filterItem in filterItems" :key="filterItem.name" @click="filterItem.clickAction" :class="{ 'active-link': currentFilter === 'filterItem.currentFilter' }">
+            <div class="filterItem" v-for="filterItem in filterItems" :key="filterItem.name" @click="filterItem.clickAction" :class="{ 'active-link': currentFilter === filterItem.currentFilter }">
                 <p>{{ filterItem.name }} <span>({{ filterItem.count }})</span></p>
                 <div class="activeBar"></div>
             </div>
@@ -125,10 +125,15 @@ const filterItems: FilterItem[] = [
         align-items: center;
         .filterItem {
             cursor: pointer;
+
+            &.active-link {
+                color: $accentColorPrimary;
+            }
             
             p {
                 margin: 0;
-                &:hover, &.active-link {
+                
+                &:hover {
                     color: $accentColorPrimary;
                 }
             }
