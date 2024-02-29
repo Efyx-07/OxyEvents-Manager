@@ -5,6 +5,7 @@ import { useEventStore } from '@/stores/EventStore';
 import { useGlobalDataStore } from '@/stores/GlobalDataStore';
 import DashboardEventCardActions from './DashboardEventCardActions.vue';
 import DashboardEventCardDateCard from './DashboardEventCardDateCard.vue';
+import ReusablePrimaryButton from '@/sub-components/ReusablePrimaryButton.vue';
 import { useRouter } from 'vue-router';
 import { ref, computed, onMounted } from 'vue';
 import type { Event } from '@/types/eventsTypes';
@@ -65,7 +66,6 @@ const displayAllEvents = (): void => {
 </script>
 
 <template>
-
     <div class="dashboardEventCard" v-for="event in filteredEvents" :key="event.title">
         <div class="image_container" @click="navigateToEvent(event.slug)">
             <img :src="hostName + event.image.source" :alt="event.image.alt">
@@ -80,14 +80,10 @@ const displayAllEvents = (): void => {
         <DashboardEventCardActions class="actions" :slug="event.slug" :title="event.title" :id="event.id.toString()"/>
         <DashboardEventCardDateCard :date="new Date(event.date)" class="dateCard" />
     </div>
-
     <div class="noMatchFound_container" v-if="filteredByKeywordEventsCount === 0 && currentFilter.value === 'keyword'">
         <p class="noMatchFound">Aucun résultat pour votre recherche...</p> 
-        <button class="back_btn" @click="displayAllEvents">
-            <p>Retour à vos évènements</p>
-        </button>
-    </div>
-    
+        <ReusablePrimaryButton @click="displayAllEvents">Retour à vos évènements</ReusablePrimaryButton>
+    </div>    
 </template>
 
 <style lang="scss" scoped>
@@ -99,7 +95,6 @@ const displayAllEvents = (): void => {
     width: 100%;
     height: 22rem;
     background: $whiteColor;
-    //color: $whiteColor;
     border-radius: 0 $containerRadiusM 0 $containerRadiusXL;
     position: relative;
     .image_container {
@@ -163,40 +158,15 @@ const displayAllEvents = (): void => {
         right: 0;
     }
 }
-    /*
-    .noMatchFound_container {
-      height: 75vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 2rem;
-      .noMatchFound {
-        margin: 0;
-        font-size: 1.2rem;
-      }
-      .back_btn {
-        background: transparent;
-        //color: $darkColorBackOf;
-        //border: 1px solid $darkColorBackOf;
-        display: flex;
-        justify-content: center;
-        text-align: center;
-        cursor: pointer;
-
-        &:hover {
-          //color: $accentColorBackof2;
-          //border-color: $accentColorBackof2;
-        }
-
-        p {
-          margin: 0;
-          font-size: 1rem;
-          font-weight: 700;
-          padding: .5rem;
-        }
-      }
-    } */
+.noMatchFound_container {
+    width: 100%;
+    height: 75vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: $whiteColor;
+}
 
 @media screen and (min-width: $breakpointDesktop) {
     .dashboardEventCard .infos_container .eventTitle {
