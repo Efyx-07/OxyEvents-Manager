@@ -5,6 +5,7 @@ import DashboardHeader from '@/dashboard-components/DashboardHeader.vue';
 import DashboardEventCard from '@/dashboard-components/DashboardEventCard.vue';
 import RemoveEventConfirmationModal from '@/dashboard-modals/RemoveEventConfirmationModal.vue';
 import DashboardEventsFilters from '@/dashboard-components/DashboardEventsFilters.vue';
+import EventsSearchBar from '@/dashboard-components/EventsSearchBar.vue';
 
 </script>
 
@@ -20,6 +21,7 @@ import DashboardEventsFilters from '@/dashboard-components/DashboardEventsFilter
                     <DashboardEventCard />
                 </div>
             </div>
+            <EventsSearchBar class="eventsSearchBar"/>
         </div>
     </div>
     <RemoveEventConfirmationModal />
@@ -34,6 +36,12 @@ import DashboardEventsFilters from '@/dashboard-components/DashboardEventsFilter
     gap: 2rem;
     justify-content: center;
     flex-wrap: wrap;
+}
+.eventsSearchBar {
+    width: 100%;
+    position: fixed;
+    top: 0;
+    z-index: 198;
 }
 
 </style>

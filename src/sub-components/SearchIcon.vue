@@ -2,14 +2,13 @@
 
 import { Icon } from '@iconify/vue';
 
-/*
 // ouvre la fenetre 'EventsSearchbar' au clic de l'icone
-const revealEventsSearchBar = () => {
+const revealEventsSearchBar = (): void => {
     // crée un nouvel evenement personnalisé 
-    const showEventsSearchBarEvent = new Event('show-eventsSearchBar');
+    const showEventsSearchBarEvent: Event = new Event('show-eventsSearchBar');
     // déclenche l'événement 'show-eventsSearchBar' sur l'objet window
     window.dispatchEvent(showEventsSearchBarEvent);
-};*/
+};
 
 </script>
 
