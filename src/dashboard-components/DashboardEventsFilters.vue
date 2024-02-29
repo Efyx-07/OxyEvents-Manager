@@ -124,6 +124,8 @@ const filterItems: FilterItem[] = [
         padding: .5rem 2rem;
         align-items: center;
         .filterItem {
+            cursor: pointer;
+            
             p {
                 margin: 0;
                 &:hover, &.active-link {
