@@ -23,9 +23,9 @@ const revealEventsSearchBar = (): void => {
 @import '@/assets/sass/dashboard-styles/colors.scss';
 @import '@/assets/sass/breakPoints.scss';
 .searchIcon_container {
-    width: 2rem;
-    height: 2rem;
-    background: $accentColorSecondary;
+    width: 2.5rem;
+    height: 2.5rem;
+    border: solid 1px $whiteTransparency;
     border-radius: 100%;
     display: flex;
     justify-content: center;
@@ -33,18 +33,11 @@ const revealEventsSearchBar = (): void => {
     cursor: pointer;
 
     &:hover {
-        background: $accentColorSecondaryLighted;
+        background: $accentColorPrimary;
     }
     .searchIcon {
         color: $whiteColor;
-        font-size: 1.3rem;
-    }
-}
-
-@media screen and (min-width: $breakpointDesktop) {
-    .searchIcon_container {
-        width: 2.3rem;
-        height: 2.3rem;
+        font-size: 1.5rem;
     }
 }
 
