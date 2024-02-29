@@ -1,5 +1,7 @@
 <script setup lang="ts">
 
+import DashboardMobileMenuIcon from '@/sub-components/DashboardMobileMenuIcon.vue';
+
 interface DashboardHeaderProps {
     title: string;
 }
@@ -13,6 +15,9 @@ const props = defineProps<DashboardHeaderProps>();
       <h1>{{ props.title }}</h1>
       <div class="content">
         <slot></slot>
+      </div>
+      <div class="mobileMenuIcon-container">
+        <DashboardMobileMenuIcon />
       </div>
     </div>
 </template>
@@ -43,6 +48,11 @@ const props = defineProps<DashboardHeaderProps>();
   }
   .content {
     width: 100%;
+  }
+  .mobileMenuIcon-container {
+    position: absolute;
+    right: 1rem;
+    top: 1.3rem;
   }
 }
 
