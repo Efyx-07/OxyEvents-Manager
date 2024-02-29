@@ -371,4 +371,16 @@ const navigateToHomepage = () => {
 
 @import '@/assets/sass/dashboard-styles/eventHandlingFormStyle.scss';
 
+.labelAndNotif_container {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+
+
+    p {
+        margin: 0;
+        font-size: .7rem;
+        font-weight: 400;
+    }
+}
 </style>
