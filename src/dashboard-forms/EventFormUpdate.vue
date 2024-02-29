@@ -210,7 +210,7 @@ const updateEvent = async () => {
                 await eventStore.loadEventsData();
 
                 // renvoie vers une page de redirection
-                router.push('/publication-confirmation');
+                router.push('/updated_event-confirmation');
 
             } else {
                 console.error('Erreur lors de la mise à jour de l\'evenement :', response.statusText);

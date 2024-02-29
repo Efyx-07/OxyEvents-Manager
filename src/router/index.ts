@@ -13,8 +13,9 @@ import EventUpdate from '@/views/dashboard-views/EventUpdate.vue';
 import EventParticipants from '@/views/dashboard-views/EventParticipants.vue';
 
 //confirmation pages
-import ConfirmPagePublication from '@/views/dashboard-views/ConfirmPagePublication.vue';
+import ConfirmPagePublishedEvent from '@/views/dashboard-views/ConfirmPagePublishedEvent.vue';
 import ConfirmPageRemovedEvent from '@/views/dashboard-views/ConfirmPageRemovedEvent.vue';
+import ConfirmPageUpdatedEvent from '@/views/dashboard-views/ConfirmPageUpdatedEvent.vue';
 
 //public views
 import EventPage from '@/views/public-views/EventPage.vue';
@@ -79,13 +80,18 @@ const router = createRouter({
     // confirmation pages
     {
       path: '/publication-confirmation',
-      name: 'ConfirmPagePublication',
-      component: ConfirmPagePublication
+      name: 'ConfirmPagePublishedEvent',
+      component: ConfirmPagePublishedEvent
     },
     {
       path: '/removed_event-confirmation',
       name: 'ConfirmPageRemovedEvent',
       component: ConfirmPageRemovedEvent
+    },
+    {
+      path: '/updated_event-confirmation',
+      name: 'ConfirmPageUpdatedEvent',
+      component: ConfirmPageUpdatedEvent
     },
 
     // public routes
