@@ -1,77 +1,75 @@
-<script setup lang="ts">
+<script setup>
 
-import { ref, watch, onMounted } from 'vue';
-import type { PropType } from 'vue';
-import type { Event } from '@/types/eventsTypes';
+import { ref, computed, watchEffect, onMounted } from 'vue';
 import { useGlobalDataStore } from '@/stores/GlobalDataStore';
 import { useEventStore } from '@/stores/EventStore';
 import { useRouter } from 'vue-router';
 import { Icon } from '@iconify/vue';
 import ReusablePrimaryButton from '@/sub-components/ReusablePrimaryButton.vue';
 import ReusableSecondaryButton from '@/sub-components/ReusableSecondaryButton.vue';
+import ButtonLoader from '@/sub-components/ButtonLoader.vue'
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 // MODE DEMO
 import DemoNotification from '@/sub-components/DemoNotification.vue'; 
 import { useAdminStore } from '@/stores/AdminStore';
-
 // MODE DEMO: extrait le statut de l'administrateur connecté
 const adminStore = useAdminStore();
-const adminStatus: "SUPERADMIN" | "ADMIN" | "GENERIC" | "GUEST" = adminStore.adminData.status
+const adminStatus = adminStore.adminData.status
 // MODE DEMO visibilité par défaut de la notification
-const demoNotification = ref<boolean>(false);
+const demoNotification = ref(false);
 
-// recupère la props de selectedEvents en provenance de EventUpdate
-const props = defineProps({
-    selectedEvent: {
-        type: Object as PropType<Event>,
-        required: true,
-    }
-})
+// visibilité par défaut du loader
+const isLoading = ref(false);
+
+// recupère la props de selectedEvents en provenance de BackOfficeEventUpdatePage
+const { selectedEvent } = defineProps(['selectedEvent']);
 
 // data
-const notification: string = '(Sans choix de votre part, l\'image actuelle restera en place)';
+const notification = '(Sans choix de votre part, l\'image actuelle restera en place)'
 const { removeImageIconName } = useGlobalDataStore();
 
 // convertit la date de l'API en une date locale
-const dateFromAPI: Date = new Date(props.selectedEvent.date);
+const dateFromAPI = new Date(selectedEvent.date);
 // ajuste l'heure à midi (12:00) pour éviter les problèmes de fuseau horaire
 dateFromAPI.setHours(12, 0, 0, 0);
 // formate la date pour pour préremplissage de l'input type "date"
-const formattedDate = ref<string>(dateFromAPI.toISOString().split('T')[0]);
+const formattedDate = computed(() => {
+    return dateFromAPI.toISOString().split('T')[0];
+});
 
 // nouvelle variable réactive pour stocker la date modifiée par l'utilisateur
-const userSelectedDate = ref<string>(formattedDate.value);
+const userSelectedDate = ref(formattedDate.value);
 
 // mettre cette nouvelle variable quand l'utilisateur modifie la date
-watch(userSelectedDate, () => {
+watchEffect(() => {
     if (userSelectedDate.value !== formattedDate.value) {
         formattedDate.value = userSelectedDate.value;
     }
-});
+})
 
 // propriétés du formulaire
-const newEventTitle = ref<string>(props.selectedEvent.title);
-const newEventCoverImage = ref<File | null>(null);
+const newEventTitle = ref(selectedEvent.title);
+const newEventCoverImage = ref('');
 const newEventDate = ref(userSelectedDate);
-const newEventLocation = ref<string>(props.selectedEvent.location);
-const newEventPresentation = ref<string>(props.selectedEvent.presentation);
-const newEventProgramme = ref<string>(props.selectedEvent.programme);
-const newEventPracticalInformations = ref<string>(props.selectedEvent.practicalInformations);
-const newEventOrganizerName = ref<string>(props.selectedEvent.organizerName);
-const newEventOrganizerLogo = ref<File | null>(null);
-const newEventOrganizerWebsite  = ref<string>(props.selectedEvent.organizerWebsite);
+const newEventLocation = ref(selectedEvent.location);
+const newEventPresentation = ref(selectedEvent.presentation);
+const newEventProgramme = ref(selectedEvent.programme);
+const newEventPracticalInformations = ref(selectedEvent.practicalInformations);
+const newEventOrganizerName = ref(selectedEvent.organizerName);
+const newEventOrganizerLogo = ref('');
+const newEventOrganizerWebsite  = ref(selectedEvent.organizerWebsite);
 
 // propriétés des previews de l'image de couverture et du logo organisateur
-const coverImagePreview = ref<string>('');
-const organizerLogoPreview = ref<string>('');
+const coverImagePreview = ref('');
+const organizerLogoPreview = ref('');
 
 // récupère l'ID de l'évènement sélectionné
-const selectedEventId = ref<number>(props.selectedEvent.id);
-const eventId: number = selectedEventId.value;
+const selectedEventId = ref(selectedEvent.id);
+const eventId = selectedEventId.value;
 
 // gère le téléchargement du fichier image de couverture et stocke le fichier selectionné
-const handleNewCoverImageFileChange = (event: any) => {
+const handleNewCoverImageFileChange = (event) => {
     newEventCoverImage.value = event.target.files[0];
 
     // permet la preview de l'image de couverture
@@ -79,68 +77,43 @@ const handleNewCoverImageFileChange = (event: any) => {
     if (file) {
         const reader = new FileReader();
         reader.onload = (e) => {
-            if (e.target && e.target.result && typeof e.target.result === 'string') {
-                coverImagePreview.value = e.target.result;
-            }
+            coverImagePreview.value = e.target.result;
         };
         reader.readAsDataURL(file);
     }
 };
 
 // gère le téléchargement du fichier logo de l'organisateur et stocke le fichier selectionné
-const handleNewOrganizerLogoFileChange = (event: any) => {
+const handleNewOrganizerLogoFileChange = (event) => {
     newEventOrganizerLogo.value = event.target.files[0];
 
-    // permet la preview de l'image de couverture
+    // permet la preview du logo de l'organisateur
     const file = event.target.files[0];
     if (file) {
         const reader = new FileReader();
         reader.onload = (e) => {
-            if (e.target && e.target.result && typeof e.target.result === 'string') {
-                organizerLogoPreview.value = e.target.result;
-            }
+            organizerLogoPreview.value = e.target.result;
         };
         reader.readAsDataURL(file);
     }
 };
 
 // supprime l'image de couverture en preview
-const removeCoverImageFromPreview = (): void => {
+const removeCoverImageFromPreview = () => {
     coverImagePreview.value = '';
 };
 
 // supprime le logo de l'organisateur en preview
-const removeOrganizerLogoFromPreview = (): void => {
+const removeOrganizerLogoFromPreview = () => {
     organizerLogoPreview.value = '';
 };
 
 // crée une instance CKEditor
-interface EditorConfig {
-    toolbar: {
-        items: string[];
-    };
-    language: string;
-    link: {
-        decorators: {
-            addTargetToExternalLinks: {
-                mode: string;
-                callback: (url: string) => boolean;
-                attributes: {
-                    target: string;
-                    rel: string;
-                };
-            };
-        };
-    };
-}
-
 const editor = ClassicEditor;
-
-let editorDataNewPresentation = '';
-let editorDataNewProgramme = '';
-let editorDataNewPracticalInformations = '';
-
-const editorConfig: EditorConfig = {
+let editorDataNewPresentation = ref(selectedEvent.presentation);
+let editorDataNewProgramme = ref(selectedEvent.programme);
+let editorDataNewPracticalInformations = ref(selectedEvent.practicalInformations);
+const editorConfig = {
     toolbar: {
         items: [
             'bold', 
@@ -157,7 +130,7 @@ const editorConfig: EditorConfig = {
         decorators: {
             addTargetToExternalLinks: {
                 mode: 'automatic',
-                callback: (url: string) => /^(https?:)?\/\//.test( url ),
+                callback: url => /^(https?:)?\/\//.test( url ),
                 attributes: {
                     target: '_blank',
                     rel: 'noopener noreferrer'
@@ -169,54 +142,40 @@ const editorConfig: EditorConfig = {
 
 // lie les editorData aux propriétés du formulaire envoyées
 onMounted(() => {
-    editorDataNewPresentation = newEventPresentation.value;
-    editorDataNewProgramme = newEventProgramme.value;
-    editorDataNewPracticalInformations = newEventPracticalInformations.value;
+    editorDataNewPresentation.value = newEventPresentation.value;
+    editorDataNewProgramme.value = newEventProgramme.value;
+    editorDataNewPracticalInformations.value = newEventPracticalInformations.value;
 });
 
-interface CKEditorInputEvent {
-    editor: any; // Type CKEditor si vous l'avez défini
-    data: {
-        value: string;
-    };
-}
-
-
 // fonctions pour mettre à jour les propriétés du formulaires quand le contenu de l'éditeur change
-const updateNewEventPresentation = (event: CKEditorInputEvent) => {
-    newEventPresentation.value = event.data?.value ?? '';
+const updateNewEventPresentation = (event) => {
+    newEventPresentation.value = event;
 };
-const updateNewEventProgramme = (event: CKEditorInputEvent) => {
-    newEventProgramme.value = event.data?.value ?? '';
+const updateNewEventProgramme = (event) => {
+    newEventProgramme.value = event;
 };
-const updateNewEventPracticalInformations = (event: CKEditorInputEvent) => {
-    newEventPracticalInformations.value = event.data?.value ?? '';
+const updateNewEventPracticalInformations = (event) => {
+    newEventPracticalInformations.value = event;
 };
 
 const eventStore = useEventStore();
 const router = useRouter();
 
 // soumet le formulaire
-const updateEvent = async (): Promise<void> => {
+const updateEvent = async () => {
 
     const formData = new FormData();
 
     formData.append('newEventTitle', newEventTitle.value);
+    formData.append('newEventCoverImage', newEventCoverImage.value);
     formData.append('newEventDate', newEventDate.value);
     formData.append('newEventLocation', newEventLocation.value);
     formData.append('newEventPresentation', newEventPresentation.value);
     formData.append('newEventProgramme', newEventProgramme.value);
     formData.append('newEventPracticalInformations', newEventPracticalInformations.value);
     formData.append('newEventOrganizerName', newEventOrganizerName.value);
-    formData.append('newEventOrganizerWebsite', newEventOrganizerWebsite.value)
-
-    if (newEventCoverImage.value) {
-        formData.append('eventCoverImage', newEventCoverImage.value, newEventCoverImage.value.name);
-    }
-
-    if (newEventOrganizerLogo.value) {
-        formData.append('eventOrganizerLogo', newEventOrganizerLogo.value, newEventOrganizerLogo.value.name);
-    }
+    formData.append('newEventOrganizerLogo', newEventOrganizerLogo.value);
+    formData.append('newEventOrganizerWebsite', newEventOrganizerWebsite.value);
 
     // vérifie si un fichier image de couverture a été sélectionné
     if (!newEventCoverImage.value) {
@@ -234,6 +193,8 @@ const updateEvent = async (): Promise<void> => {
 
         try {
 
+            isLoading.value = true;
+
             const { hostName } = useGlobalDataStore();
             
             const response = await fetch (`${hostName}/events/${eventId}`, {
@@ -244,6 +205,7 @@ const updateEvent = async (): Promise<void> => {
             if (response.ok) {
                 const data = await response.json();
                 console.log('Réponse de l\'API:', data.message);
+
                 // charge les données des évènements
                 await eventStore.loadEventsData();
 
@@ -269,6 +231,7 @@ const updateEvent = async (): Promise<void> => {
 
 // reconduis vers la page 'vos évènements'
 const navigateToHomepage = () => {
+    isLoading.value = false;
     router.push('/home');
 };
 
@@ -398,6 +361,7 @@ const navigateToHomepage = () => {
             <ReusableSecondaryButton  @click="navigateToHomepage">Annuler</ReusableSecondaryButton> 
             <!-- MODE DEMO -->
             <DemoNotification v-if="demoNotification"/>
+            <ButtonLoader v-else-if="isLoading"/>
             <ReusablePrimaryButton type="submit" v-else>Mettre à jour</ReusablePrimaryButton>
         </div>
     </form>

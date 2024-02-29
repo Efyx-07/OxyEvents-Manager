@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup>
 
 import { ref, onMounted } from 'vue';
 import { useGlobalDataStore } from '@/stores/GlobalDataStore';
@@ -17,29 +17,29 @@ import DemoNotification from '@/sub-components/DemoNotification.vue';
 const { removeImageIconName } = useGlobalDataStore();
 
 // MODE DEMO visibilité par défaut de la notification
-const demoNotification = ref<boolean>(false);
+const demoNotification = ref(false);
 
 // visibilité par défaut du loader
-const isLoading = ref<boolean>(false);
+const isLoading = ref(false);
 
 // propriétés du formulaire
-const eventTitle = ref<string>('');
-const eventCoverImage = ref<File | null>(null);
-const eventDate = ref<string>('');
-const eventLocation = ref<string>('');
-const eventPresentation = ref<string>('');
-const eventProgramme = ref<string>('');
-const eventPracticalInformations = ref<string>('');
-const eventOrganizerName = ref<string>('');
-const eventOrganizerLogo = ref<File | null>(null);
-const eventOrganizerWebsite  = ref<string>('');
+const eventTitle = ref('');
+const eventCoverImage = ref('');
+const eventDate = ref('');
+const eventLocation = ref('');
+const eventPresentation = ref('');
+const eventProgramme = ref('');
+const eventPracticalInformations = ref('');
+const eventOrganizerName = ref('');
+const eventOrganizerLogo = ref('');
+const eventOrganizerWebsite  = ref('');
 
 // propriétés des previews de l'image de couverture et du logo organisateur
-const coverImagePreview = ref<string>('');
-const organizerLogoPreview = ref<string>('');
+const coverImagePreview = ref('');
+const organizerLogoPreview = ref('');
 
 // gère le téléchargement du fichier image de couverture et stocke le fichier selectionné
-const handleCoverImageFileChange = (event: any) => {
+const handleCoverImageFileChange = (event) => {
     eventCoverImage.value = event.target.files[0];
 
     // permet la preview de l'image de couverture
@@ -47,68 +47,43 @@ const handleCoverImageFileChange = (event: any) => {
     if (file) {
         const reader = new FileReader();
         reader.onload = (e) => {
-            if (e.target && e.target.result && typeof e.target.result === 'string') {
-                coverImagePreview.value = e.target.result;
-            }
+            coverImagePreview.value = e.target.result;
         };
         reader.readAsDataURL(file);
     }
 };
 
 // gère le téléchargement du fichier logo de l'organisateur et stocke le fichier selectionné
-const handleOrganizerLogoFileChange = (event: any) => {
+const handleOrganizerLogoFileChange = (event) => {
     eventOrganizerLogo.value = event.target.files[0];
 
-    // permet la preview de l'image de couverture
+    // permet la preview du logo de l'organisateur
     const file = event.target.files[0];
     if (file) {
         const reader = new FileReader();
         reader.onload = (e) => {
-            if (e.target && e.target.result && typeof e.target.result === 'string') {
-                organizerLogoPreview.value = e.target.result;
-            }
+            organizerLogoPreview.value = e.target.result;
         };
         reader.readAsDataURL(file);
     }
 };
 
 // supprime l'image de couverture en preview
-const removeCoverImageFromPreview = (): void => {
+const removeCoverImageFromPreview = () => {
     coverImagePreview.value = '';
 };
 
-// supprime le logo de l'organisateur en preview
-const removeOrganizerLogoFromPreview = (): void => {
+   // supprime le logo de l'organisateur en preview
+const removeOrganizerLogoFromPreview = () => {
     organizerLogoPreview.value = '';
 };
 
 // crée une instance CKEditor
-interface EditorConfig {
-    toolbar: {
-        items: string[];
-    };
-    language: string;
-    link: {
-        decorators: {
-            addTargetToExternalLinks: {
-                mode: string;
-                callback: (url: string) => boolean;
-                attributes: {
-                    target: string;
-                    rel: string;
-                };
-            };
-        };
-    };
-}
-
 const editor = ClassicEditor;
-
 let editorDataPresentation = '';
 let editorDataProgramme = '';
 let editorDataPracticalInformations = '';
-
-const editorConfig: EditorConfig = {
+const editorConfig = {
     toolbar: {
         items: [
             'bold', 
@@ -123,9 +98,9 @@ const editorConfig: EditorConfig = {
     language: 'fr',
     link: {
         decorators: {
-            addTargetToExternalLinks: {
+                ddTargetToExternalLinks: {
                 mode: 'automatic',
-                callback: (url: string) => /^(https?:)?\/\//.test( url ),
+                callback: url => /^(https?:)?\/\//.test( url ),
                 attributes: {
                     target: '_blank',
                     rel: 'noopener noreferrer'
@@ -136,28 +111,21 @@ const editorConfig: EditorConfig = {
 };
 
 // lie les editorData aux propriétés du formulaire envoyées
-onMounted(() => {
+    onMounted(() => {
     editorDataPresentation = eventPresentation.value;
     editorDataProgramme = eventProgramme.value;
     editorDataPracticalInformations = eventPracticalInformations.value;
 });
 
-interface CKEditorInputEvent {
-    editor: any; // Type CKEditor si vous l'avez défini
-    data: {
-        value: string;
-    };
-}
-
 // fonctions pour mettre à jour les propriétés du formulaires quand le contenu de l'éditeur change
-const updateEventPresentation = (event: CKEditorInputEvent) => {
-    eventPresentation.value = event.data?.value ?? '';
+const updateEventPresentation = (event) => {
+    eventPresentation.value = event;
 }
-const updateEventProgramme = (event: CKEditorInputEvent) => {
-    eventProgramme.value = event.data?.value ?? '';
+const updateEventProgramme = (event) => {
+    eventProgramme.value = event;
 };
-const updateEventPracticalInformations = (event: CKEditorInputEvent) => {
-    eventPracticalInformations.value = event.data?.value ?? '';
+const updateEventPracticalInformations = (event) => {
+    eventPracticalInformations.value = event;
 };
 
 const eventStore = useEventStore();
@@ -165,38 +133,32 @@ const adminStore = useAdminStore();
 const router = useRouter();
 
 // soumet le formulaire
-const validateEventCreation = async (): Promise<void> => {
+const validateEventCreation = async () => {
         
-    const formData: FormData = new FormData();
+    const formData = new FormData();
 
     formData.append('eventTitle', eventTitle.value);
+    formData.append('eventCoverImage', eventCoverImage.value);
     formData.append('eventDate', eventDate.value);
     formData.append('eventLocation', eventLocation.value);
     formData.append('eventPresentation', eventPresentation.value);
     formData.append('eventProgramme', eventProgramme.value);
     formData.append('eventPracticalInformations', eventPracticalInformations.value);
     formData.append('eventOrganizerName', eventOrganizerName.value);
+    formData.append('eventOrganizerLogo', eventOrganizerLogo.value);
     formData.append('eventOrganizerWebsite', eventOrganizerWebsite.value);
-
-    if (eventCoverImage.value) {
-        formData.append('eventCoverImage', eventCoverImage.value, eventCoverImage.value.name);
-    }
-
-    if (eventOrganizerLogo.value) {
-        formData.append('eventOrganizerLogo', eventOrganizerLogo.value, eventOrganizerLogo.value.name);
-    }
 
     const adminId = adminStore.adminData.id;
 
-    formData.append('adminId', adminId.toString());
+    formData.append('adminId', adminId);
 
     // affiche les valeurs dans la console
     for (const pair of formData.entries()) {
         console.log(pair[0], pair[1]);
     }
 
-        // MODE DEMO: extrait le statut de l'administrateur connecté
-        const adminStatus: "SUPERADMIN" | "ADMIN" | "GENERIC" | "GUEST" = adminStore.adminData.status
+    // MODE DEMO: extrait le statut de l'administrateur connecté
+    const adminStatus = adminStore.adminData.status
     // CONDITION POUR LE MODE DEMO
     if (adminStatus !== 'GUEST') {
 
@@ -239,7 +201,7 @@ const validateEventCreation = async (): Promise<void> => {
             demoNotification.value = false;
         }, 3000)
     };
-}; 
+}
 
 // reconduis vers la page 'vos évènements'
 const navigateToHomepage = () => {
