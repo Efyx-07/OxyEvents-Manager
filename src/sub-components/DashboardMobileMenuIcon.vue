@@ -2,19 +2,19 @@
 
 import { Icon } from '@iconify/vue';
 
-// ouvre la fenetre 'BackOfficeNavMobile' au clic de l'icone
-const toggleBackOfficeNavMobileVisibility = (): void => {
+// ouvre la fenetre 'NavAside' au clic de l'icone
+const toggleNavAsideVisibility = (): void => {
     // crée un nouvel evenement personnalisé 
-    const showBackOfficeNavMobileEvent = new Event('show-backOfficeNavMobile');
-    // déclenche l'événement 'show-backOfficeNavMobile' sur l'objet window
-    window.dispatchEvent(showBackOfficeNavMobileEvent);
+    const showNavAsideEvent = new Event('show-navAside');
+    // déclenche l'événement 'show-navAside' sur l'objet window
+    window.dispatchEvent(showNavAsideEvent);
 }
 
 </script>
 
 <template>
 
-    <Icon icon="tabler:menu-deep" class="mobileMenuIcon" @click="toggleBackOfficeNavMobileVisibility"/>
+    <Icon icon="tabler:menu-deep" class="mobileMenuIcon" @click="toggleNavAsideVisibility"/>
 
 </template>
 
