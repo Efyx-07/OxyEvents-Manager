@@ -3,7 +3,8 @@
 import NavAside from '@/dashboard-components/NavAside.vue';
 import DashboardHeader from '@/dashboard-components/DashboardHeader.vue';
 import DashboardEventCard from '@/dashboard-components/DashboardEventCard.vue';
-import RemoveEventConfirmationModal from '@/dashboard-modals/RemoveEventConfirmationModal.vue'
+import RemoveEventConfirmationModal from '@/dashboard-modals/RemoveEventConfirmationModal.vue';
+import DashboardEventsFilters from '@/dashboard-components/DashboardEventsFilters.vue';
 
 </script>
 
@@ -12,7 +13,7 @@ import RemoveEventConfirmationModal from '@/dashboard-modals/RemoveEventConfirma
         <NavAside />
         <div class="page-content">
             <DashboardHeader title="Vos évènements">
-                <button>Je suis un bouton</button>
+                <DashboardEventsFilters />
             </DashboardHeader>
             <div class="content-field">
                 <div class="eventCards_container">

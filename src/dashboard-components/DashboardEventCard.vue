@@ -6,7 +6,7 @@ import { useGlobalDataStore } from '@/stores/GlobalDataStore';
 import DashboardEventCardActions from './DashboardEventCardActions.vue';
 import DashboardEventCardDateCard from './DashboardEventCardDateCard.vue';
 import { useRouter } from 'vue-router';
-//import { ref, computed } from 'vue';
+import { ref, computed, onMounted } from 'vue';
 import type { Event } from '@/types/eventsTypes';
 
 const eventStore = useEventStore();
@@ -19,14 +19,13 @@ const router = useRouter();
 // permet de naviguer vers la page de l'evenement selectionné
 const navigateToEvent = (eventSlug: string): void => {
     router.push({
-        name: 'EventDetail',
-        params: { eventSlug }
+      name: 'EventDetail',
+      params: { eventSlug }
     });
 };
 
-/*
 // déclare currentFilter comme réactif avec valeur 'all' par défaut
-const currentFilter = ref({ value: 'all' });
+const currentFilter = ref<{value: string}>({ value: 'all' });
 
 // procède au filtrage des évènements 'à venir' / 'passés' / 'par mot-clé' selon la methode de eventStore et affiche tous les évènements par défaut
 const filteredEvents = computed(() => {
@@ -37,42 +36,37 @@ const filteredEvents = computed(() => {
     } else if (currentFilter.value.value === 'keyword') {
         return eventStore.filteredByKeywordEvents;
     } else {
-        return events
+        return events;
     }
 });
-*/
 
-/*
 // permet de vérifier le nombre d'évènements correspondant au mot-clé
 const filteredByKeywordEventsCount = computed(() => {
     return eventStore.filteredByKeywordEvents.length;
 });
 
+// écoute l'évènement personnalisé émis par DashboardEventsFilters et EventsSearchBar
+onMounted(() => {
+    window.addEventListener('filterChanged', handleFilterChanged);
+});
+
+// modifie la valeur du filtre selon l'evenement emis
+const handleFilterChanged = (event: any) => {
+    currentFilter.value = { value: event.detail };
+};
+
 // permet de réafficher tous les évènements suite à une recherche infructueuse
 const displayAllEvents = (): void => {
-    currentFilter.value = {value:'all'};
+    currentFilter.value = {value: 'all'};
     // emet un évènement personnalisé pour restaurer la class active 'all'
     window.dispatchEvent(new CustomEvent('filterChanged', { detail: 'all' }));
 };
 
-/*
-// modifie la valeur du filtre selon l'evenement emis
-const handleFilterChanged = (event: CustomEvent<{ value: string }>): void => {
-    currentFilter.value = { value: event.detail.value};
-};
-*/
-
-/*
-// écoute l'évènement personnalisé émis par BackOfficeEventsNav et BackOfficeEventsSearchBar
-onMounted(() => {
-    window.addEventListener('filterChanged', handleFilterChanged);
-});
-*/
-
 </script>
 
 <template>
-    <div class="dashboardEventCard" v-for="event in events" :key="event.title">
+
+    <div class="dashboardEventCard" v-for="event in filteredEvents" :key="event.title">
         <div class="image_container" @click="navigateToEvent(event.slug)">
             <img :src="hostName + event.image.source" :alt="event.image.alt">
         </div>
@@ -86,12 +80,14 @@ onMounted(() => {
         <DashboardEventCardActions class="actions" :slug="event.slug" :title="event.title" :id="event.id.toString()"/>
         <DashboardEventCardDateCard :date="new Date(event.date)" class="dateCard" />
     </div>
-    <!-- <div class="noMatchFound_container" v-if="filteredByKeywordEventsCount === 0 && currentFilter.value === 'keyword'">
+
+    <div class="noMatchFound_container" v-if="filteredByKeywordEventsCount === 0 && currentFilter.value === 'keyword'">
         <p class="noMatchFound">Aucun résultat pour votre recherche...</p> 
         <button class="back_btn" @click="displayAllEvents">
             <p>Retour à vos évènements</p>
         </button>
-    </div> -->
+    </div>
+    
 </template>
 
 <style lang="scss" scoped>
