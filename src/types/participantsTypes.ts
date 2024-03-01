@@ -6,3 +6,7 @@ export interface Participant {
     email: string;
     telephone: string;
 }
+
+export interface ParticipantApiResponse {
+    participants: Participant[];
+}

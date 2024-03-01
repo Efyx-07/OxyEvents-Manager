@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
 import { reactive } from 'vue';
-import * as api from '@/services/adminsApi'; // importe les fonctions de l'api du fichier api.js
+import * as api from '@/services/adminsApi'; // importe les fonctions de l'api du fichier adminsApi.ts
 import type { Admin, AdminData } from '@/types/adminsTypes';
 
 type State = {
@@ -50,8 +50,8 @@ export const useAdminStore = defineStore('admins', {
             }
         },
 
-        // récupère les données de tous les administrateurs à partir de api.js
-        async loadAdminsData() {
+        // récupère les données de tous les administrateurs à partir de adminApi.ts
+        async loadAdminsData(): Promise<void> {
             try {
                 const adminsData: Admin[] = await api.fetchAdminsData();
                 this.admins = adminsData;

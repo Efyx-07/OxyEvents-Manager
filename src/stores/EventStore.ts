@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia';
-import * as api from '@/services/eventsApi'; // importe les fonctions de l'api du fichier eventsApi.js
+import * as api from '@/services/eventsApi'; // importe les fonctions de l'api du fichier eventsApi.ts
 import type { Event } from '@/types/eventsTypes';
 
 type State = {
@@ -22,7 +22,7 @@ export const useEventStore = defineStore('events', {
 
     actions: {
 
-        // récupère les données de tous les évènements à partir de eventsApi.js
+        // récupère les données de tous les évènements à partir de eventsApi.ts
         async loadEventsData(): Promise<void> {
 
             try {
