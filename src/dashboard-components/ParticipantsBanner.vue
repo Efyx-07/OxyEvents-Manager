@@ -36,8 +36,10 @@ const participantsCount = computed(() => props.participants.length);
 <style scoped lang="scss">
 
 @import '@/assets/sass/dashboard-styles/colors.scss';
+@import '@/assets/sass/variables';
 .participantsBanner {
     border: solid 1px $whiteTransparency;
+    border-radius: $containerRadiusM;
     color: $whiteColor;
     padding: 1rem;
     display: flex;
@@ -68,7 +70,9 @@ const participantsCount = computed(() => props.participants.length);
             }
         }
         .button {
-            @extend .participants-count;
+            display: flex;
+            align-items: center;
+            gap: .25rem;
 
             p {
                 margin: 0;

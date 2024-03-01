@@ -168,7 +168,7 @@ onMounted(() => {
             cursor: pointer;
             position: relative;
             &:hover > .active-bar {
-                background: rgba($accentColorPrimary, .25);
+                background: $accentTransparency;
                 width: 100%;
             }
             .icon {

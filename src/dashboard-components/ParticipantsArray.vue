@@ -64,6 +64,10 @@ const arrayItems: ArrayItem[] = [
         text-align: left;
         border-collapse: collapse;
 
+        th {
+            color: $accentColorSecondaryLighted;
+        }
+
         th, td {
             padding: 1rem;   
         }
@@ -77,7 +81,7 @@ const arrayItems: ArrayItem[] = [
         }
 
         tbody:hover {
-            background-color: rgba($accentColorSecondary, .1);
+            background-color: $accentTransparency;
         }
     } 
 }
