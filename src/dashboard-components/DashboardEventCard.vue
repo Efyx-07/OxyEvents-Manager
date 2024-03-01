@@ -82,6 +82,7 @@ const displayAllEvents = (): void => {
     </div>
     <div class="noMatchFound_container" v-if="filteredByKeywordEventsCount === 0 && currentFilter.value === 'keyword'">
         <p class="noMatchFound">Aucun résultat pour votre recherche...</p> 
+        <Icon icon="streamline-emojis:magnifying-glass-tilted-left"  class="icon"/>
         <ReusablePrimaryButton @click="displayAllEvents">Retour à vos évènements</ReusablePrimaryButton>
     </div>    
 </template>
@@ -165,7 +166,15 @@ const displayAllEvents = (): void => {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    color: $whiteColor;
+    gap: 1rem;
+
+    p {
+        margin: 0;
+        color: $whiteColor; 
+    }
+    .icon {
+        font-size: 6rem;
+    }
 }
 
 @media screen and (min-width: $breakpointDesktop) {
