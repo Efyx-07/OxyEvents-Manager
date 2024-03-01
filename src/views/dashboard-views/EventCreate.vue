@@ -5,14 +5,6 @@ import DashboardHeader from '@/dashboard-components/DashboardHeader.vue';
 import ReusablePrimaryButton from '@/sub-components/ReusablePrimaryButton.vue';
 import AdminFormContainer from '@/dashboard-components/AdminFormContainer.vue';
 import EventFormCreate from '@/dashboard-forms/EventFormCreate.vue';
-import { useRouter } from 'vue-router';
-
-const router = useRouter();
-
-// reconduis vers la page 'vos évènements'
-const navigateToHomepage = () => {
-    router.push('/home');
-};
 
 </script>
 
@@ -21,7 +13,9 @@ const navigateToHomepage = () => {
         <NavAside />
         <div class="page-content">
             <DashboardHeader title="Nouvel évènement">
-                <ReusablePrimaryButton @click="navigateToHomepage">Retour aux évènements</ReusablePrimaryButton>
+                <router-link to="/home">
+                    <ReusablePrimaryButton>Retour aux évènements</ReusablePrimaryButton>
+                </router-link>
             </DashboardHeader>
             <div class="content-field">
                 <AdminFormContainer title="Créer un nouvel évènement">
