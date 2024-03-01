@@ -5,6 +5,28 @@ const props = defineProps<{
     participants: Participant[];
 }>();
 
+interface ArrayItem {
+    title: string;
+};
+
+const arrayItems: ArrayItem[] = [
+    {
+        title: 'Entreprise / Organisation'
+    },
+    {
+        title: 'Nom'
+    }, 
+    {
+        title: 'Prenom'
+    }, 
+    {
+        title: 'Email'
+    }, 
+    {
+        title: 'Téléphone'
+    }
+];
+
 </script>
 
 <template>
@@ -12,11 +34,7 @@ const props = defineProps<{
         <table class="participantsList-array">
             <thead>
                 <tr>
-                    <th style="width: 20%;">Entreprise / Organisation</th>
-                    <th style="width: 20%;">Nom</th>
-                    <th style="width: 20%;">Prénom</th>
-                    <th style="width: 20%;">Email</th>
-                    <th style="width: 20%;">Téléphone</th>
+                    <th v-for="arrayItem in arrayItems" :key="arrayItem.title" style="width: 20%;">{{ arrayItem.title }}</th>
                 </tr> 
             </thead>
             <tbody v-for="participant in props.participants" :key="participant.id">
@@ -32,3 +50,42 @@ const props = defineProps<{
         </table>
     </div>
 </template>
+
+<style lang="scss" scoped>
+
+@import '@/assets/sass/dashboard-styles/colors.scss';
+@import '@/assets/sass/variables.scss';
+@import '@/assets/sass/breakPoints.scss';
+.participantsList-array_container {
+    overflow-x: scroll;
+    color: $whiteColor;
+    .participantsList-array {
+        width: 100%;
+        text-align: left;
+        border-collapse: collapse;
+
+        th, td {
+            padding: 1rem;   
+        }
+
+        thead tr, tbody tr {
+            border-bottom: 1px solid $whiteTransparency;
+        }
+
+        tbody {
+            transition: all .2s ease-in-out;
+        }
+
+        tbody:hover {
+            background-color: rgba($accentColorSecondary, .1);
+        }
+    } 
+}
+
+@media screen and (min-width: $breakpointDesktop) {
+    .participantsList-array_container {
+        overflow-x: unset;
+    } 
+}
+
+</style>

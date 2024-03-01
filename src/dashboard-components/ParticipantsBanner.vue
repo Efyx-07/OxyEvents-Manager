@@ -25,7 +25,10 @@ const participantsCount = computed(() => props.participants.length);
                 <Icon icon="heroicons:users-solid" class="icon" />
                 <p>{{ participantsCount }}</p>
             </div>
-            <ReusablePrimaryButton>Télécharger en Excel</ReusablePrimaryButton>
+            <ReusablePrimaryButton class="button">
+                <p>Excel</p>
+                <Icon icon="material-symbols:upload" class="icon"/>
+            </ReusablePrimaryButton>
         </div>
     </div>
 </template>
@@ -50,18 +53,29 @@ const participantsCount = computed(() => props.participants.length);
         display: flex;
         align-items: center;
         justify-content: flex-end;
-        gap: 1rem;
+        gap: 3rem;
         .participants-count {
             display: flex;
             align-items: center;
-            gap: .5rem;
-            font-size: 1.5rem;
+            gap: .25rem;
+            .icon {
+                font-size: 1.5rem;
+            }
 
             p {
                 margin: 0;
+                font-size: 1.1rem;
+            }
+        }
+        .button {
+            @extend .participants-count;
+
+            p {
+                margin: 0;
+                font-size: 1rem;
             }
             .icon {
-                font-size: 2rem;
+                font-size: 1rem;
             }
         }
     }
