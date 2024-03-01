@@ -2,7 +2,7 @@
 
 const props = defineProps<{
     date: Date;
-}>()
+}>();
 
 // reformate la date et sépare jour / mois / année
 const formatDateDay = (date: string): string => {
