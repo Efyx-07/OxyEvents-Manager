@@ -5,7 +5,7 @@ import DashboardHeader from '@/dashboard-components/DashboardHeader.vue';
 import DashboardEventCard from '@/dashboard-components/DashboardEventCard.vue';
 import RemoveEventConfirmationModal from '@/dashboard-modals/RemoveEventConfirmationModal.vue';
 import DashboardEventsFilters from '@/dashboard-components/DashboardEventsFilters.vue';
-import EventsSearchBar from '@/dashboard-components/EventsSearchBar.vue';
+import EventsSearchBar from '@/dashboard-modals/EventsSearchBar.vue';
 import ReusablePrimaryButton from '@/sub-components/ReusablePrimaryButton.vue';
 import { Icon } from '@iconify/vue';
 import { useEventStore } from '@/stores/EventStore';
