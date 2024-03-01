@@ -8,6 +8,7 @@ import { useEventStore } from '@/stores/EventStore';
 import { fetchParticipantsData } from '@/services/participantsApi';
 import { useRoute } from 'vue-router';
 import type { Participant } from '@/types/participantsTypes';
+import DataLoader from '@/sub-components/DataLoader.vue';
 import ParticipantsBanner from '@/dashboard-components/ParticipantsBanner.vue';
 
 const eventStore = useEventStore();
@@ -15,6 +16,9 @@ const route = useRoute();
 
 const eventTitle = ref<string>('');
 const participants = ref<Participant[]>([]);
+
+// affiche le loader si les données sont en cours de chargement
+const datasAreAvailable = ref<boolean>(false);
 
 // récupère le slug de la route
 let eventSlug: string;
@@ -37,7 +41,7 @@ onMounted(async () => {
     // fetch les données des participants selon le slug de l'evenement selectionné
     const participantsData: Participant[] = await fetchParticipantsData(eventSlug); 
     participants.value = participantsData;
-    //datasAreAvailable.value = true;
+    datasAreAvailable.value = true;
   } catch (error) {
     console.error('Erreur lors du chargement des participants :', error);
   }
@@ -55,7 +59,10 @@ onMounted(async () => {
                 </router-link>
             </DashboardHeader>
             <div class="content-field">
-                <ParticipantsBanner :title="eventTitle" :participants="participants"/>
+                <DataLoader v-if="!datasAreAvailable" class="dataLoader"/>
+                <div class="content" v-else>
+                    <ParticipantsBanner :title="eventTitle" :participants="participants"/>
+                </div>
             </div>
         </div>
     </div>
@@ -64,5 +71,11 @@ onMounted(async () => {
 <style lang="scss" scoped>
 
 @import '@/assets/sass/dashboard-styles/dashboardPageStyle.scss';
+.dataLoader {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
 
 </style>
