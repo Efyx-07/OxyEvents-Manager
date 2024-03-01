@@ -10,6 +10,7 @@ import { useRoute } from 'vue-router';
 import type { Participant } from '@/types/participantsTypes';
 import DataLoader from '@/sub-components/DataLoader.vue';
 import ParticipantsBanner from '@/dashboard-components/ParticipantsBanner.vue';
+import ParticipantsArray from '@/dashboard-components/ParticipantsArray.vue';
 
 const eventStore = useEventStore();
 const route = useRoute();
@@ -58,10 +59,11 @@ onMounted(async () => {
                     <ReusablePrimaryButton>Retour aux évènements</ReusablePrimaryButton>
                 </router-link>
             </DashboardHeader>
-            <div class="content-field">
-                <DataLoader v-if="!datasAreAvailable" class="dataLoader"/>
-                <div class="content" v-else>
+            <DataLoader v-if="!datasAreAvailable" class="dataLoader"/>
+            <div class="content-field" v-else>
+                <div class="content">
                     <ParticipantsBanner :title="eventTitle" :participants="participants"/>
+                    <ParticipantsArray :participants="participants"/>
                 </div>
             </div>
         </div>
