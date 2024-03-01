@@ -54,7 +54,7 @@ const participantsCount = computed(() => props.participants.length);
         width: 100%;
         display: flex;
         align-items: center;
-        justify-content: flex-end;
+        justify-content: space-between;
         gap: 3rem;
         .participants-count {
             display: flex;
