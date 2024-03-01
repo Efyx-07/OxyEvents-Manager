@@ -60,6 +60,8 @@ const newEventOrganizerName = ref(selectedEvent.organizerName);
 const newEventOrganizerLogo = ref('');
 const newEventOrganizerWebsite  = ref(selectedEvent.organizerWebsite);
 
+console.log(selectedEvent.presentation)
+
 // propriétés des previews de l'image de couverture et du logo organisateur
 const coverImagePreview = ref('');
 const organizerLogoPreview = ref('');
