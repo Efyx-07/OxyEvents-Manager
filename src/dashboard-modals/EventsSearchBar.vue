@@ -93,7 +93,7 @@ const handleEnterKey = (): void => {
 .searchBar_container {
     width: 100%;
     height: 100%;
-    background: rgba($darkColor, .95);
+    background: $darkTransparency;
     display: flex;
     justify-content: center;
     align-items: center;
