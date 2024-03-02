@@ -2,7 +2,7 @@
 
 import type { Participant } from '@/types/participantsTypes';
 import { computed } from 'vue';
-import ReusablePrimaryButton from '@/sub-components/ReusablePrimaryButton.vue';
+import ParticipantsExcelButton from '@/sub-components/ParticipantsExcelButton.vue';
 import ReusableSeparator from '@/sub-components/ReusableSeparator.vue';
 import { Icon } from '@iconify/vue';
 
@@ -25,10 +25,7 @@ const participantsCount = computed(() => props.participants.length);
                 <Icon icon="heroicons:users-solid" class="icon" />
                 <p>{{ participantsCount }}</p>
             </div>
-            <ReusablePrimaryButton class="button">
-                <p>Excel</p>
-                <Icon icon="material-symbols:upload" class="icon"/>
-            </ReusablePrimaryButton>
+            <ParticipantsExcelButton v-bind="props"/>
         </div>
     </div>
 </template>
@@ -67,19 +64,6 @@ const participantsCount = computed(() => props.participants.length);
             p {
                 margin: 0;
                 font-size: 1.1rem;
-            }
-        }
-        .button {
-            display: flex;
-            align-items: center;
-            gap: .25rem;
-
-            p {
-                margin: 0;
-                font-size: 1rem;
-            }
-            .icon {
-                font-size: 1rem;
             }
         }
     }
