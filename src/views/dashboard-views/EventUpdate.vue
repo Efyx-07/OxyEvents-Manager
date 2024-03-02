@@ -59,7 +59,7 @@ setTimeout(() => {
     </div>
 </template>
 
-<style scope lang="scss">
+<style lang="scss" scoped>
 
 @import '@/assets/sass/dashboard-styles/dashboardPageStyle.scss';
 @import '@/assets/sass/dashboard-styles/colors.scss';
