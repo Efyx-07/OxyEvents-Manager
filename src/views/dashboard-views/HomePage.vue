@@ -11,20 +11,22 @@ import DataLoader from '@/sub-components/DataLoader.vue';
 import { Icon } from '@iconify/vue';
 import { useEventStore } from '@/stores/EventStore';
 import { computed, ref } from 'vue';
+import { useGlobalDataStore } from '@/stores/GlobalDataStore';
 
 const eventStore = useEventStore();
+const { dataLoaderDelay } = useGlobalDataStore();
 
 // permet de vérifier le nombre d'évènements créés
 const eventsCount = computed<number>(() => {
     return eventStore.events.length;
 });
 
-// affiche le loader et le cache après 0.5s
+// affiche le loader et le cache selon dataLoaderDelay defini dans GlobalDataStore
 const contentIsVisible = ref<boolean>(false);
 
 setTimeout(() => {
     contentIsVisible.value = true;
-}, 500);
+}, dataLoaderDelay);
 
 </script>
 

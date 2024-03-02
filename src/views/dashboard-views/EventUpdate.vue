@@ -14,7 +14,7 @@ import type { Event } from '@/types/eventsTypes';
 
 const eventStore = useEventStore();
 const route = useRoute();
-const { hostName } = useGlobalDataStore();
+const { hostName, dataLoaderDelay } = useGlobalDataStore();
 
 const allEvents: Event[] = eventStore.events;
 
@@ -25,12 +25,12 @@ const selectedEvent: Event | undefined = allEvents.find((event) => {
     return event.slug === eventSlug;
 });
 
-// affiche le loader et le cache après 0.5s
+// affiche le loader et le cache selon dataLoaderDelay defini dans GlobalDataStore
 const contentIsVisible = ref<boolean>(false);
 
 setTimeout(() => {
     contentIsVisible.value = true;
-}, 500);
+}, dataLoaderDelay);
 
 </script>
 

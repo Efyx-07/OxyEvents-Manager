@@ -7,13 +7,16 @@ import AdminFormContainer from '@/dashboard-components/AdminFormContainer.vue';
 import EventFormCreate from '@/dashboard-forms/EventFormCreate.vue';
 import DataLoader from '@/sub-components/DataLoader.vue';
 import { ref } from 'vue';
+import { useGlobalDataStore } from '@/stores/GlobalDataStore';
 
-// affiche le loader et le cache après 0.5s
+const { dataLoaderDelay } = useGlobalDataStore();
+
+// affiche le loader et le cache selon dataLoaderDelay defini dans GlobalDataStore
 const contentIsVisible = ref<boolean>(false);
 
 setTimeout(() => {
     contentIsVisible.value = true;
-}, 500);
+}, dataLoaderDelay);
 
 </script>
 
