@@ -48,7 +48,7 @@ const participantsCount = computed(() => props.participants.length);
 
     h1 {
         margin: 0;
-        font-size: 1.5rem;
+        font-size: 1.25rem;
     }
     .infos-container {
         width: 100%;

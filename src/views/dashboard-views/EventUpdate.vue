@@ -5,9 +5,11 @@ import DashboardHeader from '@/dashboard-components/DashboardHeader.vue';
 import ReusablePrimaryButton from '@/sub-components/ReusablePrimaryButton.vue';
 import AdminFormContainer from '@/dashboard-components/AdminFormContainer.vue';
 import EventFormUpdate from '@/dashboard-forms/EventFormUpdate.vue';
+import DataLoader from '@/sub-components/DataLoader.vue';
 import { useEventStore } from '@/stores/EventStore';
 import { useGlobalDataStore } from '@/stores/GlobalDataStore';
 import { useRoute } from 'vue-router';
+import { ref } from 'vue';
 import type { Event } from '@/types/eventsTypes';
 
 const eventStore = useEventStore();
@@ -23,6 +25,13 @@ const selectedEvent: Event | undefined = allEvents.find((event) => {
     return event.slug === eventSlug;
 });
 
+// affiche le loader et le cache après 1s
+const contentIsVisible = ref<boolean>(false);
+
+setTimeout(() => {
+    contentIsVisible.value = true;
+}, 1000);
+
 </script>
 
 <template>
@@ -34,7 +43,8 @@ const selectedEvent: Event | undefined = allEvents.find((event) => {
                     <ReusablePrimaryButton>Retour aux évènements</ReusablePrimaryButton>
                 </router-link>
             </DashboardHeader>
-            <div class="content-field">
+            <DataLoader v-if="!contentIsVisible" class="dataLoader"/>
+            <div class="content-field" v-else>
                 <AdminFormContainer title="Modifier les données de l'évènement" v-if="selectedEvent">
                     <div class="eventImageAndTitle_container">
                         <img :src="hostName + selectedEvent.image.source" alt="" class="eventImage">

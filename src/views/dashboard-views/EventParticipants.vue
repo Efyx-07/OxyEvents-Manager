@@ -73,12 +73,6 @@ onMounted(async () => {
 <style lang="scss" scoped>
 
 @import '@/assets/sass/dashboard-styles/dashboardPageStyle.scss';
-.dataLoader {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
 .content {
     display: flex;
     flex-direction: column;

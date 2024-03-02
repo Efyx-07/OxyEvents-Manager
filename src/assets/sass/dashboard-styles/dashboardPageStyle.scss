@@ -18,6 +18,13 @@
             max-width: 72rem;
             position: relative;
         }
+
+        .dataLoader {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
     }
 }
 

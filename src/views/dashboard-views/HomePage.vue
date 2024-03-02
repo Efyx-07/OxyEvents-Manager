@@ -7,9 +7,10 @@ import RemoveEventConfirmationModal from '@/dashboard-modals/RemoveEventConfirma
 import DashboardEventsFilters from '@/dashboard-components/DashboardEventsFilters.vue';
 import EventsSearchBar from '@/dashboard-modals/EventsSearchBar.vue';
 import ReusablePrimaryButton from '@/sub-components/ReusablePrimaryButton.vue';
+import DataLoader from '@/sub-components/DataLoader.vue';
 import { Icon } from '@iconify/vue';
 import { useEventStore } from '@/stores/EventStore';
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
 
 const eventStore = useEventStore();
 
@@ -17,6 +18,15 @@ const eventStore = useEventStore();
 const eventsCount = computed<number>(() => {
     return eventStore.events.length;
 });
+
+// affiche le loader et le cache après 1s
+const contentIsVisible = ref<boolean>(false);
+
+setTimeout(() => {
+    contentIsVisible.value = true;
+}, 1000);
+
+
 
 </script>
 
@@ -27,7 +37,8 @@ const eventsCount = computed<number>(() => {
             <DashboardHeader title="Vos évènements">
                 <DashboardEventsFilters />
             </DashboardHeader>
-            <div class="content-field">
+            <DataLoader v-if="!contentIsVisible" class="dataLoader"/>
+            <div class="content-field" v-else>
                 <div class="eventCards_container">
                     <DashboardEventCard />
                 </div>
@@ -50,11 +61,15 @@ const eventsCount = computed<number>(() => {
 @import '@/assets/sass/dashboard-styles/dashboardPageStyle.scss';
 @import '@/assets/sass/dashboard-styles/colors.scss';
 
+.hiddenContent {
+    transform: translateY(100%);
+}
 .eventCards_container {
     display: flex;
     gap: 2rem;
     justify-content: center;
     flex-wrap: wrap;
+    transition: transform 1.4s ease-in-out;
 }
 .eventsSearchBar {
     width: 100%;
