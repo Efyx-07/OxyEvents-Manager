@@ -19,14 +19,12 @@ const eventsCount = computed<number>(() => {
     return eventStore.events.length;
 });
 
-// affiche le loader et le cache après 1s
+// affiche le loader et le cache après 0.5s
 const contentIsVisible = ref<boolean>(false);
 
 setTimeout(() => {
     contentIsVisible.value = true;
-}, 1000);
-
-
+}, 500);
 
 </script>
 
