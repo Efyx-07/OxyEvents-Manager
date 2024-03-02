@@ -5,6 +5,15 @@ import DashboardHeader from '@/dashboard-components/DashboardHeader.vue';
 import AdminPageNav from '@/dashboard-components/AdminPageNav.vue';
 import AdminFormContainer from '@/dashboard-components/AdminFormContainer.vue';
 import AdminFormUpdatePassword from '@/dashboard-forms/AdminFormUpdatePassword.vue';
+import DataLoader from '@/sub-components/DataLoader.vue';
+import { ref } from 'vue';
+
+// affiche le loader et le cache après 0.5s
+const contentIsVisible = ref<boolean>(false);
+
+setTimeout(() => {
+    contentIsVisible.value = true;
+}, 500);
 
 </script>
 
@@ -15,7 +24,8 @@ import AdminFormUpdatePassword from '@/dashboard-forms/AdminFormUpdatePassword.v
             <DashboardHeader title="Gestion compte administrateur">
                 <AdminPageNav />
             </DashboardHeader>
-            <div class="content-field">
+            <DataLoader v-if="!contentIsVisible" class="dataLoader"/>
+            <div class="content-field" v-else>
                 <AdminFormContainer title="Modifier votre mot de passe">
                     <AdminFormUpdatePassword />
                 </AdminFormContainer>
