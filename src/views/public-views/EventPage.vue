@@ -3,6 +3,7 @@
 import { useEventStore } from '@/stores/EventStore';
 import { useRoute } from 'vue-router';
 import type { Event } from '@/types/eventsTypes';
+import EventPageHeader from '@/eventPage-components/EventPageHeader.vue';
 
 const eventStore = useEventStore();
 const route = useRoute();
@@ -22,7 +23,7 @@ const selectedEvent: Event | undefined = allEvents.find((event) => {
 
 <template>
     <div class="eventPage">
-        <EP_Header :selectedEvent="selectedEvent"/>
+        <EventPageHeader :selectedEvent="selectedEvent"/>
         <div class="eventPage_content">
             <div class="eventCard_container" ref="eventCard">
                 <EP_EventCard :selectedEvent="selectedEvent" />
