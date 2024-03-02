@@ -4,6 +4,7 @@ import type { Event } from '@/types/eventsTypes';
 import { useGlobalDataStore } from '@/stores/GlobalDataStore';
 import { Icon } from '@iconify/vue';
 import ReusableSeparator from '@/sub-components/ReusableSeparator.vue';
+import ParticipateButton from '@/eventPage-subComponents/ParticipateButton.vue';
 
 // recupère la props de selectedEvent en provenance de EventPage
 const props = defineProps<{
