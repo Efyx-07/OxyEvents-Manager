@@ -22,7 +22,7 @@ const selectedEvent: Event | undefined = allEvents.find((event) => {
 </script>
 
 <template>
-    <div class="eventPage">
+    <div class="eventPage" v-if="selectedEvent">
         <EventPageHeader :selectedEvent="selectedEvent"/>
         <div class="eventPage_content">
             <div class="eventCard_container" ref="eventCard">
