@@ -11,7 +11,7 @@ interface ArrayItem {
 
 const arrayItems: ArrayItem[] = [
     {
-        title: 'Entreprise / Organisation'
+        title: 'Entreprise'
     },
     {
         title: 'Nom'
