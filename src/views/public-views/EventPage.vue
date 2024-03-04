@@ -62,7 +62,7 @@ const selectedEvent: Event | undefined = allEvents.find((event) => {
 @import '@/assets/sass/eventPage-styles/colors.scss';
 
 .eventPage {
-    background: $whiteBackground;
+    background: $whiteColor;
     color: $blackColor;
     display: flex;
     flex-direction: column;
@@ -76,7 +76,8 @@ const selectedEvent: Event | undefined = allEvents.find((event) => {
         top: 0;
         right: 0;
         z-index: 0;
-        background: rgba($accentColorSecondary, .25);
+        //background: rgba($accentColorSecondary, .25);
+        background: $accentColorSecondary;
         border-radius: 100% 0 0 0;
         transform: translateY(-6rem)
     }

@@ -46,8 +46,8 @@ const formatDate = (date: string): string => {
     top: 6rem;
     width: 100%;
     min-height: 20rem;
-    background: $whiteColor;
     border-radius: $containerRadiusM;
+    box-shadow: $shadow;
     padding: 2rem;
     display: flex;
     flex-direction: column;
