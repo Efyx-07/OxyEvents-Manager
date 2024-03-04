@@ -5,6 +5,10 @@ import { useRoute } from 'vue-router';
 import type { Event } from '@/types/eventsTypes';
 import EventPageHeader from '@/eventPage-components/EventPageHeader.vue';
 import EventCard from '@/eventPage-components/EventCard.vue';
+import SectionPresentation from '@/eventPage-components/SectionPresentation.vue';
+import SectionProgramme from '@/eventPage-components/SectionProgramme.vue';
+import SectionPracticalInformations from '@/eventPage-components/SectionPracticalInformations.vue';
+import SectionLocation from '@/eventPage-components/SectionLocation.vue';
 
 const eventStore = useEventStore();
 const route = useRoute();
@@ -31,13 +35,16 @@ const selectedEvent: Event | undefined = allEvents.find((event) => {
             </div>
             <div class="eventPage-sections_container">
                 <div id="presentation">
-                    <EP_Section_presentation :selectedEvent="selectedEvent"/>
+                    <SectionPresentation :selectedEvent="selectedEvent"/>
                 </div>
                 <div id="programme">
-                    <EP_Section_programme :selectedEvent="selectedEvent"/>
+                    <SectionProgramme :selectedEvent="selectedEvent"/>
                 </div>
                 <div id="practicalInformations">
-                    <EP_Section_practicalInformations :selectedEvent="selectedEvent"/>
+                    <SectionPracticalInformations :selectedEvent="selectedEvent"/>
+                </div>
+                <div id="locationMap">
+                    <SectionLocation :selectedEvent="selectedEvent"/>
                 </div>
             </div>
         </div>
