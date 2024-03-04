@@ -64,6 +64,7 @@ const scrollToSection = (sectionId: string): void => {
 
         p {
             margin: 0;
+            font-weight: 500;
         }
 
         .activeBar {

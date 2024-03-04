@@ -28,12 +28,13 @@ const selectedEvent: Event | undefined = allEvents.find((event) => {
 
 <template>
     <div class="eventPage" v-if="selectedEvent">
+        <div class="bgDecoElement"></div>
         <EventPageHeader :selectedEvent="selectedEvent"/>
         <div class="eventPage_content">
             <div class="eventCard_container">
                 <EventCard :selectedEvent="selectedEvent" />
             </div>
-            <div class="eventPage-sections_container">
+            <!-- <div class="eventPage-sections_container">
                 <div id="presentation">
                     <SectionPresentation :selectedEvent="selectedEvent"/>
                 </div>
@@ -43,11 +44,10 @@ const selectedEvent: Event | undefined = allEvents.find((event) => {
                 <div id="practicalInformations">
                     <SectionPracticalInformations :selectedEvent="selectedEvent"/>
                 </div>
-            </div>
+            </div> -->
         </div>
-        <EventPageFooter />
-    </div>
-    <EP_Modal_participantsInscription :selectedEvent="selectedEvent"/>   
+        <!-- <EventPageFooter /> -->
+    </div> 
 </template>
 
 <style lang="scss" scoped>
@@ -61,6 +61,19 @@ const selectedEvent: Event | undefined = allEvents.find((event) => {
     display: flex;
     flex-direction: column;
     align-items: center;
+    position: relative;
+
+    .bgDecoElement {
+        width: 37%;
+        height: 100vh;
+        position: absolute;
+        top: 0;
+        right: 0;
+        z-index: 0;
+        background: rgba($accentColorSecondary, .25);
+        border-radius: 100% 0 0 0;
+        transform: translateY(-9rem)
+    }
 
     &_content {
         width: 100%;
@@ -68,17 +81,21 @@ const selectedEvent: Event | undefined = allEvents.find((event) => {
         display: flex;
         flex-direction: column;
 
+        .eventCard_container {
+            height: calc(100vh - 6rem);
+            padding-top: 6rem;
+        }
+
+        /*
         .eventPage-sections_container {
             display: flex;
             flex-direction: column;
             gap: 2rem;
             padding: 3rem 1rem 6rem 1rem;
-        }
-    }
-    .stickyBarContainer {
-        display: none;
+        } */
     }
 }
+
 @media screen and (min-width: $breakpointDesktop) {
     .eventPage {
         padding: 0;
@@ -86,16 +103,10 @@ const selectedEvent: Event | undefined = allEvents.find((event) => {
 
         &_content {
             padding: 0 1rem;
+            /*
             .eventPage-sections_container {
                 padding: 3rem 0rem 6rem 0rem;
-            }
-        }
-        .stickyBarContainer {
-            display: block;
-            position: fixed;
-            width: 100%;
-            display: flex;
-            justify-content: center;
+            } */
         }
     }
 }

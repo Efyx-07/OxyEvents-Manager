@@ -2,7 +2,6 @@
 
 import type { Event } from '@/types/eventsTypes';
 import { useGlobalDataStore } from '@/stores/GlobalDataStore';
-import { Icon } from '@iconify/vue';
 import ReusableSeparator from '@/sub-components/ReusableSeparator.vue';
 import ParticipateButton from '@/eventPage-subComponents/ParticipateButton.vue';
 
@@ -41,30 +40,91 @@ const scrollToSection = (sectionId: string): void => {
 
 <template>
     <div class="eventCard">
-        <div class="eventImageAndTitle_container">
-            <img :src="hostName + props.selectedEvent.image.source" alt="props.selectedEvent.image.alt" class="eventImage">
-            <div class="eventTitle_container">
-                <h1 class="eventTitle">{{ props.selectedEvent.title }}</h1>
-            </div>
-        </div>       
-        <div class="eventCard-details">
-            <div class="eventOrganizer_container">
-                <div class="content">
-                    <p>Organisé par</p>
-                    <a :href="props.selectedEvent.organizerWebsite" target="_blank" rel="noopener noreferrer">{{ props.selectedEvent.organizerName }}</a>
-                </div>    
-            </div>
-            <ReusableSeparator class="separator"/>
-            <div class="eventDate_container">
-                <Icon icon="healthicons:calendar" class="icon"/>
+        <div class="infos-container">      
+            <div class="eventCard-details">
+                <a class="eventOrganizer" :href="props.selectedEvent.organizerWebsite" target="_blank" rel="noopener noreferrer">{{ props.selectedEvent.organizerName }}</a>
+                <ReusableSeparator class="separator"/>
                 <p class="eventDate">{{ formatDate(props.selectedEvent.date.toString())}}</p>
-            </div>
-            <ReusableSeparator class="separator"/>
-            <div class="eventPlace_container">
-                <Icon icon="mdi:place-outline" class="icon"/>
+                <ReusableSeparator class="separator"/>
                 <p class="eventPlace" @click="scrollToSection('practicalInformations')">{{ props.selectedEvent.location }}</p>
-            </div>
-            <ParticipateButton class="eventCard-button"/>
+            </div> 
+            <h1 class="eventTitle">{{ props.selectedEvent.title }}</h1>
+            <ParticipateButton class="eventCard-button"/> 
+        </div>
+        <div class="image-container">
+            <img :src="hostName + props.selectedEvent.image.source" alt="props.selectedEvent.image.alt">
         </div>      
     </div>
 </template>
+
+<style lang="scss" scoped>
+
+@import '@/assets/sass/variables.scss';
+@import '@/assets/sass/eventPage-styles/colors.scss';
+
+.eventCard {
+    width: 100%;
+    height: 28rem;
+    display: grid;
+    grid-template-columns: 1fr 1.15fr;
+
+    .infos-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 2rem;
+        padding: 2rem;
+
+        .eventCard-details {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+
+            a {
+                text-decoration: none;
+            }
+
+            a, p {
+                margin: 0;
+                font-weight: 500;
+                color: $blackTransparencyStrong;
+            }
+
+            .eventOrganizer, .eventPlace {
+                cursor: pointer;
+
+                &:hover {
+                    color: $accentColorPrimary;
+                }
+            }
+
+            .separator {
+                width: 1px;
+                height: 100%;
+            }
+        }
+
+        .eventTitle {
+            margin: 0;
+            font-size: 2.3rem;
+        }
+    }
+
+    .image-container {
+        width: 100%;
+        height: 100%;
+        position: relative;
+        overflow: hidden;
+        grid-column: 2 / -1;
+        border-radius: $containerRadiusM;
+
+        img {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            object-fit: cover;
+        }
+    }
+}
+
+</style>

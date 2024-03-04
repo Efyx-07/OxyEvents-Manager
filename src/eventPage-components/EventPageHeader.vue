@@ -27,8 +27,6 @@ const props = defineProps<{
 .header {
     width: 100%;
     height: 3.5rem;
-    background: $whiteColor;
-    box-shadow: $shadow;
     display: flex;
     justify-content: center;
     position: sticky;
