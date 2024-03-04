@@ -2,7 +2,7 @@
 
 import type { Event } from '@/types/eventsTypes';
 import ReusableSeparator from '@/sub-components/ReusableSeparator.vue';
-import LocationMap from './LocationMap.vue';
+import LocationMap from '@/eventPage-subComponents/LocationMap.vue';
 
 // recupère la props de selectedEvent en provenance de EventPage
 const props = defineProps<{
