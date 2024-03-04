@@ -14,9 +14,13 @@ const props = defineProps<{
 <template>
     <div class="eventPage-section">
         <SectionTitle title="Informations pratiques"/>
-        <div class="text_container">
-            <p v-html="props.selectedEvent.practicalInformations"></p>
-            <LocationMap :location="props.selectedEvent.location"/>
-        </div>
+        <p v-html="props.selectedEvent.practicalInformations"></p>
+        <LocationMap :location="props.selectedEvent.location"/>
     </div>
 </template>
+
+<style lang="scss" scoped>
+
+@import '@/assets/sass/eventPage-styles/eventPageSectionsStyle.scss';
+
+</style>

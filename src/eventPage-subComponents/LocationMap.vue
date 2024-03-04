@@ -30,10 +30,10 @@ onMounted( async(): Promise<void> => {
 });
 
 </script>
+
 <template>
     <iframe 
-        class="locationMap" 
-        width="600"
+        class="locationMap"
         height="450"
         style="border:0"
         loading="lazy"
@@ -42,3 +42,12 @@ onMounted( async(): Promise<void> => {
         :src="embedUrl">
     </iframe>
 </template>
+
+<style lang="scss" scoped>
+
+.locationMap {
+    width: 100%;
+    height: 28rem;
+}
+
+</style>

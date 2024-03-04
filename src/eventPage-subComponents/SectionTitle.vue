@@ -16,3 +16,18 @@ const props = defineProps<SectionTitleProps>();
         <ReusableSeparator />
     </div>
 </template>
+
+<style lang="scss" scoped>
+
+.sectionTitle {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+
+    h2 {
+        margin: 0;
+        white-space: nowrap;
+    }
+}
+
+</style>

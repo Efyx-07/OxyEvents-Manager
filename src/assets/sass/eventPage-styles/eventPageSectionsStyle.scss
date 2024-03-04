@@ -1,0 +1,16 @@
+@import './colors.scss';
+
+.eventPage-section {
+    padding-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    p {
+        margin: 0;
+        text-align: justify;
+        font-weight: 400;
+        color: $blackTransparencyStronger;
+        padding: 0 0 0 1rem;
+    }
+}
