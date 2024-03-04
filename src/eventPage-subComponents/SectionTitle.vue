@@ -26,6 +26,7 @@ const props = defineProps<SectionTitleProps>();
 
     h2 {
         margin: 0;
+        font-size: 1.7rem;
         white-space: nowrap;
     }
 }

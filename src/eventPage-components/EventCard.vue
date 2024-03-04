@@ -64,7 +64,7 @@ const scrollToSection = (sectionId: string): void => {
 
 .eventCard {
     width: 100%;
-    height: 28rem;
+    height: 26rem;
     display: grid;
     grid-template-columns: 1fr 1.15fr;
 

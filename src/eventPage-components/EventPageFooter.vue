@@ -31,9 +31,10 @@ import ToTopButton from '@/eventPage-subComponents/ToTopButton.vue';
     width: 100%;
     height: 8rem;
     background: $whiteColor;
-    border-radius: 50% 50% 0 0;
+    border-radius: 30% 30% 0 0;
     display: flex;
     justify-content: center;
+    align-items: center;
 
     .content {
         width: 100%;
@@ -41,11 +42,11 @@ import ToTopButton from '@/eventPage-subComponents/ToTopButton.vue';
         display: flex;
         align-items: center;
         justify-content: space-between;
-        padding: 0 1rem;
+        padding: 0 2rem;
 
         .links_container {
             display: flex;
-            gap: 3rem;
+            gap: 2rem;
 
             p {
                 margin: 0;

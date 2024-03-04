@@ -78,7 +78,7 @@ const selectedEvent: Event | undefined = allEvents.find((event) => {
         z-index: 0;
         background: rgba($accentColorSecondary, .25);
         border-radius: 100% 0 0 0;
-        transform: translateY(-9rem)
+        transform: translateY(-6rem)
     }
 
     &_content {
@@ -86,16 +86,17 @@ const selectedEvent: Event | undefined = allEvents.find((event) => {
         max-width: 77rem;
         display: flex;
         flex-direction: column;
+        padding: 3rem 2rem;
 
         .eventCard_container {
-            height: calc(100vh - 9rem);
-            padding-top: 6rem;
+            height: calc(100vh - 6.5rem);
+            display: flex;
         }
 
         .content-container {
             display: grid;
             grid-template-columns: 2fr 1fr;
-            gap: 9rem;
+            gap: 6rem;
 
             .eventPage-sections_container {
                 display: flex;
