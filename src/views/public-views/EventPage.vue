@@ -4,7 +4,7 @@ import { useEventStore } from '@/stores/EventStore';
 import { useRoute } from 'vue-router';
 import type { Event } from '@/types/eventsTypes';
 import EventPageHeader from '@/eventPage-components/EventPageHeader.vue';
-//import EventPageFooter from '@/eventPage-components/EventPageFooter.vue';
+import EventPageFooter from '@/eventPage-components/EventPageFooter.vue';
 import EventCard from '@/eventPage-components/EventCard.vue';
 import SectionPresentation from '@/eventPage-components/SectionPresentation.vue';
 import SectionProgramme from '@/eventPage-components/SectionProgramme.vue';
@@ -52,7 +52,7 @@ const selectedEvent: Event | undefined = allEvents.find((event) => {
                 </div>
             </div>
         </div>
-        <!-- <EventPageFooter /> -->
+        <EventPageFooter />
     </div> 
 </template>
 

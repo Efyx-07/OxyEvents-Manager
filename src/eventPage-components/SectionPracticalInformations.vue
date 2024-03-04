@@ -1,7 +1,7 @@
 <script setup lang="ts">
 
 import type { Event } from '@/types/eventsTypes';
-import ReusableSeparator from '@/sub-components/ReusableSeparator.vue';
+import SectionTitle from '@/eventPage-subComponents/SectionTitle.vue';
 import LocationMap from '@/eventPage-subComponents/LocationMap.vue';
 
 // recupère la props de selectedEvent en provenance de EventPage
@@ -13,10 +13,7 @@ const props = defineProps<{
 
 <template>
     <div class="eventPage-section">
-        <div class="title_container">
-            <h2>Informations Pratiques</h2>
-            <ReusableSeparator class="separator"/>
-        </div>
+        <SectionTitle title="Informations pratiques"/>
         <div class="text_container">
             <p v-html="props.selectedEvent.practicalInformations"></p>
             <LocationMap :location="props.selectedEvent.location"/>
