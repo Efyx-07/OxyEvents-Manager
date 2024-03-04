@@ -2,6 +2,7 @@
 
 import type { Event } from '@/types/eventsTypes';
 import ReusableSeparator from '@/sub-components/ReusableSeparator.vue';
+import LocationMap from './LocationMap.vue';
 
 // recupère la props de selectedEvent en provenance de EventPage
 const props = defineProps<{
@@ -18,6 +19,7 @@ const props = defineProps<{
         </div>
         <div class="text_container">
             <p v-html="props.selectedEvent.practicalInformations"></p>
+            <LocationMap :location="props.selectedEvent.location"/>
         </div>
     </div>
 </template>

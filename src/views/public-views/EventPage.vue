@@ -8,7 +8,6 @@ import EventCard from '@/eventPage-components/EventCard.vue';
 import SectionPresentation from '@/eventPage-components/SectionPresentation.vue';
 import SectionProgramme from '@/eventPage-components/SectionProgramme.vue';
 import SectionPracticalInformations from '@/eventPage-components/SectionPracticalInformations.vue';
-import SectionLocation from '@/eventPage-components/SectionLocation.vue';
 
 const eventStore = useEventStore();
 const route = useRoute();
@@ -43,15 +42,9 @@ const selectedEvent: Event | undefined = allEvents.find((event) => {
                 <div id="practicalInformations">
                     <SectionPracticalInformations :selectedEvent="selectedEvent"/>
                 </div>
-                <div id="locationMap">
-                    <SectionLocation :selectedEvent="selectedEvent"/>
-                </div>
             </div>
         </div>
         <EP_Footer />
-        <div class="stickyBarContainer">
-            <EP_StickyBar :selectedEvent="selectedEvent"/>
-        </div>
     </div>
     <EP_Modal_participantsInscription :selectedEvent="selectedEvent"/>   
 </template>
