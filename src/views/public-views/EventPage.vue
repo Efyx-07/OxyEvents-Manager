@@ -121,4 +121,11 @@ const selectedEvent: Event | undefined = allEvents.find((event) => {
     }
 }
 
+@media screen and (min-width: $breakpointLargeDesktop) {
+
+    .eventPage .eventPage_content {
+        padding: 6rem 0;
+    }
+}
+
 </style>
