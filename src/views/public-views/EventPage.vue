@@ -79,7 +79,7 @@ const selectedEvent: Event | undefined = allEvents.find((event) => {
         z-index: 0;
         background: $accentColorSecondaryTransparency;
         border-radius: 100% 0 0 0;
-        transform: translateY(-6rem)
+        transform: translateY(-6rem);
     }
 
     .waveBg {
@@ -123,8 +123,18 @@ const selectedEvent: Event | undefined = allEvents.find((event) => {
 
 @media screen and (min-width: $breakpointLargeDesktop) {
 
-    .eventPage .eventPage_content {
-        padding: 6rem 0;
+    .eventPage { 
+
+        .bgDecoElement {
+            transform: translateY(-12rem);
+        }
+        .eventPage_content {
+            padding: 6rem 0;
+
+            .eventCard_container {
+                height: calc(100vh - 15rem);
+            }
+        }
     }
 }
 
