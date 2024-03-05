@@ -25,7 +25,6 @@ const selectedEvent: Event | undefined = allEvents.find((event) => {
     return event.slug === eventSlug;
 });
 
-
 </script>
 
 <template>
