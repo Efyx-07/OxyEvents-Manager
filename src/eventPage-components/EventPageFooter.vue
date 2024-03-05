@@ -30,11 +30,10 @@ import ToTopButton from '@/eventPage-subComponents/ToTopButton.vue';
 .footer {
     width: 100%;
     height: 8rem;
-    //background: $accentColorSecondary;
-    border-radius: 30% 30% 0 0;
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 1;
 
     .content {
         width: 100%;

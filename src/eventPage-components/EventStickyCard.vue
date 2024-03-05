@@ -45,13 +45,12 @@ const formatDate = (date: string): string => {
     position: sticky;
     top: 6rem;
     width: 100%;
-    min-height: 20rem;
     border-radius: $containerRadiusM;
-    box-shadow: $shadow;
+    border: solid 1px $blackTransparencyLight;
     padding: 2rem;
     display: flex;
     flex-direction: column;
-    gap: 3rem;
+    gap: 2rem;
 
     .eventDetails {
         display: flex;

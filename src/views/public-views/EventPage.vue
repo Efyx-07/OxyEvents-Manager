@@ -10,6 +10,7 @@ import SectionPresentation from '@/eventPage-components/SectionPresentation.vue'
 import SectionProgramme from '@/eventPage-components/SectionProgramme.vue';
 import SectionPracticalInformations from '@/eventPage-components/SectionPracticalInformations.vue';
 import EventStickyCard from '@/eventPage-components/EventStickyCard.vue';
+import WaveBackground from '@/eventPage-subComponents/WaveBackground.vue';
 
 const eventStore = useEventStore();
 const route = useRoute();
@@ -53,6 +54,7 @@ const selectedEvent: Event | undefined = allEvents.find((event) => {
             </div>
         </div>
         <EventPageFooter />
+        <WaveBackground class="waveBg"/>
     </div> 
 </template>
 
@@ -76,9 +78,15 @@ const selectedEvent: Event | undefined = allEvents.find((event) => {
         top: 0;
         right: 0;
         z-index: 0;
-        background: $accentColorSecondary;
+        background: $accentColorSecondaryTransparency;
         border-radius: 100% 0 0 0;
         transform: translateY(-6rem)
+    }
+
+    .waveBg {
+        position: absolute;
+        bottom: 0;
+        z-index: 0;
     }
 
     &_content {
@@ -87,6 +95,7 @@ const selectedEvent: Event | undefined = allEvents.find((event) => {
         display: flex;
         flex-direction: column;
         padding: 3rem 2rem;
+        z-index: 1;
 
         .eventCard_container {
             height: calc(100vh - 6.5rem);
