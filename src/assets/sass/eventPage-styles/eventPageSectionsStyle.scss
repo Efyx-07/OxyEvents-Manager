@@ -1,15 +1,23 @@
 @import './colors.scss';
+@import '@/assets/sass/breakPoints.scss';
 
 .eventPage-section {
-    padding-top: 1rem;
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: .5rem;
 
     p {
         margin: 0;
         text-align: justify;
         font-weight: 500;
         color: $blackTransparencyStronger;
+    }
+}
+
+@media screen and (min-width: $breakpointDesktop) {
+
+    .eventPage-section {
+        padding-top: 1rem; // pour la navigation ancrée
+        gap: 1rem;
     }
 }

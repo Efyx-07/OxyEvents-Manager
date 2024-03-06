@@ -21,12 +21,12 @@ const props = defineProps<SectionTitleProps>();
 
 .sectionTitle {
     display: flex;
-    align-items: baseline;
+    flex-direction: column;
     gap: 1rem;
 
     h2 {
         margin: 0;
-        font-size: 1.7rem;
+        font-size: clamp(1.25rem, 3vw, 1.7rem);
         white-space: nowrap;
     }
 }
