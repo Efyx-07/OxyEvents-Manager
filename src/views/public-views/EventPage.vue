@@ -10,6 +10,7 @@ import SectionPresentation from '@/eventPage-components/SectionPresentation.vue'
 import SectionProgramme from '@/eventPage-components/SectionProgramme.vue';
 import SectionPracticalInformations from '@/eventPage-components/SectionPracticalInformations.vue';
 import EventStickyCard from '@/eventPage-components/EventStickyCard.vue';
+import ParticipateModal from '@/eventPage-components/ParticipateModal.vue';
 
 const eventStore = useEventStore();
 const route = useRoute();
@@ -53,6 +54,7 @@ const selectedEvent: Event | undefined = allEvents.find((event) => {
         </div>
         <EventPageFooter class="footer"/>
     </div> 
+    <ParticipateModal v-if="selectedEvent" :selectedEvent="selectedEvent"/>
 </template>
 
 <style lang="scss" scoped>

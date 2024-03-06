@@ -5,7 +5,7 @@ import { Icon } from '@iconify/vue';
 // ouvre la fenetre 'NavAside' au clic de l'icone
 const toggleNavAsideVisibility = (): void => {
     // crée un nouvel evenement personnalisé 
-    const showNavAsideEvent = new Event('show-navAside');
+    const showNavAsideEvent: Event = new Event('show-navAside');
     // déclenche l'événement 'show-navAside' sur l'objet window
     window.dispatchEvent(showNavAsideEvent);
 }

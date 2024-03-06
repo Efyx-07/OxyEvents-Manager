@@ -1,5 +1,17 @@
+<script setup lang="ts">
+
+// ouvre ParticipateModal au click
+const toggleParticipateModalVisibility = (): void => {
+    //crée un nouvel évènement personnalisé
+    const showParticipateModal: Event = new Event('show-participateModal');
+    // déclenche l'évènement sur l'objet window
+    window.dispatchEvent(showParticipateModal);
+}
+
+</script>
+
 <template>
-    <button class="btn">
+    <button class="btn" @click="toggleParticipateModalVisibility">
         <p>Je participe</p>
     </button>
 </template>
