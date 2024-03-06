@@ -1,5 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router';
 
+import authGuard from './navigation-guards/authGuard';
+import adminAuthGuard from './navigation-guards/adminAuthGuard';
+import guestAndAdminAuthGuard from './navigation-guards/guestAndAdminAuthGuard';
+
 //dashboard views
 import LoginPage from '@/views/dashboard-views/LoginPage.vue';
 import ResetPassword from '@/views/dashboard-views/ResetPassword.vue';
@@ -44,37 +48,44 @@ const router = createRouter({
     {
       path: '/home',
       name: 'HomePage',
-      component: HomePage
+      component: HomePage,
+      beforeEnter: authGuard,
     },
     {
       path: '/admin-update',
       name: 'AdminUpdate',
-      component: AdminUpdate
+      component: AdminUpdate,
+      beforeEnter: authGuard,
     },
     {
       path: '/admin-add',
       name: 'AdminAdd',
-      component: AdminAdd
+      component: AdminAdd,
+      beforeEnter: adminAuthGuard, // non accessible aux administrateurs avec statut 'ADMIN'
     },
     {
       path: '/admin-delete',
       name: 'AdminDelete',
-      component: AdminDelete
+      component: AdminDelete,
+      beforeEnter: guestAndAdminAuthGuard, // non accessible aux administrateurs non 'SUPERADMIN'
     },
     {
       path: '/event-create',
       name: 'EventCreate',
-      component: EventCreate
+      component: EventCreate,
+      beforeEnter: authGuard,
     },
     {
       path: '/event-update/:eventSlug',
       name: 'EventToUpdate',
-      component: EventUpdate
+      component: EventUpdate,
+      beforeEnter: authGuard,
     },
     {
       path: '/event-participants/:eventSlug',
       name: 'EventParticipants',
-      component: EventParticipants
+      component: EventParticipants,
+      beforeEnter: authGuard,
     },
 
 
@@ -82,22 +93,26 @@ const router = createRouter({
     {
       path: '/publication-confirmation',
       name: 'ConfirmPagePublishedEvent',
-      component: ConfirmPagePublishedEvent
+      component: ConfirmPagePublishedEvent,
+      beforeEnter: authGuard,
     },
     {
       path: '/removed_event-confirmation',
       name: 'ConfirmPageRemovedEvent',
-      component: ConfirmPageRemovedEvent
+      component: ConfirmPageRemovedEvent,
+      beforeEnter: authGuard,
     },
     {
       path: '/updated_event-confirmation',
       name: 'ConfirmPageUpdatedEvent',
-      component: ConfirmPageUpdatedEvent
+      component: ConfirmPageUpdatedEvent,
+      beforeEnter: authGuard,
     },
     {
       path: '/forbidden-route',
       name: 'ForbiddenRoute',
-      component: ForbiddenRoute
+      component: ForbiddenRoute,
+      beforeEnter: authGuard,
     },
 
     // public routes
