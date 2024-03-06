@@ -59,7 +59,6 @@ onMounted(() => {
 <style lang="scss" scoped>
 
 @import '@/assets/sass/eventPage-styles/colors.scss';
-@import '@/assets/sass/breakPoints.scss';
 
 .hiddenParticipateModal { 
     transform: translateX(100%);
@@ -94,12 +93,11 @@ onMounted(() => {
     }
 
     .modal-content {
-        padding: 3rem 2rem;
+        padding: 6rem 2rem;
         height: calc(100% - 3rem);
         display: flex;
         flex-direction: column;
         gap: 3rem;
-        padding-bottom: 6rem;
         overflow-y: auto;
         scrollbar-width: none;
         -ms-overflow-style: none;

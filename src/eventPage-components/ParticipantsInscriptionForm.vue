@@ -2,7 +2,7 @@
 
 import { ref } from 'vue';
 import { useGlobalDataStore } from '@/stores/GlobalDataStore';
-//import InscriptionConfirmation from '@/sub-components/InscriptionConfirmation.vue'
+import InscriptionConfirmation from '@/eventPage-subComponents/InscriptionConfirmation.vue';
 
 //datas
 const requiredFieldMention: string = '*';
