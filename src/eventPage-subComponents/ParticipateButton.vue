@@ -6,6 +6,8 @@ const toggleParticipateModalVisibility = (): void => {
     const showParticipateModal: Event = new Event('show-participateModal');
     // déclenche l'évènement sur l'objet window
     window.dispatchEvent(showParticipateModal);
+    const showOverlay: Event = new Event('show-overlay');
+    window.dispatchEvent(showOverlay);
 }
 
 </script>

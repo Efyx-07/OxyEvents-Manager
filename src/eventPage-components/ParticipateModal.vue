@@ -3,7 +3,7 @@
 import type { Event } from '@/types/eventsTypes';
 import { ref, onMounted } from 'vue';
 import { Icon } from '@iconify/vue';
-//import Overlay from '@/components/Overlay.vue';
+import EventPageOverlay from '@/eventPage-subComponents/EventPageOverlay.vue';
 //import ParticipantsInscriptionForm from '@/sub-components/ParticipantsInscriptionForm.vue';
 
 // recupère la props de selectedEvent en provenance de EventPage
@@ -20,21 +20,19 @@ const closeParticipateModal = () => {
 };
 
 // déclenche evenement personnalisé 'hide-overlay' et ferme fenetre userLogin
-
-/*const closeParticipateModalAndOverlay = () => {
+const closeParticipateModalAndOverlay = () => {
     window.dispatchEvent(new Event('hide-overlay'));
     closeParticipateModal();
-}*/
+};
 
 // ecoute l'événement personnalisé (créé sur 'ParticipateButton') pour réafficher la fenetre
 onMounted(() => {
     window.addEventListener('show-participateModal', () => {
         isParticipateModalVisible.value = true;
     });
-    /*
     window.addEventListener('hide-overlay', () => {
         isParticipateModalVisible.value = true; 
-    }); */
+    }); 
 });
 
 </script>
@@ -43,7 +41,7 @@ onMounted(() => {
     <div class="participateModal-container" :class="{ hiddenParticipateModal: !isParticipateModalVisible }">
         <div class="participateModal">
             <header>
-                <Icon icon="ei:close" width="30" class="closeIcon" @click="closeParticipateModal"/>
+                <Icon icon="ei:close" width="30" class="closeIcon" @click="closeParticipateModalAndOverlay"/>
             </header>
             <div class="modal_content">
                 <div class="titleAndForm_container">
@@ -59,12 +57,7 @@ onMounted(() => {
             </footer>
         </div>  
     </div>
-    <!-- <Overlay 
-        :showOverlay="isParticipantsInscriptionModalVisible" 
-        class="pageOverlay" 
-        v-show="isParticipantsInscriptionModalVisible" 
-    >
-    </Overlay> -->
+    <EventPageOverlay class="overlay" :showOverlay="isParticipateModalVisible" v-show="isParticipateModalVisible"></EventPageOverlay>
 </template>
 
 <style lang="scss" scoped>
