@@ -29,9 +29,6 @@ const props = defineProps<{
     height: 3.5rem;
     display: flex;
     justify-content: center;
-    position: sticky;
-    top: 0;
-    z-index: 199;
 
     .content {
         width: 100%;
@@ -48,14 +45,12 @@ const props = defineProps<{
 @media screen and (min-width: $breakpointDesktop) {
 
     .header {
-        position: unset;
         height: 5rem;
 
         .content {
             max-width: 77rem;
             display: grid;
             grid-template-columns: 1fr 1fr;
-            padding: 0 1rem;
 
             .eventPageNav {
                 display: flex;
