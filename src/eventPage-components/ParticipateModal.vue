@@ -93,11 +93,11 @@ onMounted(() => {
     }
 
     .modal-content {
-        padding: 6rem 2rem;
+        padding: 0rem 3rem 6rem 3rem;
         height: calc(100% - 3rem);
         display: flex;
         flex-direction: column;
-        gap: 3rem;
+        gap: 1rem;
         overflow-y: auto;
         scrollbar-width: none;
         -ms-overflow-style: none;
