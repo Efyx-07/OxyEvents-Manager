@@ -49,7 +49,7 @@ const scrollToSection = (sectionId: string): void => {
                 <p class="eventPlace" @click="scrollToSection('practicalInformations')">{{ props.selectedEvent.location }}</p>
             </div> 
             <h1 class="eventTitle">{{ props.selectedEvent.title }}</h1>
-            <ParticipateButton class="eventCard-button"/> 
+            <ParticipateButton class="participateButton"/> 
         </div>
         <div class="image-container">
             <img :src="hostName + props.selectedEvent.image.source" alt="props.selectedEvent.image.alt">
@@ -61,24 +61,23 @@ const scrollToSection = (sectionId: string): void => {
 
 @import '@/assets/sass/variables.scss';
 @import '@/assets/sass/eventPage-styles/colors.scss';
+@import '@/assets/sass/breakPoints.scss';
 
 .eventCard {
     width: 100%;
-    height: 26rem;
-    display: grid;
-    grid-template-columns: 1fr 1.15fr;
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 1rem;
 
     .infos-container {
         display: flex;
         flex-direction: column;
         justify-content: center;
-        gap: 2rem;
-        padding: 2rem;
+        gap: 1rem;
 
         .eventCard-details {
             display: flex;
-            align-items: center;
-            gap: 1rem;
+            gap: .5rem;
 
             a {
                 text-decoration: none;
@@ -106,16 +105,20 @@ const scrollToSection = (sectionId: string): void => {
 
         .eventTitle {
             margin: 0;
-            font-size: 2.3rem;
+            font-size: 1.8rem;
+        }
+
+        .participateButton {
+            display: none;
         }
     }
 
     .image-container {
         width: 100%;
         height: 100%;
+        max-height: 20rem;
         position: relative;
         overflow: hidden;
-        grid-column: 2 / -1;
         border-radius: $containerRadiusM;
 
         img {
@@ -123,6 +126,40 @@ const scrollToSection = (sectionId: string): void => {
             height: 100%;
             position: relative;
             object-fit: cover;
+        }
+    }
+}
+
+@media screen and (min-width: $breakpointDesktop) {
+
+    .eventCard {
+        height: 26rem;
+        display: grid;
+        grid-template-columns: 1fr 1.15fr;
+        gap: unset;
+
+        .infos-container {
+            gap: 2rem;
+            padding: 2rem;
+
+            .eventCard-details {
+                flex-direction: unset;
+                align-items: center;
+                gap: 1rem;
+            }
+
+            .eventTitle {
+                font-size: 2.3rem;
+            }
+
+            .participateButton {
+                display: block;
+            }
+        }
+
+        .image-container {
+            max-height: unset;
+            grid-column: 2 / -1;
         }
     }
 }

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-//import ParticipateButton from '@/eventPage-subComponents/ParticipateButton.vue';
+import ParticipateButton from '@/eventPage-subComponents/ParticipateButton.vue';
 import ToTopButton from '@/eventPage-subComponents/ToTopButton.vue';
 
 </script>
@@ -12,24 +12,24 @@ import ToTopButton from '@/eventPage-subComponents/ToTopButton.vue';
                 <p>Conditions d'utilisation</p>
                 <p>Contact</p>
             </div>
-            <ToTopButton />
+            <ParticipateButton class="participateButton"/>
+            <div class="toTopButton-container">
+                <ToTopButton />
+            </div>
         </div>
     </div>
-    <!-- <div class="footer_mobile">
-        <ParticipateButton class="footer_mobile-button"/>
-        <div class="mobileToTopButton_container" @click="scrollToTop">
-            <Icon icon="iconamoon:arrow-up-2-duotone" class="mobileToTopIcon"/>
-        </div>
-    </div>     -->
 </template>
 
 <style lang="scss" scoped>
 
 @import '@/assets/sass/eventPage-styles/colors.scss';
+@import '@/assets/sass/breakPoints.scss';
 
 .footer {
     width: 100%;
-    height: 8rem;
+    height: 5rem;
+    background: $whiteColor;
+    border-top: solid 1px $blackTransparencyLight;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -41,16 +41,37 @@ import ToTopButton from '@/eventPage-subComponents/ToTopButton.vue';
         display: flex;
         align-items: center;
         justify-content: space-between;
-        padding: 0 2rem;
+        gap: 1rem;
+        padding: 0 1rem;
 
         .links_container {
-            display: flex;
-            gap: 2rem;
+            display: none;
+        }
+    }
+}
 
-            p {
-                margin: 0;
-                font-size: .9rem;
-                font-weight: 500;
+@media screen and (min-width: $breakpointDesktop) {
+
+    .footer {
+        height: 8rem;
+
+        .content {
+            gap: unset;
+            padding: 0 2rem;
+
+            .links_container {
+                display: flex;
+                gap: 2rem;
+
+                p {
+                    margin: 0;
+                    font-size: .9rem;
+                    font-weight: 500;
+                }
+            }
+
+            .participateButton {
+                display: none;
             }
         }
     }

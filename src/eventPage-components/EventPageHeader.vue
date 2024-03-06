@@ -29,6 +29,7 @@ const props = defineProps<{
     height: 3.5rem;
     display: flex;
     justify-content: center;
+    z-index: 1;
 
     .content {
         width: 100%;

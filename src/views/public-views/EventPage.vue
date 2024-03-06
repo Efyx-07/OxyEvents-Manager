@@ -10,7 +10,6 @@ import SectionPresentation from '@/eventPage-components/SectionPresentation.vue'
 import SectionProgramme from '@/eventPage-components/SectionProgramme.vue';
 import SectionPracticalInformations from '@/eventPage-components/SectionPracticalInformations.vue';
 import EventStickyCard from '@/eventPage-components/EventStickyCard.vue';
-import WaveBackground from '@/eventPage-subComponents/WaveBackground.vue';
 
 const eventStore = useEventStore();
 const route = useRoute();
@@ -52,8 +51,7 @@ const selectedEvent: Event | undefined = allEvents.find((event) => {
                 </div>
             </div>
         </div>
-        <EventPageFooter />
-        <WaveBackground class="waveBg"/>
+        <EventPageFooter class="footer"/>
     </div> 
 </template>
 
@@ -71,21 +69,7 @@ const selectedEvent: Event | undefined = allEvents.find((event) => {
     position: relative;
 
     .bgDecoElement {
-        width: 100%;
-        height: 100vh;
-        position: absolute;
-        top: 0;
-        right: 0;
-        z-index: 0;
-        background: $accentColorSecondaryTransparency;
-        border-radius: 100% 0 0 0;
-        transform: translateY(-6rem);
-    }
-
-    .waveBg {
-        position: absolute;
-        bottom: 0;
-        z-index: 0;
+        display: none;
     }
 
     &_content {
@@ -93,11 +77,11 @@ const selectedEvent: Event | undefined = allEvents.find((event) => {
         max-width: 77rem;
         display: flex;
         flex-direction: column;
-        padding: 3rem 1rem;
+        gap: 5rem;
+        padding: 1rem;
         z-index: 1;
 
         .eventCard_container {
-            height: calc(100vh - 6.5rem);
             display: flex;
         }
 
@@ -115,19 +99,19 @@ const selectedEvent: Event | undefined = allEvents.find((event) => {
             }
         }
     }
+
+    .footer {
+        position: fixed;
+        bottom: 0;
+    }
 }
 
 @media screen and (min-width: $breakpointDesktop) {
 
     .eventPage {
-        background: $whiteColor;
-        color: $blackColor;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        position: relative;
 
         .bgDecoElement {
+            display: block;
             width: 37%;
             height: 100vh;
             position: absolute;
@@ -139,23 +123,12 @@ const selectedEvent: Event | undefined = allEvents.find((event) => {
             transform: translateY(-6rem);
         }
 
-        .waveBg {
-            position: absolute;
-            bottom: 0;
-            z-index: 0;
-        }
-
         &_content {
-            width: 100%;
-            max-width: 77rem;
-            display: flex;
-            flex-direction: column;
+            gap: unset;
             padding: 3rem 2rem;
-            z-index: 1;
 
             .eventCard_container {
                 height: calc(100vh - 6.5rem);
-                display: flex;
             }
 
             .content-container {
@@ -164,9 +137,6 @@ const selectedEvent: Event | undefined = allEvents.find((event) => {
                 gap: 6rem;
 
                 .eventPage-sections_container {
-                    display: flex;
-                    flex-direction: column;
-                    gap: 2rem;
                     padding: 0 1rem 6rem 1rem;
                 } 
 
@@ -176,6 +146,10 @@ const selectedEvent: Event | undefined = allEvents.find((event) => {
                     height: 100%;
                 }
             }
+        }
+
+        .footer {
+            position: unset;
         }
     }
 }

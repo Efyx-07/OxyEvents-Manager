@@ -21,12 +21,12 @@ const scrollToTop = () => {
 <style lang="scss" scoped>
 
 @import '@/assets/sass/eventPage-styles/colors.scss';
+@import '@/assets/sass/breakPoints.scss';
 
 .toTopButton_container {
     width: 3rem;
     height: 3rem;
-    background: $accentColorPrimary;
-    box-shadow: $shadow;
+    border: solid 1px $blackTransparencyStrong;
     border-radius: 100%;
     display: flex;
     justify-content: center;
@@ -34,13 +34,39 @@ const scrollToTop = () => {
     cursor: pointer;
 
     &:hover {
-        background: $accentColorSecondary;
+        border-color: $accentColorSecondary;
+    }
+
+    &:hover > .toTopIcon {
+        color: $accentColorSecondary;
     }
 
     .toTopIcon {
-        color: $whiteColor;
+        color: $blackTransparencyStrong;
         font-size: 2.5rem;
     }
 }
+
+@media screen and (min-width: $breakpointDesktop) {
+
+    .toTopButton_container {
+        background: $accentColorPrimary;
+        border: none;
+        box-shadow: $shadow;
+
+        &:hover {
+            background: $accentColorSecondary;
+        }
+
+        &:hover > .toTopIcon {
+            color: $whiteColor;
+        }
+
+        .toTopIcon {
+            color: $whiteColor;
+        }
+    }
+}
+
 
 </style>
