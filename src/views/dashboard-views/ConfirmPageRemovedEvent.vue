@@ -8,7 +8,7 @@ import ReusablePrimaryButton from '@/sub-components/ReusablePrimaryButton.vue';
 const router = useRouter();
 
 // reconduis vers la page 'vos évènements'
-const navigateToHomepage = () => {
+const navigateToHomepage = (): void => {
     router.push('/home');
 };
 

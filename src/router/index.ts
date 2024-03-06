@@ -16,6 +16,7 @@ import EventParticipants from '@/views/dashboard-views/EventParticipants.vue';
 import ConfirmPagePublishedEvent from '@/views/dashboard-views/ConfirmPagePublishedEvent.vue';
 import ConfirmPageRemovedEvent from '@/views/dashboard-views/ConfirmPageRemovedEvent.vue';
 import ConfirmPageUpdatedEvent from '@/views/dashboard-views/ConfirmPageUpdatedEvent.vue';
+import ForbiddenRoute from '@/views/dashboard-views/ForbiddenRoute.vue';
 
 //public views
 import EventPage from '@/views/public-views/EventPage.vue';
@@ -92,6 +93,11 @@ const router = createRouter({
       path: '/updated_event-confirmation',
       name: 'ConfirmPageUpdatedEvent',
       component: ConfirmPageUpdatedEvent
+    },
+    {
+      path: '/forbidden-route',
+      name: 'ForbiddenRoute',
+      component: ForbiddenRoute
     },
 
     // public routes

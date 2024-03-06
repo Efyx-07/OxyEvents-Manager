@@ -19,8 +19,8 @@ const navigateToHomepage = (): void => {
         <NavAside />
         <div class="page-content">
             <div class="confirmation_content">
-                <p>Bravo, votre évènement a été mis à jour avec succès !</p>
-                <Icon icon="streamline-emojis:ok-hand-2" class="icon"/>
+                <p>Désolé, vous ne disposez pas des droits nécessaires pour accéder à cette partie du site.</p>
+                <Icon icon="streamline-emojis:cross-mark" class="icon"/>
                 <ReusablePrimaryButton @click="navigateToHomepage">Retour aux évènements</ReusablePrimaryButton>
             </div>
         </div>
@@ -33,4 +33,3 @@ const navigateToHomepage = (): void => {
 @import '@/assets/sass/dashboard-styles/confirmPagestyle.scss';
       
 </style>
-
