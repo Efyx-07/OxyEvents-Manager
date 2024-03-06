@@ -8,10 +8,14 @@ const props = defineProps<{
     selectedEvent: Event;
 }>();
 
+// gère l'effet d'apparition au défilement avec useIntersectionObserver
+import { useIntersectionObserverEffect } from '@/hooks/useIntersectionObserver';
+const { target, targetIsVisible } = useIntersectionObserverEffect();
+
 </script>
 
 <template>
-    <div class="eventPage-section">
+    <div class="eventPage-section" ref="target" :class="{ 'visible': targetIsVisible }" :style="{ opacity: targetIsVisible ? 1 : 0, transform: targetIsVisible ? 'translateY(0)' : 'translateY(10%)'}">
         <SectionTitle title="Programme"/>
         <p v-html="props.selectedEvent.programme"></p>
     </div>

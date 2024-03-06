@@ -5,6 +5,7 @@
     display: flex;
     flex-direction: column;
     gap: .5rem;
+    transition: all .5s ease-in-out; // transition pour le style du intersection observer
 
     p {
         margin: 0;
