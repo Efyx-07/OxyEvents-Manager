@@ -29,7 +29,7 @@ const navigateToHomepage = (): void => {
 
 <style lang="scss" scoped>
 
-@import '@/assets/sass/dashboard-styles/confirmPageStyle.scss';
 @import '@/assets/sass/dashboard-styles/dashboardPageStyle.scss';
+@import '@/assets/sass/dashboard-styles/confirmPageStyle.scss';
       
 </style>
