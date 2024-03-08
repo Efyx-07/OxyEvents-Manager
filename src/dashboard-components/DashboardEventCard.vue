@@ -92,12 +92,14 @@ const displayAllEvents = (): void => {
 @import '@/assets/sass/dashboard-styles/colors.scss';
 @import '@/assets/sass/variables.scss';
 @import '@/assets/sass/breakPoints.scss';
+
 .dashboardEventCard {
     width: 100%;
-    height: 22rem;
+    height: 24rem;
     background: $whiteColor;
     border-radius: 0 $containerRadiusM 0 $containerRadiusXL;
     position: relative;
+
     .image_container {
         width: 100%;
         height: 50%;
@@ -178,8 +180,11 @@ const displayAllEvents = (): void => {
 }
 
 @media screen and (min-width: $breakpointDesktop) {
-    .dashboardEventCard .infos_container .eventTitle {
-        font-size: 1.25rem;
+    .dashboardEventCard { 
+        height: 22rem;
+        .infos_container .eventTitle {
+            font-size: 1.25rem;
+        }
     }
 }  
 
