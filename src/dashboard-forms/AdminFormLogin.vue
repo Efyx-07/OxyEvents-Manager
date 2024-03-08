@@ -22,7 +22,7 @@ const email = ref<string>('');
 const password = ref<string>('');
 
 // valide le formulaire
-const handleAdminLogin = async () => {
+const handleAdminLogin = async (): Promise<void> => {
 
     // extrait les valeurs des objets ref
     const emailValue = email.value;

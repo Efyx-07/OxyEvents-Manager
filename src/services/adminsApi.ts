@@ -1,7 +1,8 @@
 // import interface
 import type { Admin, AdminApiResponse } from '@/types/adminsTypes';
+import type { ImportMetaEnv } from 'env';
 
-const hostName = 'https://oxyeventsmanagerdemo-backend.vercel.app'; // adresse du serveur backend 
+const hostName: ImportMetaEnv = import.meta.env.VITE_BACKEND_URL; // adresse du serveur backend 
 
 // récupère du backend, l'API des datas des administrateurs
 export async function fetchAdminsData(): Promise<Admin[]> {

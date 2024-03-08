@@ -1,7 +1,8 @@
 // import interface
 import type { Participant, ParticipantApiResponse } from '@/types/participantsTypes';
+import type { ImportMetaEnv } from 'env';
 
-const hostName = 'https://oxyeventsmanagerdemo-backend.vercel.app'; // adresse du serveur backend 
+const hostName: ImportMetaEnv = import.meta.env.VITE_BACKEND_URL; // adresse du serveur backend 
 
 // récupère du backend, l'API des datas des particpants pour un évènement sélectionné
 export async function fetchParticipantsData(eventSlug: string): Promise<Participant[]> {
